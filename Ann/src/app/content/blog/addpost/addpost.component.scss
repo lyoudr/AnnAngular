@@ -1,0 +1,30 @@
+.main{
+    .container{
+        .row{
+            .col-8{
+                margin-top: 150px;
+                .form-group{
+                    &:nth-child(1){
+                        > mat-icon{
+                            cursor: pointer;
+                            margin-left: 650px;
+                        }
+                    }
+                    label{
+                        >span{
+                            font-family: 'Lucida Sans';
+                            font-size: 14px;
+                            letter-spacing: 2px;
+                        }
+                    }
+                    textarea{
+                        height: 500px;
+                    }
+                    
+                }
+            }
+        }
+    }
+    
+
+}

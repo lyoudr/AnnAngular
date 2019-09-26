@@ -1,0 +1,61 @@
+.main{
+    background: black;
+    margin-top: 100px;
+    color: white;
+    .row{
+        min-height: 80vh;
+        .chat_side_header{
+            >.chat_side_name{
+                height: 4vh;
+                h5{
+                    margin-top: 10px;
+                }
+            }
+            >.input-group{
+                height: 7vh;
+                >input{
+                    margin-top: 10px;
+                }
+            }
+            >.icon{
+                height: 6vh;
+                mat-icon{
+                    margin-top:10px;
+                    cursor: pointer;
+                }
+            }
+        }
+        .chat_side_content{
+            >div{
+                height: 7vh;
+                cursor: pointer;
+            }
+        }
+        .chatarea{
+            .self{
+                text-align:right;
+                height: 6vh;
+                >span{
+                    margin-top: 12px;
+                    background: grey;
+                    border-radius: 5px 5px 0px 5px;
+                    height: 30px;
+                }
+            }
+            .other{
+                height: 6vh;
+                >span{
+                    margin-top: 12px;
+                    background: grey;
+                    border-radius: 5px 5px 0px 5px;
+                    height: 30px;
+                }
+            }
+            .writearea{
+                position: absolute;
+                bottom: 15px;
+            }
+        }
+    }
+    
+}

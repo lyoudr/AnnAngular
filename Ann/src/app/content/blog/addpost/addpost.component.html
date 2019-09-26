@@ -1,0 +1,32 @@
+<div class="main wow slideInLeft" data-wow-duration="1s">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <form [formGroup]="addPostForm" (ngSubmit)="onSubmit()">
+                    <div class="form-group">
+                        <label for="Title"><span>Title</span></label>
+                        <mat-icon (click)="clickUpload(fileInput)" aria-hidden="false" aria-label="Example add icon">add</mat-icon>
+                        <input formControlName="title" type="text" class="form-control" id="Title">
+                        <input formControlName="file" (change)="uploadFile($event.target.files)" class="form-control" style="display: none" type="file" #fileInput/>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1"><span>Write Something...</span></label>
+                        <textarea formControlName="post" rows="8" class="form-control" id="exampleFormControlTextarea1" rows="3">
+                        </textarea>
+                    </div>
+                    <div class="form-group col-12">
+                        <div>
+                            <ng-container *ngFor ="let imagurl of imagelists">
+                                <img [src]="imagurl" class="img-fluid wow fadeInDown" style="width: 100px; height: 100px;"/>
+                            </ng-container>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" [disabled]="!addPostForm.valid" class="btn btn-secondary">Submit</button>
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</div>

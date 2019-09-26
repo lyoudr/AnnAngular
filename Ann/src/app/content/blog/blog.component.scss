@@ -1,0 +1,56 @@
+#addnewPostButton {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  a{
+	display: block;
+	padding: 30px 0 20px 0;
+	width: 70px;
+	background-color: rgba(121, 104, 73, 0.36);
+	border-radius: 3px;
+	font-size: 0;
+	text-align: center;
+	text-decoration: none;
+	&:hover{
+        cursor: pointer;
+		background: rgba(121, 104, 73, 1);
+		&:before{
+			border-top-color: #fff;
+			border-right-color: #fff;
+		}
+	}
+	&:before{
+		content: "";
+		display: block;
+		width: 18px;
+		height: 18px;
+		margin: 0 auto;
+		-webkit-transform: rotate(-45deg);
+		transform: rotate(-45deg);
+		border-top: 2px solid rgba(255,255,255,0.46);
+		border-right: 2px solid rgba(255,255,255,0.46);
+	}
+  }
+}
+
+.main{
+	margin-top: 150px;
+	.container{
+		position: relative;
+		>img{
+			opacity: 0.7;
+			height: 80vh;
+		}
+	}
+}
+
+
+.text-block{
+	position: absolute;
+	top: 42%;
+	left: 40%;
+	background-color: rgb(124, 115, 115);
+	color: white;
+	padding-left: 20px;
+	padding-right: 20px;
+}

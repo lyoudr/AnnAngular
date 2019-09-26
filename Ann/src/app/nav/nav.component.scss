@@ -1,0 +1,19 @@
+nav{
+    height: 10vh;
+    >div{
+        >ul{
+            >li{
+                margin: 10px;
+                &:hover{
+                    background-color: rgb(224, 197, 197);
+                }
+                >a{
+                    >span{
+                        color: black;
+                        font-family: 'Lucida Sans';
+                    }
+                }
+            }
+        }
+    }
+}

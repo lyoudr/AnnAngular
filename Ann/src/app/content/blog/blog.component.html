@@ -1,0 +1,16 @@
+<div (click)="hideBlogImg()" class="main" id="blogImg" style="display: none">
+    <a routerLink="postlist">
+        <div class="container">
+            <img  src="../../../assets/image/blog.jpg"/>
+            <div class="text-block">
+                <h4>Edit your Blog</h4>
+            </div>
+        </div>
+    </a>
+</div>
+<router-outlet></router-outlet>
+<div class="addnewPost">
+    <p id="addnewPostButton">
+        <a routerLink="addpost">Add Post</a>
+    </p>
+</div>

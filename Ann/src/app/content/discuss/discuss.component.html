@@ -1,0 +1,58 @@
+<div class="main">
+    <div class="row">
+        <div class="col-3">
+            <div class="chat_side_header">
+                <div class="chat_side_name">
+                    <h5>Ann Tang</h5>
+                </div>
+                <div class="input-group">
+                    <input #search (keyup)="onKey(search.value)" type="text" class="form-control" aria-label="Text input with radio button">
+                </div>
+                <div class="d-flex flex-row justify-content-between icon">
+                    <mat-icon aria-hidden="false" aria-label="Example chat icon" (click)="changeChat('chat')">chat</mat-icon>
+                    <mat-icon aria-hidden="false" aria-label="Example phone icon" (click)="changeChat('phone')">phone</mat-icon>
+                    <mat-icon aria-hidden="false" aria-label="Example contacts icon" (click)="changeChat('contact')">contacts</mat-icon>
+                    <mat-icon aria-hidden="false" aria-label="Example notifications icon" (click)="changeChat('notification')">notifications</mat-icon>
+                </div>
+            </div>
+            <div class="chat_side_content">
+                <ng-container *ngIf="chattype == 'chat'">
+                    <div (click)="showMessage(message.name)" class="d-flex flex-row" *ngFor="let message of messages">
+                        <img/>
+                        <p>{{message.name}}</p>
+                        <p>{{message.conversation}}</p>
+                        <p>{{message.date}}</p>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="chattype == 'phone'">
+                    <div class="d-flex flex-row" *ngFor="let phone of phones">
+                        <p>{{phone.name}}</p>
+                        <p>call</p>
+                    </div>
+                </ng-container>
+                <ng-container *ngIf="chattype == 'contact'">
+                    <div class="d-flex flex-row" *ngFor="let contact of contacts">
+                        <p>{{contact.name}}</p>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+        <div class="col-7 chatarea">
+            <ng-container *ngIf="chattype == 'chat'">
+                <div [ngClass]="personalmessage.name == 'me' ? 'self': 'other'" *ngFor = "let personalmessage of personalmessages">
+                    <span>{{personalmessage.message}}</span>
+                </div>
+            </ng-container>
+            <div class="input-group writearea">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">With textarea</span>
+                </div>
+                <textarea #messageTosend class="form-control" aria-label="With textarea"></textarea>
+                <div class="input-group-append" (click)="sendMessage(messageTosend.value)">
+                    <span class="input-group-text">Send</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-2">3</div>
+    </div>
+</div>
