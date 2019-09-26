@@ -1,0 +1,24 @@
+<div class="main">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-8 text-center">
+                <div class="text-center mt-5">
+                    <img src="assets/image/user.jpg" style="border-radius: 50%"/>
+                </div>
+                <div class="input-group mt-5">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Name</span>
+                    </div>
+                    <input #name type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
+                </div>
+                <div class="input-group mt-5">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Password</span>
+                    </div>
+                    <input #password type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"/>
+                </div>
+                <button class="btn btn-secondary mt-5" (click)="Login(name.value, password.value)">Log in</button>
+            </div>
+        </div>
+    </div>
+</div>
