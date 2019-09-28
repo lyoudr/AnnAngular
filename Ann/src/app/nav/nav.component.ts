@@ -12,6 +12,7 @@ export class NavComponent implements OnInit {
     {'url':'/blog', 'title': 'Blog'},
     {'url':'/discuss', 'title': 'Discuss'},
     {'url':'/piano', 'title': 'Piano'},
+    {'url':'/login', 'title': 'Login'},
   ]
   ngOnInit() {
   }

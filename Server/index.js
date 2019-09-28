@@ -27,15 +27,6 @@ app.get('/', (req, res) => {
         res.end();
     })
 });
-app.get('/*', (req, res) => {
-    fs.readFile('../Ann/dist/Ann/index.html', (err, data) => {
-        if(err){
-            return;
-        }
-        res.write(data);
-        res.end();
-    })
-});
 // addPost
 app.post('/blogpost',(req, res) => {
     const date = new Date();
@@ -240,30 +231,6 @@ app.post('/search_discuss_sidenav', (req, res)=>{
     console.log('foundfrined is =>', foundfriend);
     res.json(foundfriend);
     res.end();
-});
-
-// User Login
-app.post('/login', (req, res) => {
-    const UserInfo = req.body;
-    if(UserInfo.name == 'Json' && UserInfo.password == 'json123'){
-        res.json({'response': 'ok', 'token': 'jsonToken'});
-        res.end();
-    } else if (UserInfo.name == 'Joy' && UserInfo.password == 'joy123'){
-        res.json({'response': 'ok', 'token': 'joyToken'});
-        res.end();
-    } else if (UserInfo.name == 'Amy' && UserInfo.password == 'amy123'){
-        res.json({'response': 'ok', 'token': 'amyToken'});
-        res.end();
-    } else if (UserInfo.name == 'Tonal' && UserInfo.password == 'tonal123'){
-        res.json({'response': 'ok', 'token': 'tonalToken'});
-        res.end();
-    } else if (UserInfo.name == 'Joanna' && UserInfo.password == 'joanna123'){
-        res.json({'response': 'ok', 'token': 'joannaToken'});
-        res.end();
-    } else {
-        res.json({'response': false });
-        res.end();
-    }  
 });
 
 app.listen(4500, () => console.log('Server listen on port 4500!'));
