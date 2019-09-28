@@ -12,10 +12,10 @@ import { send } from 'q';
 export class DiscussComponent implements OnInit {
 
   messages : any[] = [
-    {name:'Json', conversation: 'hello', date: '2019/09/05'},
-    {name:'Joy', conversation: 'hello', date: '2019/09/05'},
-    {name:'Amy', conversation: 'hello', date: '2019/09/05'},
-    {name:'Tonal', conversation: 'hello', date: '2019/09/05'}];
+    {name:'Json', conversation: 'hello...', date: '2019/09/05'},
+    {name:'Joy', conversation: 'hello Joy...', date: '2019/09/05'},
+    {name:'Amy', conversation: 'hello.....', date: '2019/09/05'},
+    {name:'Tonal', conversation: 'hello.....', date: '2019/09/05'}];
   phones: any[] = [
     {name: 'Json'},
     {name: 'Joy'},

@@ -3,6 +3,8 @@
     margin-top: 100px;
     color: white;
     .row{
+        font-family: 'Trebuchet MS';
+        letter-spacing: 2px;
         min-height: 80vh;
         .chat_side_header{
             >.chat_side_name{
@@ -26,9 +28,25 @@
             }
         }
         .chat_side_content{
+            margin-top: 30px;
             >div{
-                height: 7vh;
+                height: 12vh;
                 cursor: pointer;
+                >img{
+                    height: 40px;
+                    border-radius: 50%;
+                }
+                >div{
+                    margin-left: 17px;
+                    >p{
+                        &:nth-child(2){
+                            margin-top: -15px;
+                        }
+                    }
+                }
+                >p{
+                    margin-right:-40px;
+                }
             }
         }
         .chatarea{

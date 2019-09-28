@@ -18,9 +18,11 @@
             <div class="chat_side_content">
                 <ng-container *ngIf="chattype == 'chat'">
                     <div (click)="showMessage(message.name)" class="d-flex flex-row" *ngFor="let message of messages">
-                        <img/>
-                        <p>{{message.name}}</p>
-                        <p>{{message.conversation}}</p>
+                        <img src="assets/image/user.jpg"/>
+                        <div>
+                            <p>{{message.name}}</p>
+                            <p>{{message.conversation}}</p>
+                        </div>
                         <p>{{message.date}}</p>
                     </div>
                 </ng-container>
