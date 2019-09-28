@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DiscussService } from '../../services/discuss.service';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
-import { send } from 'q';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-discuss',
@@ -11,6 +11,7 @@ import { send } from 'q';
 })
 export class DiscussComponent implements OnInit {
 
+  user: string;
   messages : any[] = [
     {name:'Json', conversation: 'hello...', date: '2019/09/05'},
     {name:'Joy', conversation: 'hello Joy...', date: '2019/09/05'},
@@ -36,13 +37,17 @@ export class DiscussComponent implements OnInit {
   private searchText$ = new Subject<string>();
   // Web Socket
   socket: any;
-  accountId : string = 'lyouder';
 
   constructor(
-    private discussService :　DiscussService
+    private discussService :　DiscussService,
+    private cookieService : CookieService
   ) { }
 
   ngOnInit() {
+    // Get User Info
+    const user = this.cookieService.get('UserID').replace('Token','');
+    this.user = user.charAt(0).toUpperCase() + user.slice(1);
+    // Search friends
     this.searchResult$ = this.searchText$.pipe(
       debounceTime(1000), // wait for the user to stop typing (1 second in this case)
       distinctUntilChanged(), // wait until the search text changes.
@@ -102,7 +107,7 @@ export class DiscussComponent implements OnInit {
   sendMessage(messageTosend: string){
     console.log('messageTosend is =>', messageTosend);
     const sendingMessages = {
-      nameId : this.accountId,
+      nameId : this.user,
       message : messageTosend
     }
     // If this.socket is connected, sending messages
@@ -118,9 +123,9 @@ export class DiscussComponent implements OnInit {
       console.log('Received data from server is =>', event.data);
       let receivedMsg = JSON.parse(event.data);
       console.log('receivedMsg.name is =>', receivedMsg.nameId);
-      if(receivedMsg.nameId == this.accountId){
+      if(receivedMsg.nameId == this.user){
         this.personalmessages.push({name: 'me', message: receivedMsg.message });
-      } else if (receivedMsg.name != this.accountId){
+      } else if (receivedMsg.name != this.user){
         this.personalmessages.push({name: 'other', message: receivedMsg.message});
       }
     }

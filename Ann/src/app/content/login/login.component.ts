@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { CookieService } from 'ngx-cookie-service';
 import { Router }      from '@angular/router';
 
 @Component({
@@ -11,6 +12,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authService : AuthService,
+    private cookieService : CookieService,
     public router: Router
   ) { }
 
@@ -26,6 +28,9 @@ export class LoginComponent implements OnInit {
       .subscribe(data => {
         console.log('returned data is =>', data)
         if(data.response == 'ok'){
+          // save the identity to cookie
+          this.cookieService.delete('UserID');
+          this.cookieService.set('UserID',data.token);
           this.authService.isLoggedIn = true;
         } else {
           this.authService.isLoggedIn = false;
