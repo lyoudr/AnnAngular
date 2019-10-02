@@ -182,6 +182,24 @@ app.get('/getpost', (req, res) => {
     }
 });
 
+// get sheet music
+app.get('/getsheet', (req, res) => {
+    let sheettype = req.query.sheettype;
+    switch(sheettype){
+        case 'classic':
+            res.download('./pianosheets/You_are_my_everything.pdf');
+            res.end();
+        case 'morden':
+            res.json({'type': 'morden'});
+            res.end();
+        case 'jazz':
+            res.json({'type': 'jazz'});
+            res.end();
+        case 'movie':
+            res.json({'type': 'cartoon'});
+            res.end();
+    }
+})
 // get discuss
 app.get('/discuss',(req, res) => {
     res.send({response: 'discuss returned!'});

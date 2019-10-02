@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { switchMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { PianoService } from '../../../services/piano.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-sheet',
@@ -6,10 +11,29 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sheet.component.scss']
 })
 export class SheetComponent implements OnInit {
+  sheet$: Observable<any>;
+  blob: any;
+  pdflink: any;
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private pianoService: PianoService,
+    private sanitizer: DomSanitizer
+  ) { }
 
   ngOnInit() {
+    this.sheet$ = this.route.paramMap.pipe(
+      switchMap(params => {
+        const sheettype = params.get('id');
+        return this.pianoService.getsheet(sheettype)
+      })
+    );
+    // 訂閱此 Observable
+    this.sheet$.subscribe((sheet) => {
+      this.blob = new Blob([sheet], {type: 'application/pdf'});
+      var downloadURL = window.URL.createObjectURL(sheet);
+      this.pdflink = this.sanitizer.bypassSecurityTrustUrl(downloadURL);
+    });
   }
 
 }
