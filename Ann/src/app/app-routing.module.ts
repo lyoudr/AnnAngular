@@ -11,17 +11,17 @@ const approutes: Routes = [
   {
     path: 'blog',
     loadChildren: () => import('./content/blog/blog.module').then(mod => mod.BlogModule),
-    canActivate : [AuthGuard]
+    //canActivate : [AuthGuard]
   },
   {
     path: 'discuss',
     loadChildren: () => import('./content/discuss/discuss.module').then(mod => mod.DiscussModule),
-    canActivate : [AuthGuard]
+    //canActivate : [AuthGuard]
   },
   {
     path: 'piano',
     loadChildren: () => import('./content/piano/piano.module').then(mod => mod.PianoModule),
-    canActivate : [AuthGuard]
+    //canActivate : [AuthGuard]
   }
 ];
 

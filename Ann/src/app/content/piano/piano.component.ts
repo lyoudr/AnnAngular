@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./piano.component.scss']
 })
 export class PianoComponent implements OnInit {
+  musictype: Array<any> = ['classic', 'morden', 'jazz', 'movie', 'cartoon'];
+  typeindex: number;
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  selectMusic(musicindex){
+    this.typeindex = musicindex;
+  }
 }

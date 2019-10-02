@@ -1,0 +1,14 @@
+.main{
+    margin-top: 10%;
+    .container{
+        .row{
+            >div{
+                >ul{
+                    >li{
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
+}

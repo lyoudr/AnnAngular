@@ -1,1 +1,19 @@
-<p>piano works!</p>
+<div class="main">
+    <div class="container">
+        <div class="row">
+            <div class="col-3 text-center">
+                <ul class="list-group">
+                    <ng-container *ngFor="let item of musictype; let musicindex = index">
+                        <a [routerLink]="item">
+                            <li class="list-group-item" [ngClass]="typeindex === musicindex ? 'active' : ''" (click)="selectMusic(musicindex)">{{item}}</li>
+                        </a>
+                    </ng-container>
+                </ul>
+            </div>
+            <div class="col-9">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>
+
