@@ -15,7 +15,10 @@ export class SomeService {
     return 'real value';
   }
 
-  getObservableValue(){
-    return this.$Test.observers;
+  getPromiseValue(){
+    return new Promise((resolve, reject) => {
+      resolve('promise');
+    });
   }
+  
 }
