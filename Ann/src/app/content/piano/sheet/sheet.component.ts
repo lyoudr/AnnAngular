@@ -30,9 +30,11 @@ export class SheetComponent implements OnInit {
     );
     // 訂閱此 Observable
     this.sheet$.subscribe((sheet) => {
-      this.blob = new Blob([sheet], {type: 'application/pdf'});
+      /*this.blob = new Blob([sheet], {type: 'application/pdf'});
       var downloadURL = window.URL.createObjectURL(sheet);
-      this.pdflink = this.sanitizer.bypassSecurityTrustUrl(downloadURL);
+      let link = this.sanitizer.bypassSecurityTrustUrl(downloadURL);
+      this.pdflink = link['changingThisBreaksApplicationSecurity'];
+      console.log('this.pdflink is =>', this.pdflink);*/
     });
   }
 

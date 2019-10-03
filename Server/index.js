@@ -210,7 +210,6 @@ app.get('/discuss',(req, res) => {
 // getMessage
 app.get('/getmessage', (req, res) => {
     let personId = req.query.getmessage;
-    console.log('personId is =>', personId);
     switch(personId){
         case 'Json':
             res.json([
@@ -248,9 +247,7 @@ app.get('/getmessage', (req, res) => {
             ]);
             res.end();
             break;
-
     }
-    
     res.end();
 });
 
