@@ -187,7 +187,9 @@ app.get('/getsheet', (req, res) => {
     let sheettype = req.query.sheettype;
     switch(sheettype){
         case 'classic':
-            res.download('./pianosheets/You_are_my_everything.pdf');
+            var data = fs.readFileSync('./pianosheets/You_are_my_everything.pdf');
+            res.contentType('application/pdf');
+            res.send(data);
             res.end();
         case 'morden':
             res.json({'type': 'morden'});
@@ -269,5 +271,7 @@ app.post('/search_discuss_sidenav', (req, res)=>{
     res.json(foundfriend);
     res.end();
 });
+
+
 
 app.listen(4500, () => console.log('Server listen on port 4500!'));
