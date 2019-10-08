@@ -13,11 +13,12 @@ describe('DiscussComponent', () => {
     
     beforeEach(() => {
         TestBed.configureTestingModule({
-            providers: [DiscussService],
+            providers: [DiscussService, CookieService],
             imports : [HttpClientTestingModule]
         });
         // Inject this service to each test by calling TestBed.get() with th e service class as the argument.
         discussService = TestBed.get(DiscussService);
+        cookieService = TestBed.get(CookieService);
     });
 
     it('#changeChat() should change chattype', () => {
@@ -62,5 +63,13 @@ describe('DiscussComponent', () => {
                 expect(JSON.parse(value)).toEqual(resPonses[index]);
             });
         });
+    });
+
+    it('#has user value after ngOnInit', () => {
+        const discusscomp = new DiscussComponent(discussService, cookieService);
+        //expect(cookieService.get('UserID')).toBe('');
+        //discusscomp.ngOnInit();
+        // After ngOnInit
+        
     });
 });
