@@ -71,10 +71,17 @@ describe('DiscussComponent', () => {
     });
 
     it('#has user value after ngOnInit', () => {
-        const discusscomp = new DiscussComponent(discussService, cookieService);
-        //expect(cookieService.get('UserID')).toBe('');
-        //discusscomp.ngOnInit();
+        expect(cookieService.get('UserID')).toBe('');
+        discusscomp.ngOnInit();
         // After ngOnInit
-        
+        expect(discusscomp.user).toBe('');
+    });
+
+    it('#when enter "J", should return right name after one second', () => {
+        discusscomp.ngOnInit();
+        discusscomp.onKey('J');
+        discusscomp.searchResult$.subscribe(data => {
+            expect(JSON.parse(data)).toBe(['Json', 'Joy', 'Joanna']);
+        });
     });
 });

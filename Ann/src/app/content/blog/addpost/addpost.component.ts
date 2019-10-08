@@ -7,7 +7,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-addpost',
   templateUrl: './addpost.component.html',
-  styleUrls: ['./addpost.component.scss']
+  styleUrls: ['./addpost.component.scss'],
 })
 export class AddpostComponent implements OnInit {
 
