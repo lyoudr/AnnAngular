@@ -7,22 +7,27 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
 describe('DiscussComponent', () => {
-
+    let discusscomp : DiscussComponent;
     let discussService : DiscussService;
     let cookieService : CookieService;
     
     beforeEach(() => {
         TestBed.configureTestingModule({
-            providers: [DiscussService, CookieService],
+            providers: [
+                DiscussComponent,
+                DiscussService, 
+                CookieService
+            ],
             imports : [HttpClientTestingModule]
         });
         // Inject this service to each test by calling TestBed.get() with th e service class as the argument.
+        discusscomp = TestBed.get(DiscussComponent);
         discussService = TestBed.get(DiscussService);
         cookieService = TestBed.get(CookieService);
     });
 
     it('#changeChat() should change chattype', () => {
-        const discusscomp = new DiscussComponent(discussService, cookieService);
+        
         const chattype = ['chat', 'phone', 'contact', 'notification'];
         chattype.forEach((type) => {
             discusscomp.changeChat(type);
