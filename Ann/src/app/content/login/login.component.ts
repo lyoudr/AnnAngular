@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Router }      from '@angular/router';
+import { interval, of } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -32,6 +33,10 @@ export class LoginComponent implements OnInit {
           this.cookieService.delete('UserID');
           this.cookieService.set('UserID',data.token);
           this.authService.isLoggedIn = true;
+          this.authService.countdown$ = interval(1000);
+          this.authService.countdown$.subscribe(time => {
+            this.authService.counter = this.authService.counter - 1;
+          });
         } else {
           this.authService.isLoggedIn = false;
         }

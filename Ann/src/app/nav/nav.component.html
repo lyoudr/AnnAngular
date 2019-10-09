@@ -7,5 +7,14 @@
                 </a>
             </li>
         </ul>
+        <div class="lang-wrap">
+            <a class="nav-link float-left" routerLink="/login">
+                <mat-icon >person</mat-icon>
+            </a>
+            <div>
+                <mat-icon class="float-left">timer</mat-icon>
+                <span>{{authService.counter}}</span>
+            </div>
+        </div>
     </div>
 </nav>

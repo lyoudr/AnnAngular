@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, Subject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 @Injectable({
@@ -9,6 +9,8 @@ import { catchError } from 'rxjs/operators';
 export class AuthService {
   isLoggedIn : boolean = false;
   redirectUrl : string;
+  counter : number = 900;
+  countdown$ : any = null;
 
   constructor(
     private http: HttpClient

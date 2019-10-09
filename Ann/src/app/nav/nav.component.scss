@@ -17,5 +17,11 @@ nav{
                 }
             }
         }
+        .lang-wrap{
+            display: flex;
+            >div{
+                margin-top: 8px;
+            }
+        }
     }
 }

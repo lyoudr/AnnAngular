@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { interval, of } from 'rxjs';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-nav',
@@ -7,13 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public authService: AuthService
+  ) { }
   navlists : any[] = [
     {'url':'/blog', 'title': 'Blog'},
     {'url':'/discuss', 'title': 'Discuss'},
     {'url':'/piano', 'title': 'Piano'},
-    {'url':'/login', 'title': 'Login'},
+    
   ]
+
   ngOnInit() {
   }
 
