@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { interval, of } from 'rxjs';
 import { AuthService } from '../services/auth.service';
+import { CookieService } from 'ngx-cookie-service';
+import { Router }      from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -10,7 +11,9 @@ import { AuthService } from '../services/auth.service';
 export class NavComponent implements OnInit {
 
   constructor(
-    public authService: AuthService
+    public authService: AuthService,
+    private cookieService : CookieService,
+    public router: Router
   ) { }
   navlists : any[] = [
     {'url':'/blog', 'title': 'Blog'},
@@ -22,4 +25,10 @@ export class NavComponent implements OnInit {
   ngOnInit() {
   }
 
+
+  logOut(){
+    this.authService.isLoggedIn = false;
+    this.cookieService.deleteAll();
+    this.router.navigate(['/login']);
+  }
 }

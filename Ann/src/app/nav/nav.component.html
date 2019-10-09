@@ -11,6 +11,9 @@
             <a class="nav-link float-left" routerLink="/login">
                 <mat-icon >person</mat-icon>
             </a>
+            <a class="nav-link float-left" (click)="logOut()">
+                <mat-icon >power_settings_new</mat-icon>
+            </a>
             <div>
                 <mat-icon class="float-left">timer</mat-icon>
                 <span>{{authService.counter}}</span>
