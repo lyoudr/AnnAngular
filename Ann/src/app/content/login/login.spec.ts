@@ -5,8 +5,9 @@ import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 // Http testing module and mocking controller
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
+// The ComponentFixtureAutoDetect service responds to asynchronous activities such as promise resolution, timers, and DOM events.
+import { ComponentFixtureAutoDetect } from '@angular/core/testing';
 
 describe('BannerComponent (with beforeEach)', () => {
     let authService: AuthService;
@@ -22,11 +23,12 @@ describe('BannerComponent (with beforeEach)', () => {
         providers: [
             AuthService,
             CookieService,
-            {provide: Router, useValue: routerSpy}
+            {provide: Router, useValue: routerSpy},
+            {provide: ComponentFixtureAutoDetect, useValue: true}
         ],
         imports: [HttpClientTestingModule]
       });
-      fixture = TestBed.createComponent(LoginComponent);
+      fixture = TestBed.createComponent(LoginComponent); // LoginComponent test instance
       component = fixture.componentInstance;
     });
   
@@ -45,5 +47,27 @@ describe('BannerComponent (with beforeEach)', () => {
         const passwordDe : HTMLElement = originalDe.nativeElement;
         const span = passwordDe.querySelectorAll('span')[1];
         expect(span.textContent).toEqual('Password')
+    });
+
+    it('should convert name and password', () => {
+      // get the name's input and display elements from the DOM
+      const hostElement = fixture.nativeElement;
+      const nameInput: HTMLInputElement = hostElement.querySelectorAll('input')[0];
+      const passWord: HTMLInputElement = hostElement.querySelectorAll('input')[1];
+
+      // simulate user entering a new name into the input box
+      nameInput.value = 'Ann';
+      passWord.value = '123456';
+
+      // dispatch a DOM event so that Angular learns of input value change.
+      // use newEvent utility function (not provided by Angular) for better browser compatibility
+      nameInput.dispatchEvent(new Event('input'));
+      passWord.dispatchEvent(new Event('input'));
+
+      // Tell Angular to update the display binding through the title pipe
+      fixture.detectChanges();
+      
+      expect(nameInput.value).toBe('Ann');
+      expect(passWord.value).toBe('123456');
     });
 });
