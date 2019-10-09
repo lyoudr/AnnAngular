@@ -10,6 +10,7 @@ import { DebugElement } from '@angular/core';
 import { ComponentFixtureAutoDetect } from '@angular/core/testing';
 
 describe('BannerComponent (with beforeEach)', () => {
+    // Variable Area
     let authService: AuthService;
     let cookieService: CookieService;
     let router: Router;
@@ -17,12 +18,20 @@ describe('BannerComponent (with beforeEach)', () => {
     let fixture: ComponentFixture<LoginComponent>;
   
     beforeEach(() => {
+      // Mock, Stub
       const routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl', 'pareUrl']);
+      let authServiceStub : Partial<AuthService>;
+
+      authServiceStub = {
+        isLoggedIn : false,
+        redirectUrl : ''
+      }
+
       TestBed.configureTestingModule({
         declarations: [ LoginComponent ],
         providers: [
-            AuthService,
             CookieService,
+            {provide: AuthService, useValue: authServiceStub},
             {provide: Router, useValue: routerSpy},
             {provide: ComponentFixtureAutoDetect, useValue: true}
         ],
@@ -30,6 +39,7 @@ describe('BannerComponent (with beforeEach)', () => {
       });
       fixture = TestBed.createComponent(LoginComponent); // LoginComponent test instance
       component = fixture.componentInstance;
+      authService = TestBed.get(AuthService);
     });
   
     it('should create', () => {
@@ -69,5 +79,13 @@ describe('BannerComponent (with beforeEach)', () => {
       
       expect(nameInput.value).toBe('Ann');
       expect(passWord.value).toBe('123456');
+    });
+
+    it('should return right response in AuthService', () => {
+        authService.isLoggedIn = true;
+        authService.redirectUrl = '/blog';
+        fixture.detectChanges();
+        expect(authService.isLoggedIn).toBe(true);
+        expect(authService.redirectUrl).toBe('/blog');
     });
 });

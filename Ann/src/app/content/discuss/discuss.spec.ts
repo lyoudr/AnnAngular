@@ -27,7 +27,6 @@ describe('DiscussComponent', () => {
     });
 
     it('#changeChat() should change chattype', () => {
-        
         const chattype = ['chat', 'phone', 'contact', 'notification'];
         chattype.forEach((type) => {
             discusscomp.changeChat(type);
