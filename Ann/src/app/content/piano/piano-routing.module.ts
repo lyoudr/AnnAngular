@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { PianoComponent } from './piano.component';
 import { SheetComponent } from './sheet/sheet.component';
 
-const routes: Routes = [
+export const pianoroutes: Routes = [
   {
     path: '', 
     component: PianoComponent,
@@ -17,7 +17,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(pianoroutes)],
   exports: [RouterModule]
 })
 export class PianoRoutingModule { }

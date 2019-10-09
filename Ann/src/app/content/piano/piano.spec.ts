@@ -1,5 +1,8 @@
 import { PianoComponent } from './piano.component';
 import { TestBed } from '@angular/core/testing';
+import { RouterModule } from '@angular/router';
+import { pianoroutes } from './piano-routing.module';
+import { SheetComponent } from './sheet/sheet.component';
 
 describe('PianoComponent Class Test', () => {
     let pianocomp : PianoComponent;
@@ -19,5 +22,17 @@ describe('PianoComponent Class Test', () => {
     });
     it('should contain right music type in each list', () => {
 
+    });
+});
+
+describe('PianoComponent DOM Test', () => {
+    it('should create', () => {
+        TestBed.configureTestingModule({
+            declarations: [PianoComponent, SheetComponent],
+            imports: [RouterModule.forRoot(pianoroutes)]
+        });
+        const fixture = TestBed.createComponent(PianoComponent);
+        const pianocomp = fixture.componentInstance;
+        expect(pianocomp).toBeDefined();
     });
 });
