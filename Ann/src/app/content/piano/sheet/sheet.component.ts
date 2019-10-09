@@ -1,19 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { switchMap } from 'rxjs/operators';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { PianoService } from '../../../services/piano.service';
 import { DomSanitizer } from '@angular/platform-browser';
+//import { switchMap } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-sheet',
   templateUrl: './sheet.component.html',
   styleUrls: ['./sheet.component.scss']
 })
-export class SheetComponent implements OnInit {
+export class SheetComponent implements OnInit, OnChanges {
   sheet$: Observable<any>;
   blob: any;
   pdflink: any;
+
+  @Input() title : string; 
+  @Input() musictype: string;
+  sheets: Array<any>;
 
   constructor(
     private route: ActivatedRoute,
@@ -22,7 +27,7 @@ export class SheetComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.sheet$ = this.route.paramMap.pipe(
+    /*this.sheet$ = this.route.paramMap.pipe(
       switchMap(params => {
         const sheettype = params.get('id');
         return this.pianoService.getsheet(sheettype)
@@ -35,7 +40,19 @@ export class SheetComponent implements OnInit {
       var downloadURL = window.URL.createObjectURL(sheet);
       this.pdflink = this.sanitizer.bypassSecurityTrustUrl(downloadURL);
       console.log('this.pdflink is =>', this.pdflink);
-    });
+    });*/
   }
 
+  ngOnChanges(){
+    console.log('this.musictype is =>', this.musictype);
+    // 根據傳入的 musictype，跟後端索取 pdf file
+    this.pianoService.getmusicsheet(this.musictype)
+      .subscribe((pdfs: Array<string>) => {
+        console.log('returned pdfs is =>', pdfs);
+        this.sheets = pdfs;
+      });
+  }
+  sanitizeUrl(url){
+    return this.sanitizer.bypassSecurityTrustResourceUrl(`assets/pdf/${url}.pdf`);
+  } 
 }

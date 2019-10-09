@@ -6,13 +6,13 @@ import { DatetransformPipe } from './pipes/datetransform.pipe';
 
 @NgModule({
   declarations: [
-    DatetransformPipe
+    DatetransformPipe,
   ],
   imports: [
     CommonModule
   ],
   exports:[
-    DatetransformPipe
+    DatetransformPipe,
   ]
 })
 export class SharedModule { }

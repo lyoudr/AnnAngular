@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PianoComponent } from './piano.component';
 import { PianoRoutingModule } from './piano-routing.module';
-import { SheetComponent } from './sheet/sheet.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { SharedModule } from '../../shared/shared.module';
+import { SheetComponent } from './sheet/sheet.component';
+import { PianoComponent } from './piano.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
   imports: [
     CommonModule,
     PdfViewerModule,
-    PianoRoutingModule
+    PianoRoutingModule,
+    SharedModule
   ]
 })
 export class PianoModule { }

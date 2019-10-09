@@ -1,8 +1,11 @@
 import { PianoComponent } from './piano.component';
-import { TestBed } from '@angular/core/testing';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { RouterModule } from '@angular/router';
 import { pianoroutes } from './piano-routing.module';
 import { SheetComponent } from './sheet/sheet.component';
+import { DebugElement } from '@angular/core';
+/* Automatic change detection */
+import { ComponentFixtureAutoDetect } from '@angular/core/testing';
 
 describe('PianoComponent Class Test', () => {
     let pianocomp : PianoComponent;
@@ -26,13 +29,39 @@ describe('PianoComponent Class Test', () => {
 });
 
 describe('PianoComponent DOM Test', () => {
-    it('should create', () => {
+    let pianocomp : PianoComponent;
+    let fixture: ComponentFixture<PianoComponent>;
+    let h5 : HTMLElement;
+
+    beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [PianoComponent, SheetComponent],
-            imports: [RouterModule.forRoot(pianoroutes)]
+            imports: [RouterModule.forRoot(pianoroutes)],
+            //providers: [{provide: ComponentFixtureAutoDetect, useValue: true}]
         });
-        const fixture = TestBed.createComponent(PianoComponent);
-        const pianocomp = fixture.componentInstance;
+        fixture = TestBed.createComponent(PianoComponent);
+        pianocomp = fixture.componentInstance;
+    });
+
+    it('should create', () => {
         expect(pianocomp).toBeDefined();
+    });
+
+    it('should display right name of each list', () => {
+        const listDe : DebugElement = fixture.debugElement;
+        const listEl : HTMLElement = listDe.nativeElement;
+        const lists = listEl.querySelectorAll('li');
+        lists.forEach((name, index) => {
+            expect(name).toBe(pianocomp.musictype[index]);
+        });
+    });
+
+    it('should change title', () => {
+        const h5De : DebugElement = fixture.debugElement;
+        const h5El : HTMLElement = h5De.nativeElement;
+        const h5 = h5El.querySelector('h5');
+        pianocomp.classTitle = 'Good';
+        fixture.detectChanges();
+        expect(h5.textContent).toContain('Good');
     });
 });

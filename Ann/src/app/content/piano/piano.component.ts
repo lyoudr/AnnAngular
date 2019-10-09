@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class PianoComponent implements OnInit {
   musictype: Array<any> = ['classic', 'morden', 'jazz', 'movie', 'cartoon'];
   typeindex: number;
+  classTitle: string = '';
 
   constructor() { }
 
@@ -16,5 +17,6 @@ export class PianoComponent implements OnInit {
 
   selectMusic(musicindex){
     this.typeindex = musicindex;
+    this.classTitle = this.musictype[musicindex];
   }
 }

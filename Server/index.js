@@ -272,6 +272,26 @@ app.post('/search_discuss_sidenav', (req, res)=>{
     res.end();
 });
 
-
+// getmusicsheet 
+app.get('/getmusicsheet', (req, res) => {
+    let musictype = req.query.musictype;
+    switch(musictype){
+        case 'classic':
+            res.json(['A', 'B', 'C']);
+            res.end();
+        case 'morden' :
+            res.json(['B', 'D']);
+            res.end();
+        case 'jazz':
+            res.json(['C', 'D']);
+            res.end();
+        case 'movie':
+            res.json(['D']);
+            res.end();
+        case 'cartoon':
+            res.json(['E']);
+            res.end();
+    }
+})
 
 app.listen(4500, () => console.log('Server listen on port 4500!'));

@@ -26,6 +26,15 @@ export class PianoService {
       )
   }
 
+  getmusicsheet(musictype: string){
+    const options = {
+      params : new HttpParams().set('musictype', musictype)
+    }
+    return this.http.get('http://127.0.0.1:4500/getmusicsheet', options)
+      .pipe(
+        catchError(this.handleError)
+      )
+  }
   //Error Handle
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
