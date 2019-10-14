@@ -6,6 +6,7 @@ import { SheetComponent } from './sheet/sheet.component';
 import { DebugElement } from '@angular/core';
 /* Automatic change detection */
 import { ComponentFixtureAutoDetect } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('PianoComponent Class Test', () => {
     let pianocomp : PianoComponent;
@@ -36,7 +37,10 @@ describe('PianoComponent DOM Test', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [PianoComponent, SheetComponent],
-            imports: [RouterModule.forRoot(pianoroutes)],
+            imports: [
+                RouterModule.forRoot(pianoroutes),
+                HttpClientTestingModule
+            ],
             //providers: [{provide: ComponentFixtureAutoDetect, useValue: true}]
         });
         fixture = TestBed.createComponent(PianoComponent);
