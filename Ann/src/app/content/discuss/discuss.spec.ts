@@ -20,7 +20,7 @@ describe('DiscussComponent', () => {
             ],
             imports : [HttpClientTestingModule]
         });
-        // Inject this service to each test by calling TestBed.get() with th e service class as the argument.
+        // Inject this service to each test by calling TestBed.get() with the service class as the argument.
         discusscomp = TestBed.get(DiscussComponent);
         discussService = TestBed.get(DiscussService);
         cookieService = TestBed.get(CookieService);

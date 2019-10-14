@@ -89,3 +89,123 @@ describe('BannerComponent (with beforeEach)', () => {
         expect(authService.redirectUrl).toBe('/blog');
     });
 });
+
+describe('Login Component Service test', () => {
+  let logincomp : LoginComponent;
+  let authService : AuthService;
+  let cookieService: CookieService;
+  let UserInfoList: any;
+  let router: Router;
+  const routerSpy = jasmine.createSpyObj('Router', ['navigateByUrl', 'parseUrl']);
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [
+        LoginComponent,
+        AuthService,
+        CookieService,
+        { provide: Router, useValue: routerSpy}
+      ],
+      imports: [HttpClientTestingModule]
+    });
+    // Inject this service to each test by calling TestBed.get() with the service class as the argument.
+    logincomp = TestBed.get(LoginComponent);
+    authService = TestBed.get(AuthService);
+    cookieService = TestBed.get(CookieService);
+    router = TestBed.get(Router);
+    UserInfoList = [
+      {
+        'name': 'Json',
+        'password': 'json123'
+      },{
+        'name': 'Joy',
+        'password': 'joy123'
+      },{
+        'name': 'Amy',
+        'password': 'amy123'
+      },{
+        'name': 'Tonal',
+        'password': 'tonal123'
+      },{
+        'name': 'Joanna',
+        'password': 'joanna123'
+      }
+    ];
+  });
+
+  it('#should return right response after enter right name and password', () => {
+    UserInfoList.forEach((UserInfo, index) => {
+      authService.Login(UserInfo)
+        .subscribe(data => {
+          if(data.response == 'ok'){
+            expect(JSON.parse(data.response)).toBe('ok');
+            switch(index){
+              case 0:
+                expect(JSON.parse(data.token)).toBe('json123');
+                break;
+              case 1:
+                expect(JSON.parse(data.token)).toBe('joyToken');
+                break;
+              case 2:
+                expect(JSON.parse(data.token)).toBe('amyToken');
+                break;
+              case 3:
+                expect(JSON.parse(data.token)).toBe('tonalToken');
+                break;
+              case 4: 
+                expect(JSON.parse(data.token)).toBe('joannaToken');
+                break;
+              default:
+                expect(JSON.parse(data.token)).toBe('json123');
+                break;
+            };
+          }
+        });
+    });
+  });
+
+  it('should have right cookie after Login && isLogged In is true', () => {
+    UserInfoList.forEach((UserInfo) => {
+      authService.Login(UserInfo)
+        .subscribe(data => {
+          if(data.response == 'ok'){
+            const lowercaseName = UserInfo.name.replace(/^\w/, c => c.toLowerCase());
+            expect(cookieService.get('UserID')).toBe(`${lowercaseName}Token`);
+            expect(authService.isLoggedIn).toBe(true);
+          }
+        });
+    });
+  });  
+
+  it('should start countdown after login', () => {
+    UserInfoList.forEach((UserInfo) => {
+      authService.Login(UserInfo)
+        .subscribe(data =>{
+          if(data.response == 'ok'){
+            authService.countdown$.subscribe(time => {
+              expect(authService.counter).toBe(authService.counter - 1)
+            });
+          }
+        });
+    });
+  });
+
+  it('should tell ROUTER to navigate when logged In', () => {
+    // use redirect
+    const redirect = authService.redirectUrl ? 
+    router.parseUrl(authService.redirectUrl) : '/blog';
+
+    // expecting to navigate to '/blog' page or the authService.redirectUrl
+    UserInfoList.forEach(UserInfo => {  
+      authService.Login(UserInfo)
+        .subscribe(data => {
+          if(data.response == 'ok'){
+            // args passed to router.navigateByUrl() spy
+            const spy = router.navigateByUrl as jasmine.Spy;
+            const navArgs = spy.calls.first().args[0];
+            expect(navArgs).toBe(redirect || '/blog', 'should navigate to Specific Component');
+          }
+        });
+    });
+  });
+});
