@@ -4,12 +4,11 @@ import { AddpostComponent } from './addpost/addpost.component';
 import { BloghomeComponent } from './bloghome/bloghome.component';
 import { SharedModule } from '../../shared/shared.module';
 import { TestBed, ComponentFixture, fakeAsync, tick, discardPeriodicTasks } from '@angular/core/testing';
-import { Router, RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { blogroutes } from './blog-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { asyncData } from '../../testing/async-observable-helpers';
 
 describe('BlogComponent DOM async testing', () =>{
     
@@ -21,13 +20,6 @@ describe('BlogComponent DOM async testing', () =>{
     let blogImg: HTMLElement;
 
     beforeEach(() => {
-        routerEvent = {url: 'blog'}
-
-        // Create a fake Router object with a `event` spy
-        const routerSpy = jasmine.createSpyObj('Router', ['event']);
-        // Make the spy return a synchronous Observable with the test data
-        //getRouterEvent = routerSpy.and.returnValue(asyncData(routerEvent))
-
         TestBed.configureTestingModule({
             declarations: [
                 BlogComponent, 
