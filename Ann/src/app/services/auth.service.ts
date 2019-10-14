@@ -10,7 +10,8 @@ export class AuthService {
   isLoggedIn : boolean = false;
   redirectUrl : string;
   counter : number = 900;
-  countdown$ : any = null;
+  countdown$ : any;
+  countdownTimer$: any;
 
   constructor(
     private http: HttpClient

@@ -49,10 +49,9 @@ export class SheetComponent implements OnInit, OnChanges {
     this.pianoService.getmusicsheet(this.musictype)
       .subscribe((pdfs: Array<string>) => {
         console.log('returned pdfs is =>', pdfs);
-        this.sheets = pdfs;
+        this.sheets = pdfs.map((eachname) => {
+          return this.sanitizer.bypassSecurityTrustResourceUrl(`assets/pdf/${eachname}.pdf`);
+        });
       });
   }
-  sanitizeUrl(url){
-    return this.sanitizer.bypassSecurityTrustResourceUrl(`assets/pdf/${url}.pdf`);
-  } 
 }

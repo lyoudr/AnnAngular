@@ -27,6 +27,8 @@ export class NavComponent implements OnInit {
 
 
   logOut(){
+    this.authService.countdownTimer$.unsubscribe();
+    this.authService.counter = 900;
     this.authService.isLoggedIn = false;
     this.cookieService.deleteAll();
     this.router.navigate(['/login']);

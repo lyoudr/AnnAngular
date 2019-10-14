@@ -4,9 +4,10 @@ import { CookieService } from 'ngx-cookie-service';
 // Http testing module and mocking controller
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 // Other imports
-import { TestBed, ComponentFixture } from '@angular/core/testing';
-import { of } from 'rxjs';
+import { TestBed, ComponentFixture, fakeAsync, tick } from '@angular/core/testing';
+import { of, throwError} from 'rxjs';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { asyncData } from '../../testing/async-observable-helpers';
 
 describe('DiscussComponent', () => {
     let discusscomp : DiscussComponent;
@@ -102,6 +103,7 @@ describe('Discuss DOM testeing', () => {
         const discussService = jasmine.createSpyObj('DiscussService', ['getSerchResult']);
         // Make the spy return a synchronous Observable with the test data
         getSearchResultSpy = discussService.getSerchResult.and.returnValue(of(testResponse))
+        getSearchResultSpy.and.returnValue(asyncData(testResponse));
 
         TestBed.configureTestingModule({
             declarations: [DiscussComponent],
@@ -140,4 +142,6 @@ describe('Discuss DOM testeing', () => {
             expect(getSearchResultSpy.calls.any()).toBe(true, 'getSearchResult called');
         }, 1000);
     });
+
+    
 });
