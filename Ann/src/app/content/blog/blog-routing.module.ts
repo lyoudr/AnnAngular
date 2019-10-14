@@ -5,7 +5,7 @@ import { BloghomeComponent } from './bloghome/bloghome.component';
 import { BlogpostComponent } from './blogpost/blogpost.component';
 import { AddpostComponent } from './addpost/addpost.component';
 
-const routes: Routes = [
+export const blogroutes: Routes = [
   {
     path: '',
     component: BlogComponent,
@@ -29,7 +29,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(blogroutes)],
   exports: [RouterModule]
 })
 export class BlogRoutingModule { }
