@@ -27,13 +27,13 @@
                     </div>
                 </ng-container>
                 <ng-container *ngIf="chattype == 'phone'">
-                    <div class="d-flex flex-row" *ngFor="let phone of phones">
+                    <div class="d-flex flex-row phones" *ngFor="let phone of phones">
                         <p>{{phone.name}}</p>
                         <p>call</p>
                     </div>
                 </ng-container>
                 <ng-container *ngIf="chattype == 'contact'">
-                    <div class="d-flex flex-row" *ngFor="let contact of contacts">
+                    <div class="d-flex flex-row contacts" *ngFor="let contact of contacts">
                         <p>{{contact.name}}</p>
                     </div>
                 </ng-container>

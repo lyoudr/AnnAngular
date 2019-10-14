@@ -4,7 +4,9 @@ import { CookieService } from 'ngx-cookie-service';
 // Http testing module and mocking controller
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 // Other imports
-import { TestBed } from '@angular/core/testing';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
+import { of } from 'rxjs';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('DiscussComponent', () => {
     let discusscomp : DiscussComponent;
@@ -82,5 +84,60 @@ describe('DiscussComponent', () => {
         discusscomp.searchResult$.subscribe(data => {
             expect(JSON.parse(data)).toBe(['Json', 'Joy', 'Joanna']);
         });
+    });
+});
+
+describe('Discuss DOM testeing', () => {
+        let testResponse : any;
+        let getSearchResultSpy : any;
+        let fixture: ComponentFixture<DiscussComponent>;
+        let discusscomp: DiscussComponent;
+        let contactsEl: HTMLElement;
+        let phonesEl : HTMLElement;
+
+    beforeEach(() => {
+        testResponse = [{'name': 'Json'}, {'name': 'Joy'}, {'name': 'Joanna'}];
+
+        // Create a fake DiscussService object with a `getSearchResult`
+        const discussService = jasmine.createSpyObj('DiscussService', ['getSerchResult']);
+        // Make the spy return a synchronous Observable with the test data
+        getSearchResultSpy = discussService.getSerchResult.and.returnValue(of(testResponse))
+
+        TestBed.configureTestingModule({
+            declarations: [DiscussComponent],
+            providers: [
+                {provide: DiscussService, useValue: discussService},
+                CookieService
+            ],
+            imports: [HttpClientTestingModule],
+            schemas: [CUSTOM_ELEMENTS_SCHEMA]
+        });
+        fixture = TestBed.createComponent(DiscussComponent);
+        discusscomp = fixture.componentInstance;
+        
+    });
+
+    it('should show right contact and phone after enter "J"', () => {
+        contactsEl = fixture.nativeElement.querySelector('.phones');
+        phonesEl = fixture.nativeElement.querySelector('.contacts');
+        const hostElement = fixture.nativeElement;
+        const searchInput : HTMLInputElement = hostElement.querySelector('input');
+        // simulate user entering a "J" to search input box
+        searchInput.value = "J";
+
+        // dispatch a DOM event so that Angular learns of input value changes.
+        searchInput.dispatchEvent(new Event('input'));
+
+        // Tell Angular to uptdate the display binding throught the title pipe
+        fixture.detectChanges();
+        setTimeout(() => {
+            expect(contactsEl.childNodes.forEach((value, index) => {
+                expect(value.textContent).toBe(testResponse[index].name);
+            }));
+            expect(phonesEl.childNodes.forEach((value, index) => {
+                expect(value.textContent).toBe(testResponse[index].name);
+            }));
+            expect(getSearchResultSpy.calls.any()).toBe(true, 'getSearchResult called');
+        }, 1000);
     });
 });
