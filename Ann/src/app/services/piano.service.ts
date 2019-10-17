@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpErrorResponse, HttpHandler, HttpHeaders } from '@angular/common/http';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators'
 
@@ -8,8 +9,12 @@ import { catchError } from 'rxjs/operators'
 })
 export class PianoService {
 
+  isDetail : boolean = false; // decide if is enter to detail page
+  
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private route: ActivatedRoute,
+    private router: Router,
   ) { }
 
   getsheet(sheettype: any){
@@ -34,6 +39,18 @@ export class PianoService {
       .pipe(
         catchError(this.handleError)
       )
+  }
+  // detect navigation
+  detectNavigation(url){
+    this.router.events.subscribe(event => {
+      if(event instanceof NavigationEnd){
+        if(event.url !== url){
+          this.isDetail = true;
+        } else if(event.url === url){
+          this.isDetail = false;
+        }
+      }
+    });
   }
   //Error Handle
   private handleError(error: HttpErrorResponse) {

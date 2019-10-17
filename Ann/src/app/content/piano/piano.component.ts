@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PianoService } from 'src/app/services/piano.service';
 
 @Component({
   selector: 'app-piano',
@@ -42,8 +43,11 @@ export class PianoComponent implements OnInit {
   }];
   ranktype: string = 'name';
   currencyCode: string = 'TWD';
-  
-  constructor() { }
+  isSlideUp: boolean = false;
+
+  constructor(
+    public pianoService: PianoService
+  ) { }
 
   ngOnInit() {
   }
@@ -51,6 +55,9 @@ export class PianoComponent implements OnInit {
   selectMusic(musicindex){
     this.typeindex = musicindex;
     this.classTitle = this.musictype[musicindex];
+    if(this.isSlideUp === false) {
+      this.isSlideUp = true;
+    }
   }
 
   rankPieces(ranktype){

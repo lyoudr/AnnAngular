@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { PianoService } from '../../../services/piano.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import WOW from 'wow.js';
@@ -22,25 +21,14 @@ export class SheetComponent implements OnInit, OnChanges {
   url: Observable<string>;
 
   constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private pianoService: PianoService,
+    public pianoService: PianoService,
     private sanitizer: DomSanitizer
   ) { 
   }
 
   ngOnInit() {
     new WOW().init();
-    this.router.events.subscribe(event => {
-      if(event instanceof NavigationEnd){
-        console.log('event.url is =>', event.url);
-        if(event.url !== '/piano'){
-          this.isDetail = true;
-        } else if(event.url === '/piano'){
-          this.isDetail = false;
-        }
-      }
-    });
+    this.pianoService.detectNavigation('/piano');
   }
 
   ngOnChanges(){
