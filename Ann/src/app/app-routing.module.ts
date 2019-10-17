@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './auth/auth.guard';
 
 const approutes: Routes = [
+  { path: '', redirectTo: 'blog', pathMatch: 'full' },
   {
     path: 'login',
     component: LoginComponent

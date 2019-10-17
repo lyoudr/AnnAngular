@@ -8,6 +8,11 @@
                         cursor: pointer;
                     }
                 }
+                &:nth-child(2){
+                    .material-icons, .dropdown-item{
+                        cursor: pointer;
+                    }
+                }
             }
         }
     }

@@ -13,6 +13,37 @@
                 </ul>
             </div>
             <div class="col-9">
+                <table class="table table-striped table-dark">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Composer<i class="material-icons" (click)="rankPieces('name')">expand_less</i></th>
+                            <th scope="col">Piano piece<i class="material-icons" (click)="rankPieces('pieces')">expand_less</i></th>
+                            <th scope="col">Sheet music</th>
+                            <th scope="col">
+                                <div class="dropdown">
+                                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Price
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" (click)="setCurrency('USD')">USD</a>
+                                        <a class="dropdown-item" (click)="setCurrency('TWD')">TWD</a>
+                                        <a class="dropdown-item" (click)="setCurrency('JPY')">JPY</a>
+                                    </div>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let eachpiece of (pieces | rankpieces : ranktype); let pieceindex = index">
+                            <th scope="row">{{ pieceindex + 1}}</th>
+                            <td>{{eachpiece.name}}</td>
+                            <td>{{eachpiece.sheetname}}</td>
+                            <td>{{eachpiece.src}}</td>
+                            <td>{{eachpiece.price | currency : currencyCode}}</td>
+                        </tr>
+                    </tbody>
+                </table>
                 <app-sheet [title]="classTitle" [musictype]="classTitle"></app-sheet>
             </div>
         </div>
