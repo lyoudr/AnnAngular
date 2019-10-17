@@ -19,7 +19,6 @@ export class BlogComponent implements OnInit {
     // Using Wow.js
     new WOW().init();
     this.router.events.subscribe(event => {
-      console.log('event is =>', event);
       if(event instanceof NavigationEnd){
         if(event.url === '/blog'){
           $('#blogImg').fadeIn(1000);

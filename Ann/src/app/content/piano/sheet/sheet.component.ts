@@ -1,10 +1,9 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { PianoService } from '../../../services/piano.service';
 import { DomSanitizer } from '@angular/platform-browser';
-//import { switchMap } from 'rxjs/operators';
-
+import WOW from 'wow.js';
 
 @Component({
   selector: 'app-sheet',
@@ -19,28 +18,29 @@ export class SheetComponent implements OnInit, OnChanges {
   @Input() title : string; 
   @Input() musictype: string;
   sheets: Array<any>;
+  isDetail : boolean = false; // decide if is enter to detail page
+  url: Observable<string>;
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private pianoService: PianoService,
     private sanitizer: DomSanitizer
-  ) { }
+  ) { 
+  }
 
   ngOnInit() {
-    /*this.sheet$ = this.route.paramMap.pipe(
-      switchMap(params => {
-        const sheettype = params.get('id');
-        return this.pianoService.getsheet(sheettype)
-      })
-    );
-    // 訂閱此 Observable
-    this.sheet$.subscribe((sheet) => {
-      console.log('sheet is =>', sheet);
-      this.blob = new Blob([sheet], {type: 'application/pdf'});
-      var downloadURL = window.URL.createObjectURL(sheet);
-      this.pdflink = this.sanitizer.bypassSecurityTrustUrl(downloadURL);
-      console.log('this.pdflink is =>', this.pdflink);
-    });*/
+    new WOW().init();
+    this.router.events.subscribe(event => {
+      if(event instanceof NavigationEnd){
+        console.log('event.url is =>', event.url);
+        if(event.url !== '/piano'){
+          this.isDetail = true;
+        } else if(event.url === '/piano'){
+          this.isDetail = false;
+        }
+      }
+    });
   }
 
   ngOnChanges(){
@@ -50,7 +50,10 @@ export class SheetComponent implements OnInit, OnChanges {
       .subscribe((pdfs: Array<string>) => {
         console.log('returned pdfs is =>', pdfs);
         this.sheets = pdfs.map((eachname) => {
-          return this.sanitizer.bypassSecurityTrustResourceUrl(`assets/pdf/${eachname}.pdf`);
+          return { 
+            url: this.sanitizer.bypassSecurityTrustResourceUrl(`assets/pdf/${eachname}.pdf`),
+            name: eachname  
+          };
         });
       });
   }

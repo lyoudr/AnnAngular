@@ -276,19 +276,19 @@ app.post('/search_discuss_sidenav', (req, res)=>{
 app.get('/getmusicsheet', (req, res) => {
     let musictype = req.query.musictype;
     switch(musictype){
-        case 'classic':
+        case 'Classic':
             res.json(['A', 'B', 'C']);
             res.end();
-        case 'morden' :
+        case 'Morden' :
             res.json(['B', 'D']);
             res.end();
-        case 'jazz':
+        case 'Jazz':
             res.json(['C', 'D']);
             res.end();
-        case 'movie':
+        case 'Movie':
             res.json(['D']);
             res.end();
-        case 'cartoon':
+        case 'Cartoon':
             res.json(['E']);
             res.end();
     }

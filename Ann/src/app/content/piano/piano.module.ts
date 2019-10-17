@@ -5,11 +5,13 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { SharedModule } from '../../shared/shared.module';
 import { SheetComponent } from './sheet/sheet.component';
 import { PianoComponent } from './piano.component';
+import { SheetdetailComponent } from './sheetdetail/sheetdetail.component';
 
 @NgModule({
   declarations: [
     PianoComponent,
-    SheetComponent
+    SheetComponent,
+    SheetdetailComponent
   ],
   imports: [
     CommonModule,

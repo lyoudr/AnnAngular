@@ -1,0 +1,18 @@
+<div class="sheetdetail mt-5">
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+            <i class="material-icons" (click)="selectPage(-1)">keyboard_arrow_left</i>
+            <div class="col-8"> 
+                <pdf-viewer
+                    [src]="pdfSrc"
+                    [page]="page"
+                    [show-all]="false"
+                    [original-size]="originalsize"
+                    [fit-to-page]="fittopage"
+                    style="display: block;"
+                ></pdf-viewer>   
+            </div>
+            <i class="material-icons" (click)="selectPage(1)">keyboard_arrow_right</i>
+        </div>
+    </div>
+</div>
