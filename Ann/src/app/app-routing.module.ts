@@ -23,6 +23,11 @@ const approutes: Routes = [
     path: 'piano',
     loadChildren: () => import('./content/piano/piano.module').then(mod => mod.PianoModule),
     canActivate : [AuthGuard]
+  },
+  {
+    path: 'calendar',
+    loadChildren : () => import('./content/calendar/calendar.module').then(mod => mod.CalendarModule),
+    canActivate: [AuthGuard]
   }
 ];
 
