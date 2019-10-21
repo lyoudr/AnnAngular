@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 export class SheetdetailComponent implements OnInit {
   id: string ;
   pdfSrc: string;
+  audioSrc: string;
   page: number = 1;
   originalsize : boolean = false;
   fittopage: boolean = true;
@@ -21,6 +22,7 @@ export class SheetdetailComponent implements OnInit {
   ngOnInit() {
     this.id = this.router.snapshot.paramMap.get('id');
     this.pdfSrc = `http://127.0.0.1:4500/assets/pdf/${this.id}.pdf`;
+    this.audioSrc = `http://127.0.0.1:4500/assets/music/${this.id}.mp3`;
   }
 
   selectPage(count){

@@ -13,12 +13,14 @@ import { LoginComponent } from './content/login/login.component';
 
 // Service
 import { CookieService } from 'ngx-cookie-service';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
     LoginComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

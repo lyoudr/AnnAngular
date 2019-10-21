@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PianoService } from 'src/app/services/piano.service';
+import WOW from 'wow.js';
 
 @Component({
   selector: 'app-piano',
@@ -50,6 +51,7 @@ export class PianoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    new WOW().init();
   }
 
   selectMusic(musicindex){

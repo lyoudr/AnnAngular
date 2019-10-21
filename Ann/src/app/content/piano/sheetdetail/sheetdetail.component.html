@@ -10,9 +10,13 @@
                     [original-size]="originalsize"
                     [fit-to-page]="fittopage"
                     style="display: block;"
+                    class="wow slideInLeft"
                 ></pdf-viewer>   
             </div>
             <i class="material-icons" (click)="selectPage(1)">keyboard_arrow_right</i>
+        </div>
+        <div class="row justify-content-center">
+            <audio [src]="audioSrc" controls class="wow slideInRight"></audio>
         </div>
     </div>
 </div>
