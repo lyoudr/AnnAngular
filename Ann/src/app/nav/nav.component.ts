@@ -19,7 +19,8 @@ export class NavComponent implements OnInit {
     {'url':'/blog', 'title': 'Blog'},
     {'url':'/discuss', 'title': 'Discuss'},
     {'url':'/piano', 'title': 'Piano'},
-    {'url':'/calendar', 'title': 'Calendar'}
+    {'url':'/calendar', 'title': 'Calendar'},
+    {'url':'/restaurant', 'title':'Restaurant'}
   ]
 
   ngOnInit() {

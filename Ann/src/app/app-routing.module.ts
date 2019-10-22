@@ -28,6 +28,11 @@ const approutes: Routes = [
     path: 'calendar',
     loadChildren : () => import('./content/calendar/calendar.module').then(mod => mod.CalendarModule),
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'restaurant',
+    loadChildren: () => import('./content/restaurant/restaurant.module').then(mod => mod.RestaurantModule),
+    canActivate: [AuthGuard]
   }
 ];
 
