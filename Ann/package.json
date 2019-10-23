@@ -28,7 +28,9 @@
     "ng2-pdf-viewer": "^5.3.4",
     "ngx-bootstrap": "^5.2.0",
     "ngx-cookie-service": "^2.2.0",
+    "ngx-slick-carousel": "^0.4.6",
     "rxjs": "~6.4.0",
+    "slick-carousel": "^1.8.1",
     "tslib": "^1.10.0",
     "wow.js": "^1.2.2",
     "zone.js": "~0.9.1"

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { RestaurantRoutingModule } from './restaurant-routing.module';
@@ -15,7 +15,6 @@ import {
   MatProgressBarModule,
 } from '@angular/material'
 import { ScrollDispatchModule } from '@angular/cdk/scrolling';
-
 import { RestaurantComponent } from './restaurant.component';
 import { RestaurantChildComponent } from './restaurantchild/restaurant-child.component';
 import { ChangecurrencyPipe } from '../../shared/pipes/changecurrency.pipe';
@@ -42,7 +41,10 @@ import { EachrestaurantComponent } from './eachrestaurant/eachrestaurant.compone
     MatDialogModule,
     MatListModule,
     MatProgressBarModule,
-    ScrollDispatchModule
+    ScrollDispatchModule,   
+  ],
+  schemas:[
+    CUSTOM_ELEMENTS_SCHEMA
   ]
 })
 export class RestaurantModule { }
