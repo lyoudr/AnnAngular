@@ -1,7 +1,7 @@
 <div class="main">
     <div class="container">
         <div class="row">
-            <div class="jumbotron" style="background-color: white">
+            <div class="col-12 title">
                 <h1>Restaurant</h1>      
                 <p>Search your desire restaurant</p>
             </div>
@@ -41,17 +41,17 @@
             <div class="col-8 restaurantlists">
                 <mat-tab-group [(selectedIndex)]="tabIndex"
                                 (focusChange)="tabFocusChange($event)">
-                    <mat-tab label="甜點">
+                        <mat-tab label="Sweet">
+                            <app-restaurant-child 
+                                [restaurantlists]="restaurantlists" [type]="type" #Child (resetEvent)="Reset($event)"> 
+                            </app-restaurant-child>
+                        </mat-tab>
+                    <mat-tab label="Ceremonial cuisine">
                         <app-restaurant-child 
                             [restaurantlists]="restaurantlists" [type]="type" #Child (resetEvent)="Reset($event)"> 
                         </app-restaurant-child>
                     </mat-tab>
-                    <mat-tab label="義士料理">
-                        <app-restaurant-child 
-                            [restaurantlists]="restaurantlists" [type]="type" #Child (resetEvent)="Reset($event)"> 
-                        </app-restaurant-child>
-                    </mat-tab>
-                    <mat-tab label="中士料理">
+                    <mat-tab label="Chinese cuisine">
                         <app-restaurant-child 
                             [restaurantlists]="restaurantlists" [type]="type" #Child (resetEvent)="Reset($event)"> 
                         </app-restaurant-child>

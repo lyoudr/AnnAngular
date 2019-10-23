@@ -37,7 +37,7 @@ export class RestaurantService {
   
   /*2. Get Post */
   GetPost(restaurantId: any) : Observable<any>{
-     const options = restaurantId ? {params: new HttpParams().set('restaurantId', restaurantId)} : {};
+    const options = restaurantId ? {params: new HttpParams().set('restaurantId', restaurantId)} : {};
     return this.http.get<Object>('http://127.0.0.1:4500/restaurantpost', options)
       .pipe(
         catchError(this.handleError)
