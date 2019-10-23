@@ -74,4 +74,9 @@ export class RestaurantComponent implements OnInit {
       this.DefineType(1, 'chinese');
     }
   }
+
+  /* Search Food */
+  searchFood(food){
+    console.log('food is =>', food);
+  }
 }

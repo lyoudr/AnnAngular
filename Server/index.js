@@ -338,7 +338,6 @@ app.get('/restaurantpost',(req, res)=>{
     console.log('retaurantId is =>', typeof restaurantId);
     switch(restaurantId){
         case '01' :
-            //res.setHeader("Set-Cookie","ACookieAvailableCrossSite; SameSite=None; secure; httponly");
             res.json([
                 {   img: 'assets/image/restaurant/cuisine/tater_tots.jpg', 
                     title: 'Tater tots', 
@@ -363,6 +362,41 @@ app.get('/restaurantpost',(req, res)=>{
                     "Gooey, melty, warm and sweet -- nothing evokes family vacations and carefree camping under the stars quite like this classic American food.",
                     "Whether they were first to roast marshmallows and squish them between graham crackers with a bar of chocolate no one seems to know, but the Girl Scouts were the first to get the recipe down in the 1927 'Tramping and Trailing with the Girl Scouts,' transforming many a standard-issue campfire into a quintessential experience.",
                     "Celebrate sweetly on August 10: It's National S'mores Day. Get those marshmallow sticks sharpened."
+                  ],
+                  LatLng: [65.3, 110.45]
+                }
+              ]);
+            res.end();
+            break;
+        case '02' :
+            res.json([
+                {   img: 'assets/image/restaurant/cuisine/cioppino.jpg', 
+                    title: 'Cioppino', 
+                    content: [
+                            "San Francisco's answer to French bouillabaisse, cioppino (cho-pea-no) is fish stew with an Italian flair.",
+                            "It's an American food that's been around since the late 1800s, when Portuguese and Italian fishermen who settled the North Beach section of the city brought their on-board catch-of-the-day stew back to land and area restaurants picked up on it.",
+                            "Cooked in a tomato base with wine and spices and chopped fish (whatever was plentiful, but almost always crab), cioppino probably takes its name from the classic fish stew of Italy's Liguria region, where many Gold Rush era fishermen came from.",
+                            "Get a memorable bowl at Sotto Mare in North Beach, Scoma's on Fisherman's Wharf, and Anchor Oyster Bar in the Castro District. Don't feel bad about going with the 'lazy man's' cioppino -- it only means you're not going to spend half the meal cracking shellfish."
+                    ],
+                    LatLng: [48.678, -30.8431]
+                },
+                {
+                  img: 'assets/image/restaurant/cuisine/marylandcrabcakes.jpg', title: 'Maryland crabcakes', content: 
+                  [
+                    "The Chesapeake Bay yields more than just the regatta-loving suntanned class in their sock-free topsiders.",
+                    "It's the home habitat of the blue crab, which both Maryland and Virginia claim as their own.",
+                    "Boardwalk style (mixed with fillers and served on a bun) or restaurant/gourmet style; fried, broiled, or baked, crab cakes can be made with any kind of crab, but the blue crabs of Chesapeake Bay are preferred for both tradition and taste.",
+                    "When Baltimore magazine rounded up the best places to get the city's signature food, editors declared simplicity the key, while lamenting the fact that most crabmeat doesn't even come from home turf these days. Kind of makes you crabby, doesn't it?"
+                  ],
+                  LatLng: [63.78, 155.37]
+                },
+                {
+                  img: 'assets/image/restaurant/cuisine/potatochips.jpg', title: "Potato Chips", content: 
+                  [
+                    "We have a high-maintenance resort guest to thank for America's hands-down favorite snack.",
+                    "Saratoga Springs, New York, 1853: Native American chef George Crum is in the kitchen at the elegant Moon Lake Lodge. A persnickety customer sends back his French fries (then highfalutin fare eaten with a fork) for being too thick. Crum makes a second, thinner, order.",
+                    "Still too thick for the picky diner. Annoyed, Crum makes the next batch with a little attitude, slicing the potatoes so thin, the crispy things can't possibly be picked up with a fork. Surprise: the wafer-thin fried potatoes are a hit.",
+                    "Traveling salesman Herman Lay sold them out of the trunk of his car before founding Lay's Potato Chips, the first nationally marketed brand. Lay's would ultimately merge in 1961 with Frito to create the snack behemoth Frito-Lay."
                   ],
                   LatLng: [65.3, 110.45]
                 }
