@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild, OnChanges } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import {} from 'googlemaps';
 import { ActivatedRoute } from '@angular/router';
 import { RestaurantService } from 'src/app/services/restaurant.service';
@@ -18,20 +19,46 @@ export class EachrestaurantComponent implements OnInit {
   
   @ViewChild('map', {static: true}) mapElement: any;
   map: google.maps.Map;
+  name: string;
+  restaurantId : string;
+  restaurantName: Object = {
+    '01': '咚咚餐廳',
+    '02': '哈摟餐廳',
+    '03': '每每餐廳',
+    '04': '美麗餐廳',
+    '05': '義大餐廳',
+    '06': '樂樂餐廳',
+    '07': '您好餐廳',
+    '08': '安安餐廳',
+    '09': '武道餐廳',
+    '10': '湯包餐廳',
+    '11': '享用餐廳',
+    '12': '素菜餐廳',
+  };
   /* Slick */
   slides: Array<any> = [];
   
   /*Latitude and longitude */
   LatLng : Array<any> = [35.2271, -80.8431];
 
+  /* Comment Form */
+  commentForm = this.fb.group({
+    title : [''],
+    content : ['']
+  });
+
+  messages : any = [];
   constructor(
     private route: ActivatedRoute,
+    private fb: FormBuilder,
     private restaurantService : RestaurantService
   ) { }
 
   ngOnInit() {
+    this.restaurantId = this.route.snapshot.paramMap.get('id');
     this.initGoogleMap();
     this.getMapInfo();
+    this.getComment();
   }
   
   initGoogleMap(){
@@ -44,11 +71,11 @@ export class EachrestaurantComponent implements OnInit {
   }
 
   getMapInfo(){
-    let restaurantId = this.route.snapshot.paramMap.get('id');
-    this.restaurantService.GetPost(restaurantId)
+    this.restaurantService.GetPost(this.restaurantId)
       .subscribe(data => {
         this.LatLng = data[0].LatLng
         this.slides = data;
+        this.name = this.restaurantName[this.restaurantId];
         this.slick();
       });
   }
@@ -65,5 +92,27 @@ export class EachrestaurantComponent implements OnInit {
         adaptiveHeight: true
       });
     });
+  }
+
+  // Get comment info
+  getComment(){
+    this.restaurantService.getComment(this.restaurantId)
+      .subscribe(data => {
+        if(data.response == 'ok'){
+          this.messages = data.comments;
+        }
+      });
+  }
+  // Submit Comment
+  submitComment(){
+    this.commentForm.value.restaurantId = this.route.snapshot.paramMap.get('id');
+    console.log('this.commentForm.value is =>', this.commentForm.value);
+    this.restaurantService.sentComment(this.commentForm.value)
+      .subscribe(data =>{
+        console.log('data is =>', data);
+        if(data.response == 'ok'){
+          this.messages = data.comments;
+        }
+      });
   }
 }

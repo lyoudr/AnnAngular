@@ -6,6 +6,8 @@ import { RestaurantRoutingModule } from './restaurant-routing.module';
 import { TabsModule } from 'ngx-bootstrap';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import {
@@ -13,6 +15,7 @@ import {
   MatDialogModule,
   MatListModule,
   MatProgressBarModule,
+  MatInputModule,
 } from '@angular/material'
 import { ScrollDispatchModule } from '@angular/cdk/scrolling';
 import { RestaurantComponent } from './restaurant.component';
@@ -35,6 +38,9 @@ import { EachrestaurantComponent } from './eachrestaurant/eachrestaurant.compone
     TabsModule,
     MatTabsModule,
     MatCheckboxModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatInputModule,
     FormsModule,
     MatCardModule,
     MatButtonModule,

@@ -1,15 +1,45 @@
 .main{
-    margin-top: 200px;
-     
-    .slide{
-        img{
-            margin: auto;
+    margin-top: 100px;
+    background: rgb(128, 126, 126);
+    color: white;
+    .container{
+        >h5{
+            margin-bottom: 30px;
         }
-        h5{
-            margin-top: 50px;
+        .slide{
+            img{
+                margin: auto;
+            }
+            h5{
+                margin-top: 50px;
+            }
+            p{
+                text-align: justify;
+            }
         }
-        p{
-            text-align: justify;
+        .comment{
+            margin-top: 100px;
+            margin-bottom: 100px;
+            form{
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                >button{
+                    width: 15%;
+                    margin: auto;
+                }
+            }
+        }
+        .message{
+            margin-bottom: 150px;
+            >div{
+                background: white;
+                color:black;
+                box-shadow: 2px 2px 0 0 darkgrey;
+                padding: 10px 0 10px 10px;
+                margin-bottom: 30px;
+                border: none;
+            }
         }
     }          
 }

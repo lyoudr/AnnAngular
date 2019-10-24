@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTabChangeEvent } from '@angular/material';
 import { RestaurantService } from 'src/app/services/restaurant.service';
-
+import WOW from 'wow.js';
 
 @Component({
   selector: 'app-restaurant',
@@ -27,6 +27,7 @@ export class RestaurantComponent implements OnInit {
   TWD = "TWD";
   JPY = "JPY";
   USD = "USD";
+  @ViewChild('result', {static: true}) resultTab: any;
 
   constructor(
     private restaurantService: RestaurantService
@@ -35,16 +36,15 @@ export class RestaurantComponent implements OnInit {
   ngOnInit() {
     this.DefineType(1, "sweet");
     this.type= "sweet";
+    new WOW().init();
   }
 
   /*1. Get restaurant lists */
   DefineType(pagenumber, classification : string){
     this.pagenumber = pagenumber;
     this.classification = classification;
-    console.log('classification =>', this.classification);
     this.restaurantService.Getrestaurant(this.pagenumber, this.classification)
       .subscribe((restaurantlists)=>{
-        console.log('回傳的餐廳清單 =>', restaurantlists);
         this.restaurantlists = restaurantlists;
       })
   }
@@ -72,11 +72,18 @@ export class RestaurantComponent implements OnInit {
       this.DefineType(1, 'righteous');
     } else if(event == 'chinese') { 
       this.DefineType(1, 'chinese');
+    } else if(event == 'search'){
+      this.DefineType(1, 'sweet');
     }
   }
 
   /* Search Food */
-  searchFood(food){
-    console.log('food is =>', food);
+  searchFood(food : string){
+    this.restaurantService.searchFood(food)
+      .subscribe(data => {
+        this.tabIndex = 3;
+        this.restaurantlists = data;
+        this.type = 'search';
+      });
   }
 }

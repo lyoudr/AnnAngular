@@ -332,7 +332,7 @@ app.get('/restaurantlists', (req, res) =>{
     }
 });
 
-// 得到每間餐廳的經緯度
+// 得到每間餐廳的經緯度和菜色介紹
 app.get('/restaurantpost',(req, res)=>{
     let restaurantId = req.query.restaurantId;
     console.log('retaurantId is =>', typeof restaurantId);
@@ -404,5 +404,62 @@ app.get('/restaurantpost',(req, res)=>{
             res.end();
             break;
     }
-})
+});
+
+app.post('/searchfood', (req, res) => {
+    console.log('search text is =>', req.body);
+    let searchword = req.body;
+    let foundres = [];
+    let restaurantlists = [
+        { name : "咚咚餐廳", price : "100 ~ 200 TWD", comment: "好吃甜甜的", img : "assets/image/restaurant/restaurant-1.jpg", id : "01" },
+        { name : "哈摟餐廳", price : "300 ~ 600 TWD", comment: "好棒", img : "assets/image/restaurant/restaurant-2.jpg", id : "02" },
+        { name : "每每餐廳", price : "600 ~ 944 TWD", comment : "吃起來不錯", img : "assets/image/restaurant/restaurant-3.jpg", id : "03"},
+        { name : "美麗餐廳", price : "500 ~ 1200 TWD", comment : "一定要來吃", img : "assets/image/restaurant/restaurant-4.jpg", id : "04" },
+        { name : "義大餐廳", price : "400 ~ 700 TWD", comment: "好吃鹹鹹的", img : "assets/image/restaurant/restaurant-1.jpg", id : "05" },
+        { name : "樂樂餐廳", price : "500 ~ 600 TWD", comment: "有很多生菜, 不好吃", img : "assets/image/restaurant/restaurant-2.jpg", id : "06" },
+        { name : "您好餐廳", price : "600 ~ 900 TWD", comment : "我喜歡它的米飯", img : "assets/image/restaurant/restaurant-3.jpg", id : "07" },
+        { name : "安安餐廳", price : "500 ~ 800 TWD", comment : "義大利麵好吃", img : "assets/image/restaurant/restaurant-4.jpg", id : "08" },
+        { name : "武道餐廳", price : "304 ~ 850 TWD", comment: "很有中國味", img : "assets/image/restaurant/restaurant-1.jpg", id : "09" },
+        { name : "湯包餐廳", price : "100 ~ 220 TWD", comment: "湯包好吃", img : "assets/image/restaurant/restaurant-2.jpg", id : "10" },
+        { name : "享用餐廳", price : "230 ~ 340 TWD", comment : "吃起來不錯", img : "assets/image/restaurant/restaurant-3.jpg", id : "11" },
+        { name : "素菜餐廳", price : "800 ~ 1000 TWD", comment : "菜菜好吃喔", img : "assets/image/restaurant/restaurant-4.jpg", id : "12" }
+    ]
+    restaurantlists.forEach(res => {
+        if(res.name === searchword){
+            foundres.push(res);
+        }
+    });
+    res.json(foundres);
+    res.end();
+});
+
+app.get('/getcomment',(req, res) => {
+    let restaurantId = req.query.restaurantId;
+    switch(restaurantId){
+        case '01':
+            res.json({
+                response: 'ok',
+                comments:[
+                    {title: 'Hello', content: 'I think this restaurant is great.', restaurantId: '01'},
+                    {title: 'Good', content: 'I think this restaurant is execellent.', restaurantId: '01'},
+                    {title: 'Great', content: 'I think this restaurant is not bad.', restaurantId: '01'},
+                ]
+            });
+            res.end();
+            break;
+    }
+});
+
+app.post('/restaurantcomment', (req, res) => {
+    console.log('comment is =>', req.body);
+    let comments = [
+        {title: 'Hello', content: 'I think this restaurant is great.', restaurantId: '01'},
+        {title: 'Good', content: 'I think this restaurant is execellent.', restaurantId: '01'},
+        {title: 'Great', content: 'I think this restaurant is not bad.', restaurantId: '01'},
+    ]
+    comments.push(req.body);
+    // save req.body to DataBase
+    res.json({response: 'ok', comments});
+    res.end();
+});
 app.listen(4500, () => console.log('Server listen on port 4500!'));

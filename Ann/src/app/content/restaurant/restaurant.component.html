@@ -13,7 +13,7 @@
                     <div class="input-group">
                         <input #food (change)="searchFood(food.value)" type="search" aria-describedby="button-addon1" class="form-control border-0 bg-light">
                         <div class="input-group-append">
-                            <button id="button-addon1" type="submit" class="btn btn-link text-primary"><i class="material-icons">search</i></button>
+                            <button (change)="searchFood(food.value)" type="submit" class="btn btn-link text-primary"><i class="material-icons">search</i></button>
                         </div>
                     </div>
                 </div>
@@ -49,11 +49,11 @@
             <div class="col-8 restaurantlists">
                 <mat-tab-group [(selectedIndex)]="tabIndex"
                                 (focusChange)="tabFocusChange($event)">
-                        <mat-tab label="Sweet">
-                            <app-restaurant-child 
-                                [restaurantlists]="restaurantlists" [type]="type" #Child (resetEvent)="Reset($event)"> 
-                            </app-restaurant-child>
-                        </mat-tab>
+                    <mat-tab label="Sweet">
+                        <app-restaurant-child 
+                            [restaurantlists]="restaurantlists" [type]="type" #Child (resetEvent)="Reset($event)"> 
+                        </app-restaurant-child>
+                    </mat-tab>
                     <mat-tab label="Ceremonial cuisine">
                         <app-restaurant-child 
                             [restaurantlists]="restaurantlists" [type]="type" #Child (resetEvent)="Reset($event)"> 
@@ -64,6 +64,13 @@
                             [restaurantlists]="restaurantlists" [type]="type" #Child (resetEvent)="Reset($event)"> 
                         </app-restaurant-child>
                     </mat-tab>
+                    <ng-container *ngIf="type === 'search'">
+                        <mat-tab label="Search Result">
+                            <app-restaurant-child 
+                                [restaurantlists]="restaurantlists" [type]="type" #Child (resetEvent)="Reset($event)"> 
+                            </app-restaurant-child>
+                        </mat-tab>
+                    </ng-container>
                 </mat-tab-group>
                 <nav aria-label="Page navigation example" class="mt-4">
                     <ul class="pagination justify-content-end">

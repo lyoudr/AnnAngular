@@ -44,6 +44,28 @@ export class RestaurantService {
       )
   }
 
+  /*3. Search Restaurant */
+  searchFood(food : string):Observable<any>{
+    return this.http.post<Object>('http://127.0.0.1:4500/searchfood', food)
+      .pipe(
+        catchError(this.handleError)
+      )
+  }
+  /*4. Get comment when enter to this page */
+  getComment(restaurantId: string): Observable<any>{
+    const options2 = restaurantId ? {params: new HttpParams().set('restaurantId', restaurantId)} : {};
+    return this.http.get('http://127.0.0.1:4500/getcomment', options2)
+      .pipe(
+        catchError(this.handleError)
+      )
+  }
+  /*5. Sent comment of each restaurant to server */
+  sentComment(comment : any) : Observable<any>{
+    return this.http.post('http://127.0.0.1:4500/restaurantcomment', comment)
+      .pipe(
+        catchError(this.handleError)
+      )
+  }
   /* Error handling */
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
