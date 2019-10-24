@@ -48,6 +48,9 @@ export class EachrestaurantComponent implements OnInit {
   });
 
   messages : any = [];
+  stars : Array<any> = [0,1,2,3,4];
+  selectedstarIndex : number = -1;
+
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
@@ -114,5 +117,10 @@ export class EachrestaurantComponent implements OnInit {
           this.messages = data.comments;
         }
       });
+  }
+
+  // Ranking
+  rankStar(starindex){
+    this.selectedstarIndex = starindex;
   }
 }

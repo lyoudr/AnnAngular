@@ -16,7 +16,22 @@
                     </div>
                 </div>
                 <div class="comment wow slideInLeft">
-                    <h5>Leave a comment...</h5>
+                    <div class="d-flex align-items-center">
+                        <h5>Leave a comment...</h5>
+                        <ng-container *ngFor="let star of stars; let starindex = index">
+                            <span class="fa fa-star" 
+                                [ngClass]="selectedstarIndex >= starindex ? 'checked' : '' "
+                                [style.margin-left]="starindex == 0? 'auto': '' "
+                                (click)="rankStar(starindex)"
+                                >
+                            </span>
+                        </ng-container>
+                        <span class="fa fa-star checked" style="margin-left:auto"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star checked"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                    </div>
                     <form [formGroup]="commentForm" (ngSubmit)="submitComment()">
                         <mat-form-field>
                             <input matInput placeholder="Title" formControlName="title">

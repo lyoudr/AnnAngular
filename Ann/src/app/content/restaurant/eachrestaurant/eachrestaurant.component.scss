@@ -20,6 +20,14 @@
         .comment{
             margin-top: 100px;
             margin-bottom: 100px;
+            >div{
+                >span{
+                    cursor: pointer;
+                    &.checked{
+                        color: orange;
+                    }
+                }
+            }
             form{
                 display: flex;
                 flex-direction: column;
