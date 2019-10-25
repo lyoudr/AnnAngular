@@ -60,7 +60,7 @@ export class EachrestaurantComponent implements OnInit {
   ngOnInit() {
     this.restaurantId = this.route.snapshot.paramMap.get('id');
     this.initGoogleMap();
-    this.getMapInfo();
+    this.getMapandRestaurantInfo();
     this.getComment();
   }
   
@@ -73,7 +73,7 @@ export class EachrestaurantComponent implements OnInit {
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapProperties)
   }
 
-  getMapInfo(){
+  getMapandRestaurantInfo(){
     this.restaurantService.GetPost(this.restaurantId)
       .subscribe(data => {
         this.LatLng = data[0].LatLng
@@ -109,6 +109,7 @@ export class EachrestaurantComponent implements OnInit {
   // Submit Comment
   submitComment(){
     this.commentForm.value.restaurantId = this.route.snapshot.paramMap.get('id');
+    this.commentForm.value.rankstar = this.selectedstarIndex;
     console.log('this.commentForm.value is =>', this.commentForm.value);
     this.restaurantService.sentComment(this.commentForm.value)
       .subscribe(data =>{
