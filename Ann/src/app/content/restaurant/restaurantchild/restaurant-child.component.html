@@ -7,11 +7,9 @@
                 <p>{{ restaurant.name }}</p>
                 <p class="text-justify">{{ restaurant.price  | changecurrency : currency}}</p>
                 <p class="text-justify">{{ restaurant.comment }}</p>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
+                <ng-container *ngFor="let star of stars; let starindex = index">
+                    <span class="fa fa-star" [ngClass]="(starindex + 1) <= restaurant.starrank? 'checked': '' "></span>
+                </ng-container>
             </div>
         </a>
     </div>

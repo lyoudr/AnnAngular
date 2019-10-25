@@ -49,8 +49,9 @@ export class EachrestaurantComponent implements OnInit {
 
   messages : any = [];
   stars : Array<any> = [0,1,2,3,4];
+  starrank: number;
   selectedstarIndex : number = -1;
-
+  
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
@@ -76,8 +77,9 @@ export class EachrestaurantComponent implements OnInit {
   getMapandRestaurantInfo(){
     this.restaurantService.GetPost(this.restaurantId)
       .subscribe(data => {
-        this.LatLng = data[0].LatLng
-        this.slides = data;
+        this.LatLng = data.LatLng
+        this.slides = data.dishes;
+        this.starrank = data.starrank;
         this.name = this.restaurantName[this.restaurantId];
         this.slick();
       });

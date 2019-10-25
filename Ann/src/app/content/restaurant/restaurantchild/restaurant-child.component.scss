@@ -3,6 +3,10 @@
     height: auto;
 }
 
-.checked {
-    color: orange;
+.fa-star{
+    color: grey;
+    &.checked{
+        color: orange;
+    }
 }
+

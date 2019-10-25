@@ -12,6 +12,7 @@ export class RestaurantChildComponent implements OnInit {
   @Input() restaurantlists: object[];
   @Output() resetEvent = new EventEmitter();
   currency: string = "TWD";
+  stars = [0,1,2,3,4];
 
   constructor() { }
 

@@ -16,6 +16,7 @@ import { LoginComponent } from './content/login/login.component';
 import { CookieService } from 'ngx-cookie-service';
 import { FooterComponent } from './footer/footer.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

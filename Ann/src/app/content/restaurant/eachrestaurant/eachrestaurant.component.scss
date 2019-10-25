@@ -3,9 +3,23 @@
     background: rgb(128, 126, 126);
     color: white;
     .container{
-        >h5{
+        padding-top: 30px;
+        .titlearea{
             margin-bottom: 30px;
+            .rank{
+                margin-left: auto;
+                font-size: 18px;
+                font-weight: bold;      
+            }
+            .fa-star{
+                color: white;
+                &.checked{
+                    color: orange;
+                }
+            }
+            
         }
+        
         .slide{
             img{
                 margin: auto;
