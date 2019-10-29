@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { TodoitemComponent } from './todoitem/todoitem.component';
 import WOW from 'wow.js';
+import { CalendarService } from 'src/app/services/calendar.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-calendar',
@@ -19,14 +21,37 @@ export class CalendarComponent implements OnInit {
   parenttodolists: any;
   weekday: any;
   listStyles: {};
+  user: any;
+  memorandum : any = {
+    user: '',
+    data: {
+      "Jan":[],
+      "Feb":[],
+      "Mar":[],
+      "Apr":[],
+      "May":[],
+      "Jun":[],
+      "July":[],
+      "Aug":[],
+      "Sep":[],
+      "Oct":[],
+      "Nov":[],
+      "Dec":[],
+    }
+  };
 
   constructor(
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private calendarService: CalendarService,
+    private cookieService: CookieService
   ) { }
 
   ngOnInit() {
     new WOW().init();
     this.GetNow();
+    // define user
+    const user = this.cookieService.get('UserID').replace('Token','');
+    this.user = user.charAt(0).toUpperCase() + user.slice(1);
   } 
 
   GetNow(){
@@ -178,6 +203,13 @@ export class CalendarComponent implements OnInit {
       currenttime.getDay();
       this.datesarray.push({date: currenttime.getDate(), data: []});             
     }
+    // Call API for memorandum of each month
+    this.calendarService.getTodolist(this.Month, this.user)
+      .subscribe(data => {
+        if(data[0]){
+          this.datesarray = data;
+        };
+      });
   }
 
   /* Add new Item */
@@ -187,7 +219,7 @@ export class CalendarComponent implements OnInit {
     currenttime.setMonth(this.initialmonth);
     currenttime.setDate(1);
     let dateindex = (currenttime.getDay() + date);
-
+    
     const dialogRef = this.dialog.open(TodoitemComponent, {
       width: '500px',
       height: '400px',
@@ -196,7 +228,15 @@ export class CalendarComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       let results = result;
+      // define datesarray
       this.datesarray[(dateindex - 1)] = {date: date, data: results};
+      // define memorandum
+      this.memorandum.user = this.user;
+      this.memorandum.data[this.Month] = this.datesarray;
+      this.calendarService.postTodolists(this.memorandum)
+        .subscribe(data => {
+          console.log('returned data is =>', data);
+        });
       this.listStyles = {
         'font-size': '12px',
         'list-style-type':'none'

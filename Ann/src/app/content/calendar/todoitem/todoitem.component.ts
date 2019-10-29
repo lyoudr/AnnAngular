@@ -33,7 +33,7 @@ export class TodoitemComponent implements OnInit {
     });
 
     dialogchildRef.afterClosed().subscribe(result => {
-      this.todolists.push({title: result[0], color: result[2]});
+      this.todolists.push({title: result[0], content: result[1], color: result[2]});
     });
   }
 }

@@ -443,7 +443,6 @@ app.post('/login', (req, res) => {
     });
     // Post comment about each restaurant to Server
     app.post('/restaurantcomment', (req, res) => {
-        console.log('req.body is =>', req.body);
         let eachcomment = req.body;
         restaurant_Comments[`restaurant_${eachcomment.restaurantId}`].push(eachcomment);
         let comments = restaurant_Comments[`restaurant_${eachcomment.restaurantId}`];
@@ -451,4 +450,28 @@ app.post('/login', (req, res) => {
         res.end();
     });
 
+/* Calendar */
+    const Memorandum = {
+        'Json': {},
+        'Joy': {},
+        'Amy': {},
+        'Tonal': {},
+        'Joanna': {}
+    };
+    // Get memorandum of each user in each month
+    app.get('/getcalendar', (req, res) => {
+        let month = req.query.month;
+        let user = req.query.user;
+        let founddata = Memorandum[user][month];
+        res.json(founddata);
+        res.end();
+    });
+    // Post personal memorandum to server
+    app.post('/postcalendar', (req, res) => {
+        let calendar = req.body;
+        let user = calendar.user;
+        Memorandum[user] = calendar.data;
+        res.json({calendar: 'ok'});
+        res.end();
+    });
 
