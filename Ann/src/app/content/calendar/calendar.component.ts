@@ -22,6 +22,7 @@ export class CalendarComponent implements OnInit {
   weekday: any;
   listStyles: {};
   user: any;
+  isMemorandumOpen : boolean = false;
   memorandum : any = {
     user: '',
     data: {
@@ -210,6 +211,7 @@ export class CalendarComponent implements OnInit {
           this.datesarray = data;
         };
       });
+    console.log('this.datesarray is =>', this.datesarray);
   }
 
   /* Add new Item */

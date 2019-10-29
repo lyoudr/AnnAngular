@@ -1,6 +1,4 @@
-.calendar{
-    margin-top: 150px;
-}
+
 .card {
     font-family: "system-ui";
 }
@@ -17,6 +15,33 @@ thead tr {
 tbody tr {
     height: 100px;
 }
+tbody tr th{
+    cursor: pointer;
+}
 .material-icons{
     cursor: pointer;
+}
+.calendar{
+    margin-top: 100px;
+}
+.innercalendar{
+    margin-left: 20px;
+    transition: all 0.5s ease-in-out;
+    &.active{
+        margin-left: 0px;
+    }
+}
+.memorandum{
+    background: rgb(218, 195, 218);
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s linear;
+    >i{
+      float: right;
+      margin-top: 15px; 
+    }
+    &.active{
+        visibility: visible;
+        opacity: 1;
+    }
 }
