@@ -35,7 +35,7 @@ tbody tr th{
     background: rgb(218, 195, 218);
     visibility: hidden;
     opacity: 0;
-    transition: visibility 0s, opacity 0.5s linear;
+    transition: visibility 0s, opacity 0.8s linear;
     >i{
       float: right;
       margin-top: 15px; 
@@ -44,4 +44,25 @@ tbody tr th{
         visibility: visible;
         opacity: 1;
     }
+    .list-group{
+        >h5{
+            margin-top: 20px;
+            margin-left: 10px;
+            font-family: serif;
+            font-weight: bold;
+            letter-spacing: 1px;
+            font-size: 1.0rem;
+        }
+        .list-group-item{
+            &:nth-child(1){ 
+                margin-top: 40px;
+            }
+            color: black;
+            margin-top: 10px;
+            margin-left: 10px;
+            background-color: white;
+            border-color: grey 0.5px;
+        }
+    }
+    
 }

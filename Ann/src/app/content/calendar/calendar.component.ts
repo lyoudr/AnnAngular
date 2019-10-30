@@ -19,7 +19,7 @@ export class CalendarComponent implements OnInit {
   currentmonth: any;
   substractyear: number = 0;
   parenttodolists: any;
-  weekday: any;
+  date : number;
   listStyles: {};
   user: any;
   isMemorandumOpen : boolean = false;
@@ -40,6 +40,7 @@ export class CalendarComponent implements OnInit {
       "Dec":[],
     }
   };
+  memorandumlists : Array<any> = [];
 
   constructor(
     public dialog: MatDialog,
@@ -53,6 +54,7 @@ export class CalendarComponent implements OnInit {
     // define user
     const user = this.cookieService.get('UserID').replace('Token','');
     this.user = user.charAt(0).toUpperCase() + user.slice(1);
+    this.getMemorandum();
   } 
 
   GetNow(){
@@ -205,15 +207,17 @@ export class CalendarComponent implements OnInit {
       this.datesarray.push({date: currenttime.getDate(), data: []});             
     }
     // Call API for memorandum of each month
+    this.getMemorandum();
+  }
+  /* Call API for memorandum of each month */
+  getMemorandum(){
     this.calendarService.getTodolist(this.Month, this.user)
       .subscribe(data => {
         if(data[0]){
           this.datesarray = data;
         };
       });
-    console.log('this.datesarray is =>', this.datesarray);
   }
-
   /* Add new Item */
   OpenModal(date: any): void{
     let currenttime = new Date();
@@ -244,5 +248,14 @@ export class CalendarComponent implements OnInit {
         'list-style-type':'none'
       };
     });
+  }
+
+  /* Open memorandum */
+  openMemo(date: any){
+    this.date = date;
+    var founditem = this.datesarray.filter(obj => {
+      return obj.date === date;
+    });
+    this.memorandumlists = founditem[0].data[0];
   }
 }

@@ -40,7 +40,7 @@
                 <tr>
                   <ng-template ngFor let-date [ngForOf]="datesarray" let-i="index">
                     <th 
-                      (click)="isMemorandumOpen = true"
+                      (click)="isMemorandumOpen = true; openMemo(date.date); openMemo(date.date)"
                       (dblclick)="OpenModal(date.date)" *ngIf="i < 7"
                     >
                       {{date.date}}
@@ -53,7 +53,7 @@
                 <tr>
                   <ng-template ngFor let-date [ngForOf]="datesarray" let-i="index">
                     <th 
-                      (click)="isMemorandumOpen = true"
+                      (click)="isMemorandumOpen = true; openMemo(date.date)"
                       (dblclick)="OpenModal(date.date)" 
                       *ngIf="6 < i && i < 14"
                     >
@@ -67,7 +67,7 @@
                 <tr>
                   <ng-template ngFor let-date [ngForOf]="datesarray" let-i="index">
                     <th 
-                      (click)="isMemorandumOpen = true"
+                      (click)="isMemorandumOpen = true; openMemo(date.date)"
                       (dblclick)="OpenModal(date.date)" 
                       *ngIf="13 < i && i < 21"
                     >
@@ -81,7 +81,7 @@
                 <tr>
                   <ng-template ngFor let-date [ngForOf]="datesarray" let-i="index">
                     <th 
-                      (click)="isMemorandumOpen = true"
+                      (click)="isMemorandumOpen = true; openMemo(date.date)"
                       (dblclick)="OpenModal(date.date)" 
                       *ngIf="20 < i && i < 28"
                     >
@@ -95,7 +95,7 @@
                 <tr *ngIf="datesarray[28]">
                   <ng-template ngFor let-date [ngForOf]="datesarray" let-i="index">
                     <th 
-                      (click)="isMemorandumOpen = true"
+                      (click)="isMemorandumOpen = true; openMemo(date.date)"
                       (dblclick)="OpenModal(date.date)" 
                       *ngIf="27 < i && i < 35 && date.date"
                     >
@@ -109,7 +109,7 @@
                 <tr *ngIf="datesarray[35]">
                   <ng-template ngFor let-date [ngForOf]="datesarray" let-i="index">
                     <th 
-                      (click)="isMemorandumOpen = true"
+                      (click)="isMemorandumOpen = true; openMemo(date.date)"
                       (dblclick)="OpenModal(date.date)" 
                       *ngIf="34 < i && i < 42 && date.date"
                     >
@@ -125,8 +125,21 @@
           </div>
         </div>
       </div>
+      <!--Memorandum-->
       <div class="col-4 memorandum" [ngClass]="isMemorandumOpen ? 'active': ''">
         <i (click)="isMemorandumOpen = false" class="material-icons">close</i>
+        <div class="list-group ">
+          <h5>{{Month}} {{date}}</h5>
+          <ng-container *ngFor="let memorandum of memorandumlists">
+            <a href="#" class="list-group-item list-group-item-action active wow slideInLeft">
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">{{memorandum.title}}</h5>
+              </div>
+              <p class="mb-1">{{memorandum.content}}</p>
+              <small>{{memorandum.color}}</small>
+            </a>
+          </ng-container>
+        </div>
       </div> 
     </div>
   </div>
