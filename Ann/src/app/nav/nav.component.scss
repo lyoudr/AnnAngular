@@ -7,6 +7,10 @@ nav{
         >ul{
             >li{
                 margin: 10px;
+                transition: border-bottom 200ms ease;
+                &:hover{
+                    border-bottom: 2px solid rgb(179, 170, 170);
+                }
                 >a{
                     >span{
                         color: black;

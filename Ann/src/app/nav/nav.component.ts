@@ -16,13 +16,13 @@ export class NavComponent implements OnInit {
     public router: Router
   ) { }
   navlists : any[] = [
-    {'url':'/blog', 'title': 'Blog'},
-    {'url':'/discuss', 'title': 'Discuss'},
-    {'url':'/piano', 'title': 'Piano'},
-    {'url':'/calendar', 'title': 'Calendar'},
-    {'url':'/restaurant', 'title':'Restaurant'}
+    {'url':'/blog', 'title': 'Blog', linkfocus : false},
+    {'url':'/discuss', 'title': 'Discuss', linkfocus : false},
+    {'url':'/piano', 'title': 'Piano', linkfocus : false},
+    {'url':'/calendar', 'title': 'Calendar', linkfocus : false},
+    {'url':'/restaurant', 'title':'Restaurant', linkfocus : false}
   ]
-
+  
   ngOnInit() {
   }
 
@@ -33,5 +33,18 @@ export class NavComponent implements OnInit {
     this.authService.isLoggedIn = false;
     this.cookieService.deleteAll();
     this.router.navigate(['/login']);
+  }
+
+  ActiveLink(event, index){
+    if(event == 'click'){
+      this.navlists.forEach(item => {
+        item.linkfocus = false;
+      });
+      this.navlists[index]['linkfocus'] = true;
+    } else if(event == 'mouseover'){
+      this.navlists[index]['linkfocus'] = true;
+    } else if(event == 'mouseleave'){
+      this.navlists[index]['linkfocus'] = false;
+    }
   }
 }
