@@ -20,7 +20,8 @@ export class NavComponent implements OnInit {
     {'url':'/discuss', 'title': 'Discuss', linkfocus : false},
     {'url':'/piano', 'title': 'Piano', linkfocus : false},
     {'url':'/calendar', 'title': 'Calendar', linkfocus : false},
-    {'url':'/restaurant', 'title':'Restaurant', linkfocus : false}
+    {'url':'/restaurant', 'title':'Restaurant', linkfocus : false},
+    {'url': '/shop', 'title': 'Shop', linkfocus: false}
   ]
   
   ngOnInit() {

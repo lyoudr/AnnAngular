@@ -4,9 +4,12 @@ const app = express();
 const fs = require('fs');
 const multer = require('multer');
 const upload = multer();
+const util = require('util');
+const readdir = util.promisify(fs.readdir);
 
 /* Static Files */
 app.use(express.static('../Ann/dist/Ann'));
+app.use(express.static('./shop'));
 
 /* Allow bodyParser */
 // for parsing application/xwww-
@@ -452,7 +455,7 @@ app.post('/login', (req, res) => {
 
 /* Calendar */
     const Memorandum = {
-        'Json': {},
+        'Json': {name: '', price: '', picture: ''},
         'Joy': {},
         'Amy': {},
         'Tonal': {},
@@ -473,5 +476,34 @@ app.post('/login', (req, res) => {
         Memorandum[user] = calendar.data;
         res.json({calendar: 'ok'});
         res.end();
+    });
+
+/* Commodities */
+    app.get('/popularItems', (req, res) => {
+        res.json([
+            {name: 'Gray Shoe', price: '$20.00', picture: ''},
+            {name: 'Blue Shoe High Heels', price: '$28.00', picture: ''},
+            {name: 'Danim Jacket', price: '$28.00', picture: ''},
+            {name: 'Leather Green Bag', price: '$25.00', picture: ''},
+            {name: 'Smooth Cloth', price: '$15.00', picture: ''},
+            {name: 'Yellow Jacket', price: '58.00', picture: ''}
+        ]);
+    });
+
+    app.get('/popularItemsPhoto', async(req, res) => {
+        const shopitems = ['grey_shoe.jpg', 'blue_shoe_high_heels.jpg', 'danim_jacket.jpg', 'leather_green_bag.jpg', 'smooth_clothes.jpg', 'yellow_jacket.jpg'];
+        const shoparr = [];
+        let count = 0;
+        shopitems.forEach((item ,index) => {
+            fs.readFile(`./shop/${item}`,'base64',(err, image) => {
+                count++;
+                let imgUrl = `data:image/jpeg;base64, ${image}`;
+                shoparr.push(imgUrl);
+                if(count == shopitems.length){
+                    res.json(shoparr);
+                    res.end();
+                }
+            });
+        });
     });
 

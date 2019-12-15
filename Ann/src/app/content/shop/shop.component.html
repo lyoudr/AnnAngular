@@ -1,0 +1,21 @@
+<div class="shop">
+    <section class="search">
+
+    </section>
+    <section class="popular">
+        <div class="container">
+            <div class="row">
+                <div [routerLink]="['item', commodity.name]" class="col-4" 
+                    *ngFor="let commodity of commdities; let itemindex = index">
+                    <img [src]="imgSources[itemindex]"/>
+                    <p>{{commodity.name}}</p>
+                    <p>{{commodity.price}}</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<a routerLink = 'item/1'>1</a>
+<a routerLink = 'shopcart'>shopcart</a>
+<router-outlet></router-outlet>

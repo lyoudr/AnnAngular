@@ -33,6 +33,10 @@ const approutes: Routes = [
     path: 'restaurant',
     loadChildren: () => import('./content/restaurant/restaurant.module').then(mod => mod.RestaurantModule),
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'shop',
+    loadChildren : () => import('./content/shop/shop.module').then(mod => mod.ShopModule)
   }
 ];
 
