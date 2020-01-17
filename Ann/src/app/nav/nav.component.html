@@ -1,7 +1,7 @@
-<nav class="navbar navbar-expand-lg fixed-top">
-    <div class="collapse navbar-collapse" id="navbarToggler">
-        <ul class="navbar-nav ml-auto mr-auto">
-            <li class="nav-item" *ngFor="let eachnav of navlists; let linkindex = index" 
+<nav>
+    <div>
+        <ul>
+            <li *ngFor="let eachnav of navlists; let linkindex = index" 
                 (click)="ActiveLink('click', linkindex)"
                 (mouseover)="ActiveLink('mouseover', linkindex)"
                 (mouseleave)="ActiveLink('mouseleave', linkindex)"
@@ -12,14 +12,14 @@
             </li>
         </ul>
         <div class="lang-wrap">
-            <a class="nav-link float-left" routerLink="/login">
+            <a routerLink="/login">
                 <mat-icon >person</mat-icon>
             </a>
-            <a class="nav-link float-left" (click)="logOut()">
+            <a (click)="logOut()">
                 <mat-icon >power_settings_new</mat-icon>
             </a>
             <div>
-                <mat-icon class="float-left">timer</mat-icon>
+                <mat-icon>timer</mat-icon>
                 <span>{{authService.counter}}</span>
             </div>
         </div>

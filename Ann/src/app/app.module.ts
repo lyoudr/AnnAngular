@@ -15,6 +15,8 @@ import { LoginComponent } from './content/login/login.component';
 // Service
 import { CookieService } from 'ngx-cookie-service';
 import { FooterComponent } from './footer/footer.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 
 @NgModule({
@@ -31,6 +33,7 @@ import { FooterComponent } from './footer/footer.component';
     PdfViewerModule,
     AppRoutingModule,
     HttpClientModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]
