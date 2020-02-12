@@ -1,6 +1,8 @@
 <div class="shop">
     <section class="search">
-
+        <select class="select_price" #price (change)="selectPrice(price.value)">
+            <option *ngFor="let price of prices" [value]="price">{{price}}</option>
+        </select>
     </section>
     <section class="popular">
         <div class="container">
@@ -9,13 +11,9 @@
                     *ngFor="let commodity of commdities; let itemindex = index">
                     <img [src]="imgSources[itemindex]"/>
                     <p>{{commodity.name}}</p>
-                    <p>{{commodity.price}}</p>
+                    <p>${{commodity.price}}</p>
                 </div>
             </div>
         </div>
     </section>
 </div>
-
-<a routerLink = 'item/1'>1</a>
-<a routerLink = 'shopcart'>shopcart</a>
-<router-outlet></router-outlet>

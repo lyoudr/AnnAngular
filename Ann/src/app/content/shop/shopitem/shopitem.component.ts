@@ -22,7 +22,7 @@ export class ShopitemComponent implements OnInit {
       switchMap((params: ParamMap) =>
         this.shopService.getcommdityDetail(params.get('id')))
     );
-
+    
     this.$commodity.subscribe(commoditydetail =>
       console.log('commoditydetail is =>', commoditydetail)
     );

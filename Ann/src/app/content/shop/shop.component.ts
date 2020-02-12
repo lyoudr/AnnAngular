@@ -10,9 +10,11 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 export class ShopComponent implements OnInit {
   commdities: Array<any> = [];
   imgSources : SafeResourceUrl ;
+  prices : Array<any> = [10, 20, 30];
+
   constructor(
     private shopService : ShopService,
-    private sanitizer : DomSanitizer
+    private sanitizer : DomSanitizer,
   ) { }
 
   ngOnInit() {
@@ -35,5 +37,15 @@ export class ShopComponent implements OnInit {
         });
           this.imgSources = photo;
       });
+  }
+
+  // Closure Function
+  selectPrice(price){
+    this.commdities = this.commdities.map(commdity => {
+      if(commdity.price <= price){
+        return commdity.price;
+      };
+    });
+    console.log('this.commdities is =>', this.commdities);
   }
 }

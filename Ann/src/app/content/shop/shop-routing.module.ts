@@ -5,19 +5,9 @@ import { ShopitemComponent } from './shopitem/shopitem.component';
 import { ShopCartComponent } from './shop-cart/shop-cart.component'; 
 
 const shoproutes: Routes = [
-  { path: '', 
-    component : ShopComponent,
-    children: [
-      {
-        path: 'item/:id',
-        component: ShopitemComponent
-      },
-      {
-        path: 'shopcart',
-        component: ShopCartComponent
-      }
-    ]
-  }
+  { path: '', component : ShopComponent},
+  { path: 'item/:id', component: ShopitemComponent },
+  { path: 'shopcart', component: ShopCartComponent }
 ];
 
 @NgModule({

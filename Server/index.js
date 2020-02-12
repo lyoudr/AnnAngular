@@ -481,12 +481,12 @@ app.post('/login', (req, res) => {
 /* Commodities */
     app.get('/popularItems', (req, res) => {
         res.json([
-            {name: 'Gray Shoe', price: '$20.00', picture: ''},
-            {name: 'Blue Shoe High Heels', price: '$28.00', picture: ''},
-            {name: 'Danim Jacket', price: '$28.00', picture: ''},
-            {name: 'Leather Green Bag', price: '$25.00', picture: ''},
-            {name: 'Smooth Cloth', price: '$15.00', picture: ''},
-            {name: 'Yellow Jacket', price: '58.00', picture: ''}
+            {name: 'Gray Shoe', price: 20.00, picture: ''},
+            {name: 'Blue Shoe High Heels', price: 28.00, picture: ''},
+            {name: 'Danim Jacket', price: 28.00, picture: ''},
+            {name: 'Leather Green Bag', price: 25.00, picture: ''},
+            {name: 'Smooth Cloth', price: 15.00, picture: ''},
+            {name: 'Yellow Jacket', price: 58.00, picture: ''}
         ]);
     });
 
@@ -505,5 +505,11 @@ app.post('/login', (req, res) => {
                 }
             });
         });
+    });
+
+    app.post('/getcommditydetail', (req, res) => {
+        console.log('getcommditydetail body is =>', req.body);
+        res.json({"status": "ok", "code": "200"});
+        res.end();
     });
 

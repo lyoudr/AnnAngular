@@ -32,8 +32,8 @@ export class ShopService {
       )
   }
 
-  getcommdityDetail(itemId): Observable<any> {
-    console.log('itemId is =>', itemId);
+  async getcommdityDetail(itemId){
+    /*console.log('itemId is =>', itemId);
     const getcommdityOptions = {
       params : new HttpParams()
         .set('itemId', itemId)
@@ -41,7 +41,27 @@ export class ShopService {
     return this.http.get('http://127.0.0.1:4500/getcommditydetail', getcommdityOptions)
       .pipe(
         catchError(this.handleError)
-      )
+      )*/
+    const reqBody = {
+      method: 'POST',
+      headers: {
+        'Content-Type' : 'text/plain',
+      },
+      body: itemId
+    }
+    const commdity = await fetch('http://127.0.0.1:4500/getcommditydetail', reqBody)
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log('data is =>', data);
+        return data;
+      })
+      .catch(error => {
+        console.error('error is =>', error);
+      });
+    console.log('commdity is =>', commdity);
+    return commdity;
   }
   
   /* Error handling */
