@@ -2,13 +2,13 @@
     <div class="container">
         <div class="row">
             <div class="col-12 text-left">
-                <h3>{{title}}</h3>
+                <h5>{{title}}</h5>
                 <!--Ingredients-->
-                    <div class="d-flex flex-row justify-content-between" style="margin-top: 50px">
+                    <div class="d-flex flex-row justify-content-between ingredients_content">
                         <div class="wow slideInLeft">
                             <h5>Ingredients</h5>
                             <ng-container *ngFor="let ingredient of ingredients; let index = index" >
-                                <p class="ingredients" style="margin-top: 30px; margin-left: 36px;">{{ingredient}}</p>
+                                <p class="ingredients">{{ingredient}}</p>
                             </ng-container>
                         </div>
                         <div>
@@ -16,10 +16,10 @@
                         </div>
                     </div>
                 <!--Steps-->
-                    <div style="margin-top: 50px" class="wow slideInLeft">
+                    <div class="wow slideInLeft ingredients_content">
                         <h5>Steps</h5>
                         <ng-container *ngFor="let step of steps" >
-                            <p class="steps" style="margin-top: 30px; margin-left: 36px;">{{step}}</p>
+                            <p class="steps">{{step}}</p>
                         </ng-container>
                     </div>
             </div>

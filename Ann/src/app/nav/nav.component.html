@@ -1,27 +1,29 @@
-<nav>
-    <div>
-        <ul>
-            <li *ngFor="let eachnav of navlists; let linkindex = index" 
-                (click)="ActiveLink('click', linkindex)"
-                (mouseover)="ActiveLink('mouseover', linkindex)"
-                (mouseleave)="ActiveLink('mouseleave', linkindex)"
-                [ngClass]="eachnav.linkfocus ? 'active' : ''">
-                <a class="nav-link" [routerLink]="eachnav.url">
-                    <span>{{eachnav.title}}</span>
-                </a>
-            </li>
-        </ul>
-        <div class="lang-wrap">
-            <a routerLink="/login">
-                <mat-icon >person</mat-icon>
-            </a>
-            <a (click)="logOut()">
-                <mat-icon >power_settings_new</mat-icon>
-            </a>
-            <div>
-                <mat-icon>timer</mat-icon>
-                <span>{{authService.counter}}</span>
-            </div>
-        </div>
+<a class="menu" (click)="isOpen = true">
+    <img src="assets/svg/menu.svg"/>
+</a>
+<nav [ngClass]="{'active': isOpen}">
+    <div class="lang-wrap">
+        <a routerLink="/login">
+            <mat-icon >person</mat-icon>
+        </a>
+        <!--<div>
+            <mat-icon>timer</mat-icon>
+            <span>{{authService.counter}}</span>
+        </div>-->
+        <span (click)="isOpen = false">X</span>
+    </div>
+    <div class="pages">
+        <a *ngFor="let eachnav of navlists; let linkindex = index" 
+            (click)="ActiveLink('click', linkindex)"
+            [routerLink]="eachnav.url"
+            (mouseover)="ActiveLink('mouseover', linkindex)"
+            (mouseleave)="ActiveLink('mouseleave', linkindex)"
+            [ngClass]="eachnav.linkfocus ? 'active' : ''">
+            <span>{{eachnav.title}}</span>
+        </a>
+        <a (click)="logOut()">
+            LogOut
+            <mat-icon >power_settings_new</mat-icon>
+        </a>
     </div>
 </nav>

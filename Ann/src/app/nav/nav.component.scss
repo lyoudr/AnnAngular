@@ -1,48 +1,59 @@
+.menu{
+    display: flex;
+    position: absolute;
+    left: 12px;
+    top: 21px;
+    cursor: pointer;
+}
+
 nav{
-    height: 10vh;
+    position: absolute;
+    top: 0;
+    transition: left 300ms ease-in-out;
+    left: -100%;
+    &.active{
+        left: 0;
+    }
+    width: 25%;
+    height: 100vh;
+    display: block;
     z-index: 12;
-    background: white;
+    background: rgb(216, 194, 198);
     font-family: 'Source Code Pro',sans-serif;
-    >div{
+    .lang-wrap{
+        padding: 15px;
+        justify-content: space-between;
+        align-items: center;
         display: flex;
-        >ul{
-            list-style: none;
-            display: flex;
-            margin: 0;
-            padding: 0;
-            width:75%;
-            >li{
-                margin: 10px;
-                transition: border-bottom 200ms ease;
-                &:hover{
-                    border-bottom: 2px solid rgb(179, 170, 170);
-                }
-                >a{
-                    >span{
-                        color: black;
-                        flex: 1;
-                        font-size: 16px;
-                        line-height: 1.2;
-                        text-decoration: none;
-                        background-image: linear-gradient(to right, black 0, black 100%);
-                        background-position: 0 1.2em;
-                        background-size: 0 100%;
-                        background-repeat: no-repeat;
-                        transition: background .5s;
-                        &:hover{
-                            background-size: 100% 100%;
-                        }
-                    }
-                }
-            }
+        >a{
+            cursor: pointer;
         }
-        .lang-wrap{
-            width: 25%;
+    }
+    .pages{
+        >a{
+            display: flex;
+            justify-content: center;
             align-items: center;
-            display: flex;
-            >a{
-                cursor: pointer;
+            width: 100%;
+            padding: 15px;
+            text-align: center;
+            text-decoration: none;
+            background-image: linear-gradient(to right, rgb(216, 194, 198) 0, #eeacb1 100%);
+            background-position: 0 1.2em;
+            background-size: 0% 100%;
+            background-repeat: no-repeat;
+            transition: background .5s;
+            &:hover{
+                background-size: 100% 40%;
+            }
+            >span{
+                color: black;
+                flex: 1;
+                font-size: 16px;
+                line-height: 1.2;
+                text-decoration: none;
             }
         }
+        
     }
 }

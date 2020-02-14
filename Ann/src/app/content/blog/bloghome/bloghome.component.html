@@ -6,7 +6,10 @@
             </div>
             <div class="col-6 text-left postlistarea"> 
                 <ng-container *ngFor="let dish of postlist">
-                    <p (click)="hidePostlist()"><span>{{dish.date | datetransform}}</span><a [routerLink]="dish.url">{{dish.title}}</a></p>
+                    <a [routerLink]="dish.url" (click)="hidePostlist()">
+                        <span>{{dish.date | datetransform}}</span>
+                        <p>{{dish.title}}</p>
+                    </a>
                 </ng-container>
             </div>
         </div>

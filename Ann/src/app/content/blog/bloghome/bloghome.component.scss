@@ -1,5 +1,5 @@
 .main{
-    margin-top: 150px;
+    padding: 2rem 0;
     animation-fill-mode: forwards;
     .container{
         .row{
@@ -7,26 +7,28 @@
                 &:nth-child(1){
                     >img{
                         opacity: 0.7;
+                        height: 80vh;
+                        width: 100%;
                     } 
                 }
                 &:nth-child(2){ 
-                    padding-top: 3rem; 
-                    padding-left: 3rem;
+                    padding-top: 1rem; 
+                    padding-left: 1rem;
                     height: 80vh;
                     overflow-y: scroll;
                     overflow-x: hidden;
                     
-                    >p{
+                    >a{
                         >span {
                             font-size: 12px;
                             font-family: 'Lucida Sans';
                             color: grey;
                             margin-right: 3rem;
                         }
-                        font-size: 24px;
+                        font-size: 14px;
                         font-family: 'Lucida Sans';
                         letter-spacing: 2px;
-                        margin-bottom: 6rem;
+                        margin-bottom: 1rem;
                     }
                 }
                 &.postlistarea::-webkit-scrollbar{

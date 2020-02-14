@@ -23,7 +23,8 @@ export class NavComponent implements OnInit {
     {'url':'/restaurant', 'title':'Restaurant', linkfocus : false},
     {'url': '/shop', 'title': 'Shop', linkfocus: false}
   ]
-  
+  isOpen : boolean = false;
+
   ngOnInit() {
   }
 
