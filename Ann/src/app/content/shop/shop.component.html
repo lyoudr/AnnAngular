@@ -1,18 +1,33 @@
 <div class="shop">
+    <section class="title">
+        <p>NewShop</p>
+    </section>
     <section class="search">
-        <select class="select_price" #price (change)="selectPrice(price.value)">
-            <option *ngFor="let price of prices" [value]="price">{{price}}</option>
-        </select>
+        <div class="container">
+            <div class="row">
+                <ng-container *ngFor="let selectItem of selectItems">
+                    <a class="select {{selectItem.name}}" (click)="selectItem.isOpen = !selectItem.isOpen">
+                        <p>{{selectItem.name}}</p>
+                        <img src="assets/svg/down.svg" [ngClass]="{'arrow': true, 'down': selectItem.isOpen}"/>
+                    </a>
+                    <div [ngClass]="{'list': true, 'show': selectItem.isOpen}" [class]="selectItem.name">
+                        <a class="each {{selectItem.name}}" *ngFor="let item of selectItem.arrays">{{item}}</a>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
     </section>
     <section class="popular">
         <div class="container">
             <div class="row">
-                <div [routerLink]="['item', commodity.name]" class="col-4" 
-                    *ngFor="let commodity of commdities; let itemindex = index">
-                    <img [src]="imgSources[itemindex]"/>
-                    <p>{{commodity.name}}</p>
-                    <p>${{commodity.price}}</p>
-                </div>
+                <cdk-virtual-scroll-viewport itemSize="50" class="virtual_scroll">
+                    <div [routerLink]="['item', commodity.name]" class="col-4 scroll_item" 
+                        *cdkVirtualFor="let commodity of commdities; templateCacheSize: 0; let itemindex = index">
+                        <img [src]="imgSources[itemindex]"/>
+                        <p>{{commodity.name}}</p>
+                        <p>${{commodity.price}}</p>
+                    </div>
+                </cdk-virtual-scroll-viewport>
             </div>
         </div>
     </section>

@@ -5,7 +5,9 @@ const fs = require('fs');
 const multer = require('multer');
 const upload = multer();
 const util = require('util');
+const cors = require('cors');
 const readdir = util.promisify(fs.readdir);
+
 
 /* Static Files */
 app.use(express.static('../Ann/dist/Ann'));
@@ -19,6 +21,8 @@ app.use(bodyParser.json());
 // for parsing text
 app.use(bodyParser.text());
 
+/* Allow CORS */
+app.use(cors());
 
 /* Read index.html */
 app.get('/', (req, res) => {
@@ -486,12 +490,47 @@ app.post('/login', (req, res) => {
             {name: 'Danim Jacket', price: 28.00, picture: ''},
             {name: 'Leather Green Bag', price: 25.00, picture: ''},
             {name: 'Smooth Cloth', price: 15.00, picture: ''},
-            {name: 'Yellow Jacket', price: 58.00, picture: ''}
+            {name: 'Yellow Jacket', price: 58.00, picture: ''},
+            {name: 'Bag', price: 17.00, picture: ''},
+            {name: 'Coat', price: 16.00, picture: ''},
+            {name: 'Beautiful Dress', price: 23.00, picture: ''},
+            {name: 'Cool Jeans', price: 10.00, picture: ''},
+            {name: 'Styled Jeans', price: 12.00, picture: ''},
+            {name: 'Shoes', price: 20.00, picture: ''},
+            {name: 'Skirt', price: 18.00, picture: ''},
+            {name: 'Down Jacket', price: 16.50, picture: ''},
+            {name: 'Hat', price: 17.50, picture: ''},
+            {name: 'Outfit pretty', price: 23.50, picture: ''},
+            {name: 'Beggie Outfit', price: 22.50, picture: ''},
+            {name: 'Pants', price: 21.50, picture: ''},
+            {name: 'Scarf', price: 20.50, picture: ''},
+            {name: 'Sunglasses', price: 30.50, picture: ''},
         ]);
     });
 
     app.get('/popularItemsPhoto', async(req, res) => {
-        const shopitems = ['grey_shoe.jpg', 'blue_shoe_high_heels.jpg', 'danim_jacket.jpg', 'leather_green_bag.jpg', 'smooth_clothes.jpg', 'yellow_jacket.jpg'];
+        const shopitems = [
+            'grey_shoe.jpg', 
+            'blue_shoe_high_heels.jpg', 
+            'danim_jacket.jpg', 
+            'leather_green_bag.jpg', 
+            'smooth_clothes.jpg', 
+            'yellow_jacket.jpg',
+            'bag.jpg', 
+            'coat.jpg', 
+            'dress.jpg', 
+            'jeans.jpg', 
+            'jeans_2.jpg', 
+            'shoes.jpg',
+            'skirt.jpg', 
+            'down_jacket.jpg', 
+            'hat.jpg', 
+            'outfit_1.jpg', 
+            'outfit_2.jpg', 
+            'pants.jpg',
+            'scarf.jpg', 
+            'sunglasses.jpg', 
+        ];
         const shoparr = [];
         let count = 0;
         shopitems.forEach((item ,index) => {

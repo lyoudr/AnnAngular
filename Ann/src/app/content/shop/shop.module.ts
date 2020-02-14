@@ -4,6 +4,8 @@ import { ShopComponent } from './shop.component';
 import { ShopitemComponent } from './shopitem/shopitem.component';
 import { ShopCartComponent } from './shop-cart/shop-cart.component';
 import { ShopRoutingModule } from './shop-routing.module';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { ScrollDispatchModule } from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [
@@ -13,7 +15,9 @@ import { ShopRoutingModule } from './shop-routing.module';
   ],
   imports: [
     CommonModule,
-    ShopRoutingModule
+    ShopRoutingModule,
+    ScrollingModule,
+    ScrollDispatchModule
   ]
 })
 export class ShopModule { }
