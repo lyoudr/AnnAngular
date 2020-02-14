@@ -56,6 +56,10 @@ export class MyDataSource extends DataSource<any | undefined>{
   ];
   private fetchPages = new Set<number>();
   private subscription = new Subscription();
+  
+  // A BehaviorSubject holds one value. When it is subscribed it emits the value immediately.
+  // A Subject doesn't hold a value.
+  // https://stackoverflow.com/questions/43348463/what-is-the-difference-between-subject-and-behaviorsubject
   private dataStream = new BehaviorSubject<(string | undefined)[]>(this.initialData)
 
   constructor(private shopService: ShopService){
