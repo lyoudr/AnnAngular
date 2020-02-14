@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { BlogService } from '../../../services/blog.service';
+import { BlogService } from '../../../services/blog-service/blog.service';
 import * as $ from 'jquery';
 @Component({
   selector: 'app-bloghome',

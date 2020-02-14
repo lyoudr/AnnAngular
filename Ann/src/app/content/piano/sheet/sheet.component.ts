@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { Observable } from 'rxjs';
-import { PianoService } from '../../../services/piano.service';
+import { PianoService } from '../../../services/piano-service/piano.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import WOW from 'wow.js';
 

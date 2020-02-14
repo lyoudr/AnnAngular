@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PianoService } from 'src/app/services/piano.service';
+import { PianoService } from 'src/app/services/piano-service/piano.service';
 import WOW from 'wow.js';
 
 @Component({

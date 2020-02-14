@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { TodoitemComponent } from './todoitem/todoitem.component';
 import WOW from 'wow.js';
-import { CalendarService } from 'src/app/services/calendar.service';
+import { CalendarService } from 'src/app/services/calendar/calendar.service';
 import { CookieService } from 'ngx-cookie-service';
 
 @Component({

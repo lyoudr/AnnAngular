@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { LogupdateService } from './services/logupdate.service';
-import { CheckForUpdateService } from './services/check-for-update.service';
-import { PromptupdateServiceService } from './services/promptupdate-service.service';
+import { LogupdateService } from './services/logupdate-service/logupdate.service';
+import { CheckForUpdateService } from './services/checkforupdate-service/check-for-update.service';
+import { PromptupdateServiceService } from './services/promptupdate-service/promptupdate-service.service';
 
 @Component({
   selector: 'app-root',

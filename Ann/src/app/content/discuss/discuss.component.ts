@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DiscussService } from '../../services/discuss.service';
+import { DiscussService } from '../../services/discuss-service/discuss.service';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';

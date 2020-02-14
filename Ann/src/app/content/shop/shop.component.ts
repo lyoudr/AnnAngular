@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { ShopService } from '../../services/shop.service';
+import { ShopService } from '../../services/shop-service/shop.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { CollectionViewer, DataSource  } from '@angular/cdk/collections';

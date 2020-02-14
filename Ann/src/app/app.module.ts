@@ -18,6 +18,9 @@ import { FooterComponent } from './footer/footer.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
+// Interceptor
+import { httpInterceptorProviders } from './services/htttp-interceptors';
+
 
 @NgModule({
   declarations: [
@@ -35,7 +38,7 @@ import { environment } from '../environments/environment';
     HttpClientModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
-  providers: [CookieService],
+  providers: [CookieService, httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

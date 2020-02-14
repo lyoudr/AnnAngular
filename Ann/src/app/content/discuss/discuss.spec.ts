@@ -1,5 +1,5 @@
 import { DiscussComponent} from './discuss.component';
-import { DiscussService} from '../../services/discuss.service';
+import { DiscussService} from '../../services/discuss-service/discuss.service';
 import { CookieService } from 'ngx-cookie-service';
 // Http testing module and mocking controller
 import { HttpClientTestingModule } from '@angular/common/http/testing';

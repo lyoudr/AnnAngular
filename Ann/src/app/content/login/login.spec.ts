@@ -1,6 +1,6 @@
 import { LoginComponent } from './login.component';
 import { TestBed, ComponentFixture } from '@angular/core/testing';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from 'src/app/services/auth-service/auth.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 // Http testing module and mocking controller

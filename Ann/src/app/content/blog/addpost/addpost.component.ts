@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { BlogService } from '../../../services/blog.service';
+import { BlogService } from '../../../services/blog-service/blog.service';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({

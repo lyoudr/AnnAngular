@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import {} from 'googlemaps';
 import { ActivatedRoute } from '@angular/router';
-import { RestaurantService } from 'src/app/services/restaurant.service';
+import { RestaurantService } from 'src/app/services/restaurant-service/restaurant.service';
 import $ from 'jquery';
 import 'slick-carousel';
 import 'slick-carousel/slick/slick.css';

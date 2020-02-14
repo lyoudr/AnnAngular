@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ShopService } from '../../../services/shop.service';
+import { ShopService } from '../../../services/shop-service/shop.service';
 import { switchMap } from 'rxjs/operators';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { Observable } from 'rxjs';

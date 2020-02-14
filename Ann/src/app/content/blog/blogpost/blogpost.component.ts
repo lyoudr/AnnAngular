@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { BlogService } from '../../../services/blog.service';
+import { BlogService } from '../../../services/blog-service/blog.service';
 
 @Component({
   selector: 'app-blogpost',
