@@ -12,7 +12,7 @@ import { CollectionViewer, DataSource  } from '@angular/cdk/collections';
 })
 export class ShopComponent implements OnInit {
   commdities = new MyDataSource(this.shopService);
-  imgSources : SafeResourceUrl ;
+  imgSources : SafeResourceUrl; // photo image source
   prices : Array<any> = [10, 20, 30];
   sizes : Array<string> = ['small(S)', 'medium(M)', 'large(L)', 'extra-large(XL)']
   brands : Array<string> = ['Zara', 'H&M', 'uniqulo', 'Net'];

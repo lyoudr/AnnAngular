@@ -86,19 +86,19 @@ app.post('/login', tokenHandler.login);
 
 /* Blog */
     // addPost
-    app.post('/blogpost',(req, res) => {
+    app.post('/blogpost', middleware.checkToken , (req, res) => {
         const date = new Date();
         res.json({title: req.body.title, content: req.body.post, date: date});
         res.end();
     });
     // upLoadFile
-    app.post('/postFile', upload.single('filekey') ,(req, res) => {
+    app.post('/postFile', middleware.checkToken ,upload.single('filekey') ,(req, res) => {
         const formData = req.file;
         res.send(formData);
         res.end();
     });
     // get post content 
-    app.get('/getpost', (req, res) => {
+    app.get('/getpost', middleware.checkToken ,(req, res) => {
         let postId = req.query.postId;
         switch(postId){
             case 'yogurt':
@@ -186,7 +186,7 @@ app.post('/login', tokenHandler.login);
 
 /* Piano */
     // get sheet music
-    app.get('/getsheet', (req, res) => {
+    app.get('/getsheet', middleware.checkToken ,(req, res) => {
         let sheettype = req.query.sheettype;
         switch(sheettype){
             case 'classic':
@@ -206,7 +206,7 @@ app.post('/login', tokenHandler.login);
         }
     });
     // getmusicsheet 
-    app.get('/getmusicsheet', (req, res) => {
+    app.get('/getmusicsheet', middleware.checkToken ,(req, res) => {
         let musictype = req.query.musictype;
         switch(musictype){
             case 'Classic':
@@ -229,7 +229,7 @@ app.post('/login', tokenHandler.login);
 
 /* Discuss */
     // getMessage
-    app.get('/getmessage', (req, res) => {
+    app.get('/getmessage', middleware.checkToken ,(req, res) => {
         let personId = req.query.getmessage;
         switch(personId){
             case 'Json':
@@ -272,7 +272,7 @@ app.post('/login', tokenHandler.login);
         res.end();
     });
     // search discuss page side_bar
-    app.post('/search_discuss_sidenav', (req, res)=>{
+    app.post('/search_discuss_sidenav', middleware.checkToken ,(req, res)=>{
         let foundfriend = [];
         let findword = '';
         findword += req.body; 
@@ -420,7 +420,7 @@ app.post('/login', tokenHandler.login);
     }
     
     // Get restaurant lists
-    app.get('/restaurantlists', (req, res) =>{
+    app.get('/restaurantlists', middleware.checkToken ,(req, res) =>{
         let page = req.query.page;
         let classification = req.query.classification;
         if (page == 1) {
@@ -428,14 +428,14 @@ app.post('/login', tokenHandler.login);
             res.end();
         }
     });
-    // 得到每間餐廳的經緯度和菜色介紹
-    app.get('/restaurantpost',(req, res)=>{
+    // Get gudiance to each restaurants
+    app.get('/restaurantpost', middleware.checkToken ,(req, res)=>{
         let restaurantId = req.query.restaurantId;
         res.json(restaurant_Info[`restaurant_${restaurantId}`]);
         res.end();
     });
     // Get comments towards each restaurant
-    app.get('/getcomment',(req, res) => {
+    app.get('/getcomment', middleware.checkToken ,(req, res) => {
         let restaurantId = req.query.restaurantId;
         res.json({
             response: 'ok',
@@ -444,7 +444,7 @@ app.post('/login', tokenHandler.login);
         res.end();  
     });
     // search restaurant
-    app.post('/searchfood', (req, res) => {
+    app.post('/searchfood', middleware.checkToken ,(req, res) => {
         let searchword = req.body;
         let foundres = [];
         let restaurantlists = [
@@ -470,7 +470,7 @@ app.post('/login', tokenHandler.login);
         res.end();
     });
     // Post comment about each restaurant to Server
-    app.post('/restaurantcomment', (req, res) => {
+    app.post('/restaurantcomment', middleware.checkToken ,(req, res) => {
         let eachcomment = req.body;
         restaurant_Comments[`restaurant_${eachcomment.restaurantId}`].push(eachcomment);
         let comments = restaurant_Comments[`restaurant_${eachcomment.restaurantId}`];
@@ -487,7 +487,7 @@ app.post('/login', tokenHandler.login);
         'Joanna': {}
     };
     // Get memorandum of each user in each month
-    app.get('/getcalendar', (req, res) => {
+    app.get('/getcalendar', middleware.checkToken ,(req, res) => {
         let month = req.query.month;
         let user = req.query.user;
         let founddata = Memorandum[user][month];
@@ -495,7 +495,7 @@ app.post('/login', tokenHandler.login);
         res.end();
     });
     // Post personal memorandum to server
-    app.post('/postcalendar', (req, res) => {
+    app.post('/postcalendar', middleware.checkToken ,(req, res) => {
         let calendar = req.body;
         let user = calendar.user;
         Memorandum[user] = calendar.data;
@@ -504,7 +504,7 @@ app.post('/login', tokenHandler.login);
     });
 
 /* Commodities */
-    app.get('/popularItems', (req, res) => {
+    app.get('/popularItems', middleware.checkToken ,(req, res) => {
         res.json([
             {name: 'Gray Shoe', price: 20.00, picture: ''},
             {name: 'Blue Shoe High Heels', price: 28.00, picture: ''},
@@ -529,7 +529,7 @@ app.post('/login', tokenHandler.login);
         ]);
     });
 
-    app.get('/popularItemsPhoto', async(req, res) => {
+    app.get('/popularItemsPhoto', middleware.checkToken ,async(req, res) => {
         const shopitems = [
             'grey_shoe.jpg', 
             'blue_shoe_high_heels.jpg', 
@@ -567,7 +567,7 @@ app.post('/login', tokenHandler.login);
         });
     });
 
-    app.post('/getcommditydetail', (req, res) => {
+    app.post('/getcommditydetail', middleware.checkToken ,(req, res) => {
         console.log('getcommditydetail body is =>', req.body);
         res.json({"status": "ok", "code": "200"});
         res.end();
