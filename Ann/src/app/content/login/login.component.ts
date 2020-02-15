@@ -28,10 +28,10 @@ export class LoginComponent implements OnInit {
     this.authService.Login(UserInfo)
       .subscribe(data => {
         console.log('returned data is =>', data)
-        if(data.response == 'ok'){
+        if(data.message == 'OK'){
           // save the identity to cookie
-          this.cookieService.delete('UserID');
-          this.cookieService.set('UserID',data.token);
+          this.cookieService.delete('AccessToken');
+          this.cookieService.set('AccessToken',data.token);
           this.authService.isLoggedIn = true;
           this.authService.countdown$ = interval(1000);
           this.authService.countdownTimer$ = this.authService.countdown$.subscribe(time => {

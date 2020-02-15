@@ -7,7 +7,9 @@ const upload = multer();
 const util = require('util');
 const cors = require('cors');
 const readdir = util.promisify(fs.readdir);
-
+const jwt = require('jsonwebtoken');
+const config = require('./config');
+const middleware = require('./middleware');
 
 /* Static Files */
 app.use(express.static('../Ann/dist/Ann'));
@@ -40,28 +42,47 @@ app.listen(4500, () => console.log('Server listen on port 4500!'));
 
 
 /*Login */
-app.post('/login', (req, res) => {
-    const UserInfo = req.body;
-    if(UserInfo.name == 'Json' && UserInfo.password == 'json123'){
-        res.json({'response': 'ok', 'token': 'jsonToken'});
-        res.end();
-    } else if (UserInfo.name == 'Joy' && UserInfo.password == 'joy123'){
-        res.json({'response': 'ok', 'token': 'joyToken'});
-        res.end();
-    } else if (UserInfo.name == 'Amy' && UserInfo.password == 'amy123'){
-        res.json({'response': 'ok', 'token': 'amyToken'});
-        res.end();
-    } else if (UserInfo.name == 'Tonal' && UserInfo.password == 'tonal123'){
-        res.json({'response': 'ok', 'token': 'tonalToken'});
-        res.end();
-    } else if (UserInfo.name == 'Joanna' && UserInfo.password == 'joanna123'){
-        res.json({'response': 'ok', 'token': 'joannaToken'});
-        res.end();
-    } else {
-        res.json({'response': false });
-        res.end();
-    }  
-});
+// 1. Generate Token 
+class HandlerGenerator {
+    login(req, res){
+        let username = req.body.name;
+        let password = req.body.password;
+        // For the given user name fetch user from DB
+        let mockedUsername = 'Json' || 'Joy' || 'Amy' || 'Tonal' || 'Joanna';
+        let mockedPassword = 'json123' || 'joy123' || 'amy123' || 'tonal123' || 'joanna123';
+        if(username && password){
+            if(username === mockedUsername && password === mockedPassword){
+                let token = jwt.sign(
+                    {username: username, password: password},
+                    config.secret,
+                    {expiresIn: '24h'}
+                )
+                // return the JWT token for the future API calls
+                res.json({
+                    sucess: true,
+                    message: 'OK',
+                    token : token
+                });
+            } else {
+                res.send(401).json({
+                  success: false,
+                  message: 'Authentication failed! Please check the request'
+                });
+            }
+        }
+    }
+    index (req, res, next) {
+        res.json({
+          success: true,
+          message: 'Index page'
+        });
+        next();
+    }
+};
+// 2. Instantiate HandlerGenerator
+const tokenHandler = new HandlerGenerator();
+// 3. Log In verify
+app.post('/login', tokenHandler.login);
 
 /* Blog */
     // addPost
