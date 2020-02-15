@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTabChangeEvent } from '@angular/material';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 import { RestaurantService } from 'src/app/services/restaurant-service/restaurant.service';
 import WOW from 'wow.js';
 

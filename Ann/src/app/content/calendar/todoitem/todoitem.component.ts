@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DialogData } from '../dalog';
 import { TodocontentComponent } from '../todocontent/todocontent.component';
 
