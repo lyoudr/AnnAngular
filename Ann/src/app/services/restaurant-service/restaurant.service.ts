@@ -5,7 +5,6 @@ import {
   HttpErrorResponse, 
   HttpParams
 } from '@angular/common/http';
-import { Subject } from 'rxjs';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
@@ -18,7 +17,6 @@ export class RestaurantService {
 
   constructor(
     private http: HttpClient,
-    private cookieService: CookieService
   ) { }
 
   /*1. Get restaurant lists */

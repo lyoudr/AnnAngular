@@ -8,7 +8,7 @@ import { TestBed } from '@angular/core/testing';
 
 
 
-describe('DiscussService is ', () => {
+describe('*Service* => DiscussService', () => {
     let discussService: DiscussService;
     let httpClient : HttpClient;
     let httpTestingController : HttpTestingController;
@@ -28,18 +28,25 @@ describe('DiscussService is ', () => {
     });
 
     // Tests begin //
-    it('DiscussService getMessage', () => {
+    it('#getMessage', () => {
+        const testData = [
+            {name: 'Json', message: 'Hello'},
+            {name: 'me', message: 'Hi~'},
+            {name: 'Json', message: 'Where do you live ?'},
+            {name: 'me', message: 'I live in Taipei now.'}
+        ];
         discussService.getMessage('Json').subscribe(data => {
-            expect(data).toBe([
-                {name: 'Json', message: 'Hello'},
-                {name: 'me', message: 'Hi~'},
-                {name: 'Json', message: 'Where do you live ?'},
-                {name: 'me', message: 'I live in Taipei now.'}
-            ])
+            expect(data).toBe(testData);
         });
+        const req = httpTestingController.expectOne('http://127.0.0.1:4500/getmessage?getmessage=Json');
+
+        // Assert that the request is a GET.
+        expect(req.request.method).toEqual('GET');
+        req.flush(testData);
+        httpTestingController.verify();
     });
 
-    it('DiscussService get', () => {
+    it('#get', () => {
         const testData = {'name': 'Joanna'};
         const testUrl = 'http://127.0.0.1:4500/search_discuss_sidenav';
         // Make an HTTP GET request
@@ -53,7 +60,6 @@ describe('DiscussService is ', () => {
         // `expectOne()` would throw.
         const req = httpTestingController.expectOne(testUrl);
 
-        console.log('req is =>', req);
         // Assert that the request is a GET.
         expect(req.request.method).toEqual('POST');
 
@@ -64,6 +70,6 @@ describe('DiscussService is ', () => {
         // Finally, assert that there are no outstanding requests.
         httpTestingController.verify();
     });
-})
+});
 
 

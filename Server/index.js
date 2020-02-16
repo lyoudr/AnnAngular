@@ -208,6 +208,7 @@ app.post('/login', tokenHandler.login);
     // getmusicsheet 
     app.get('/getmusicsheet', middleware.checkToken ,(req, res) => {
         let musictype = req.query.musictype;
+        console.log('musictype is =>'< musictype);
         switch(musictype){
             case 'Classic':
                 res.json(['A', 'B', 'C']);

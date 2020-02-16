@@ -27,6 +27,7 @@ export class CalendarService {
 
   // post memorandum to server
   postTodolists(memorandum : any){
+    console.log('memorandum is =>', memorandum);
     return this.http.post('http://127.0.0.1:4500/postcalendar', memorandum)
       .pipe(
         catchError(this.handleError)

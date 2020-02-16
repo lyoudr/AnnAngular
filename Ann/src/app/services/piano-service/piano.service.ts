@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpErrorResponse, HttpHandler, HttpHeaders } from '@angular/common/http';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators'
 
@@ -13,7 +13,6 @@ export class PianoService {
   
   constructor(
     private http: HttpClient,
-    private route: ActivatedRoute,
     private router: Router,
   ) { }
 
@@ -35,6 +34,7 @@ export class PianoService {
     const options = {
       params : new HttpParams().set('musictype', musictype)
     }
+    console.log('options is =>', options);
     return this.http.get('http://127.0.0.1:4500/getmusicsheet', options)
       .pipe(
         catchError(this.handleError)
