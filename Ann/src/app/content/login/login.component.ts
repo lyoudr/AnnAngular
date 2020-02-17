@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
           // save the identity to cookie
           this.cookieService.delete('AccessToken');
           this.cookieService.set('AccessToken',data.token);
+          this.cookieService.set('UserID', name);
           this.authService.isLoggedIn = true;
           this.authService.countdown$ = interval(1000);
           this.authService.countdownTimer$ = this.authService.countdown$.subscribe(time => {

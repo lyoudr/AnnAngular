@@ -481,7 +481,7 @@ app.post('/login', tokenHandler.login);
 
 /* Calendar */
     const Memorandum = {
-        'Json': {name: '', price: '', picture: ''},
+        'Json': {},
         'Joy': {},
         'Amy': {},
         'Tonal': {},
@@ -498,9 +498,32 @@ app.post('/login', tokenHandler.login);
     // Post personal memorandum to server
     app.post('/postcalendar', middleware.checkToken ,(req, res) => {
         let calendar = req.body;
+        console.log('calendar is =>', calendar);
         let user = calendar.user;
         Memorandum[user] = calendar.data;
         res.json({calendar: 'ok'});
+        res.end();
+    });
+    // Get detail of each memorandum
+    app.post('/getmemorandumdetail', middleware.checkToken, (req, res) => {
+        const user = req.body.user;
+        const month = req.body.month;
+        const date = req.body.date;
+        const Id = req.body.Id;
+        let foundDetail;
+        Memorandum[user][month].forEach(item => { 
+            if(item.date === date){
+                item.data[0].forEach(item2 => {
+                    if(item2.Id === Id){
+                        foundDetail = item2;
+                        return;
+                    }
+                    return;
+                });
+            };
+            return;
+        });
+        res.json({detail : foundDetail});
         res.end();
     });
 

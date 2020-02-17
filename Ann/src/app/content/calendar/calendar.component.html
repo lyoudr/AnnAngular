@@ -130,8 +130,8 @@
         <i (click)="isMemorandumOpen = false" class="material-icons">close</i>
         <div class="list-group ">
           <h5>{{Month}} {{date}}</h5>
-          <ng-container *ngFor="let memorandum of memorandumlists">
-            <a href="#" class="list-group-item list-group-item-action active wow slideInLeft">
+          <ng-container *ngFor="let memorandum of calendarService.memorandumlists">
+            <a (click)="memorandumDetail(memorandum.Id)" class="list-group-item list-group-item-action active wow slideInLeft">
               <div class="d-flex w-100 justify-content-between">
                 <h5 class="mb-1">{{memorandum.title}}</h5>
               </div>

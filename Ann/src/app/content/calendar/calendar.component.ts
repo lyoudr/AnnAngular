@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { TodoitemComponent } from './todoitem/todoitem.component';
 import WOW from 'wow.js';
 import { CalendarService } from 'src/app/services/calendar/calendar.service';
+import { IdGeneratorService } from '../../services/id-generator-service/id-generator.service';
 import { CookieService } from 'ngx-cookie-service';
 
 @Component({
@@ -40,12 +41,12 @@ export class CalendarComponent implements OnInit {
       "Dec":[],
     }
   };
-  memorandumlists : Array<any> = [];
 
   constructor(
     public dialog: MatDialog,
-    private calendarService: CalendarService,
-    private cookieService: CookieService
+    public calendarService: CalendarService,
+    private cookieService: CookieService,
+    private idGeneratorService : IdGeneratorService,
   ) { }
 
   ngOnInit() {
@@ -234,8 +235,14 @@ export class CalendarComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       let results = result;
+      results[0].forEach(item => {
+        item.Id = this.idGeneratorService.idGenerator();
+      });
       // define datesarray
-      this.datesarray[(dateindex - 1)] = {date: date, data: results};
+      this.datesarray[(dateindex - 1)] = {
+        date: date, 
+        data: results
+      };
       // define memorandum
       this.memorandum.user = this.user;
       this.memorandum.data[this.Month] = this.datesarray;
@@ -256,6 +263,12 @@ export class CalendarComponent implements OnInit {
     var founditem = this.datesarray.filter(obj => {
       return obj.date === date;
     });
-    this.memorandumlists = founditem[0].data[0];
+    this.calendarService.memorandumlists = founditem[0].data[0];
+  }
+
+  /* See memorandum detail */
+  memorandumDetail(memorandumId){
+    this.calendarService.getTodolistDetail(this.user, this.Month, this.date, memorandumId)
+      .subscribe(detail => console.log('detail is =>', detail));
   }
 }

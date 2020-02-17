@@ -7,10 +7,13 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class CalendarService {
+  
+  public memorandumlists: Array<any> = [];
 
   constructor(
     private http: HttpClient,
   ) { }
+
 
   // get memorandum of each month
   getTodolist(month: string, user: string){
@@ -24,11 +27,25 @@ export class CalendarService {
         catchError(this.handleError)
       )
   }
-
+  
   // post memorandum to server
   postTodolists(memorandum : any){
     console.log('memorandum is =>', memorandum);
     return this.http.post('http://127.0.0.1:4500/postcalendar', memorandum)
+      .pipe(
+        catchError(this.handleError)
+      )
+  }
+
+  // get memorandum detail
+  getTodolistDetail(user: string, month: string, date: any, Id : string){
+    const getTodoInfo = {
+      user: user,
+      month: month,
+      date : date,
+      Id : Id
+    };
+    return this.http.post('http://127.0.0.1:4500/getmemorandumdetail', getTodoInfo)
       .pipe(
         catchError(this.handleError)
       )
