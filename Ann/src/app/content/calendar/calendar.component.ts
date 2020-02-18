@@ -24,6 +24,8 @@ export class CalendarComponent implements OnInit {
   listStyles: {};
   user: any;
   isMemorandumOpen : boolean = false;
+  detail : any; 
+  isOpenModal : boolean = false;
   memorandum : any = {
     user: '',
     data: {
@@ -269,6 +271,18 @@ export class CalendarComponent implements OnInit {
   /* See memorandum detail */
   memorandumDetail(memorandumId){
     this.calendarService.getTodolistDetail(this.user, this.Month, this.date, memorandumId)
-      .subscribe(detail => console.log('detail is =>', detail));
+      .subscribe(returneddetail => {
+        console.log('detail is =>', returneddetail);
+        this.detail = returneddetail;
+        if(this.detail){
+          this.isOpenModal = true;
+        }
+      });
+  }
+
+  closeModal(event){
+    if(event){
+      this.isOpenModal = false;
+    }
   }
 }

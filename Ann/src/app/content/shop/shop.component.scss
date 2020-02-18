@@ -1,10 +1,9 @@
 .shop{
     section{
         &.title{
-            height: 70px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            height: 110px;
+            display: block;
+            text-align: center;
             background-color: #f8f8f8;
             border-top: 1px solid #ddd;
             border-bottom: 1px solid #ddd;
@@ -12,6 +11,29 @@
                 font-family: monospace;
                 letter-spacing: 1px;
                 font-size: 16px;
+                margin: 0;
+                text-align: center;
+                padding: 15px 0 15px 0;
+            }
+            .searchbox{
+                width: 40%;
+                border-radius: 19px/50%;
+                padding-left: 16px;
+                padding-right: 38px;
+                height: 38px;
+                border: 1px solid #e0e0e0;
+            }
+            >button{
+                background-color: transparent;
+                width: 38px;
+                height: 38px;
+                border-radius: 50%;
+                position: absolute;
+                margin-left: -38px;
+                border: 1px solid transparent;
+                >img{
+                    width: 20px;
+                }
             }
         }
         &.search{

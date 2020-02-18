@@ -144,3 +144,10 @@
     </div>
   </div>
 </div>
+<app-modal 
+  [detail]="detail?.detail"
+  [ngClass]="{'active' : isOpenModal, 'modal': true}"
+  (close) = "closeModal($event)"
+>
+</app-modal>
+

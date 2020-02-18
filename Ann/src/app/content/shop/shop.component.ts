@@ -1,8 +1,9 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ShopService } from '../../services/shop-service/shop.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription, Subject } from 'rxjs';
 import { CollectionViewer, DataSource  } from '@angular/cdk/collections';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-shop',
@@ -11,7 +12,7 @@ import { CollectionViewer, DataSource  } from '@angular/cdk/collections';
   changeDetection : ChangeDetectionStrategy.OnPush
 })
 export class ShopComponent implements OnInit {
-  commdities = new MyDataSource(this.shopService);
+  commdities = new MyDataSource(this.shopService, null);
   imgSources : SafeResourceUrl; // photo image source
   prices : Array<any> = [10, 20, 30];
   sizes : Array<string> = ['small(S)', 'medium(M)', 'large(L)', 'extra-large(XL)']
@@ -20,7 +21,10 @@ export class ShopComponent implements OnInit {
     {name: 'price', arrays: this.prices, isOpen: false},
     {name: 'size', arrays: this.sizes, isOpen: false},
     {name: 'brand', arrays: this.brands, isOpen: false}
-  ]
+  ];
+  searchText$ = new Subject<string>();
+  searchObserve$ : Observable<any>;
+
   constructor(
     private shopService : ShopService,
     private sanitizer : DomSanitizer,
@@ -28,6 +32,27 @@ export class ShopComponent implements OnInit {
 
   ngOnInit() {
     this.getpopularCommodities();
+    this.searchObserve$ = this.searchText$.pipe(
+      debounceTime(1000), // wait for user to stop typing (1 second in the case)
+      distinctUntilChanged(), // wait until the search text changes.
+      switchMap(searchVal => // send the search request to the service.
+        this.shopService.getSearchResult(searchVal)
+      )
+    );
+    this.searchObserve$.subscribe(data => { 
+      console.log('data is =>', data);
+      if(data.length != 0){
+        this.commdities = new MyDataSource(this.shopService, data);
+      } else {
+        this.commdities = new MyDataSource(this.shopService, null);
+      }
+    });
+  }
+
+  /* Search Shop items */
+  onKey(searchVal : string){
+    console.log('searchVal is =>', searchVal);
+    this.searchText$.next(searchVal);
   }
 
   /* Get popular commodities */
@@ -39,7 +64,7 @@ export class ShopComponent implements OnInit {
         photo = photo.map(src => { 
           return this.sanitizer.bypassSecurityTrustUrl(src)
         });
-          this.imgSources = photo;
+        this.imgSources = photo;
       });
   }
 }
@@ -62,10 +87,17 @@ export class MyDataSource extends DataSource<any | undefined>{
   // https://stackoverflow.com/questions/43348463/what-is-the-difference-between-subject-and-behaviorsubject
   private dataStream = new BehaviorSubject<(string | undefined)[]>(this.initialData)
 
-  constructor(private shopService: ShopService){
+  constructor(
+    private shopService: ShopService,
+    private searchVal : any
+  ){
     super();
   }
   connect(collectionViewer: CollectionViewer): Observable<(string |undefined)[]>{
+    if(this.searchVal){
+      this.dataStream.next(this.searchVal);
+      return this.dataStream;
+    } 
     // fetch page from 1 to pageSize when scrolling
     this.subscription.add(collectionViewer.viewChange.subscribe((range) => {
       console.log('range is =>', range);

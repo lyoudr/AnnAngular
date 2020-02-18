@@ -11,6 +11,13 @@ export class ShopService {
   constructor(
     private http: HttpClient
   ) { }
+  
+  getSearchResult(searchVal : string) : Observable<any>{
+    return this.http.post('http://127.0.0.1:4500/popularItemSearch', searchVal)
+      .pipe(
+        catchError(this.handleError)
+      )
+  }
 
   getpopularCommodities(): Observable<any>{
     const getcommoditesOptions = {

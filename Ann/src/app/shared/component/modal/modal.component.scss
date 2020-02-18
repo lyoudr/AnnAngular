@@ -1,0 +1,32 @@
+.modal_content{
+    width: 75%;
+    height: 80vh;
+    background-color: #f3eeee;
+    font-family: 'Trebuchet MS';
+    .title{
+        padding: 20px;
+        display: flex;
+        >p{
+            margin: 0 auto 0 auto;
+            font-size: 16px;
+        }
+    }
+    .content{
+        padding: 30px;
+        height: calc(80vh - 64px);
+        >div{
+            background-color: #fff;
+            height: 100%;
+            padding: 10px;
+            >p{
+                height: 50px;
+                display: flex;
+                align-items: center;
+                margin: 0;
+                font-size: 14px;
+                letter-spacing: 1px;
+                color: #555;
+            }
+        }
+    }
+}

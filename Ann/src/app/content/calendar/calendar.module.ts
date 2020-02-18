@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { SharedModule } from '../../shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { CalendarRoutingModule } from './calendar-routing.module';
 import { FormsModule } from '@angular/forms';
@@ -10,11 +11,12 @@ import { MatInputModule } from '@angular/material/input';
 import { TodocontentComponent } from './todocontent/todocontent.component';
 import { TodoitemComponent } from './todoitem/todoitem.component';
 
+
 @NgModule({
   declarations: [
     CalendarComponent,
     TodocontentComponent,
-    TodoitemComponent
+    TodoitemComponent,
   ],
   entryComponents: [
     TodocontentComponent,
@@ -23,6 +25,7 @@ import { TodoitemComponent } from './todoitem/todoitem.component';
   imports: [
     CommonModule,
     CalendarRoutingModule,
+    SharedModule,
     FormsModule,
     MatDialogModule,
     MatButtonModule,

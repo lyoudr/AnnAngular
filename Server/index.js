@@ -528,62 +528,77 @@ app.post('/login', tokenHandler.login);
     });
 
 /* Commodities */
+    const shopItems = [
+        {name: 'Gray Shoe', price: 20.00, picture: ''},
+        {name: 'Blue Shoe High Heels', price: 28.00, picture: ''},
+        {name: 'Danim Jacket', price: 28.00, picture: ''},
+        {name: 'Leather Green Bag', price: 25.00, picture: ''},
+        {name: 'Smooth Cloth', price: 15.00, picture: ''},
+        {name: 'Yellow Jacket', price: 58.00, picture: ''},
+        {name: 'Bag', price: 17.00, picture: ''},
+        {name: 'Coat', price: 16.00, picture: ''},
+        {name: 'Beautiful Dress', price: 23.00, picture: ''},
+        {name: 'Cool Jeans', price: 10.00, picture: ''},
+        {name: 'Styled Jeans', price: 12.00, picture: ''},
+        {name: 'Shoes', price: 20.00, picture: ''},
+        {name: 'Skirt', price: 18.00, picture: ''},
+        {name: 'Down Jacket', price: 16.50, picture: ''},
+        {name: 'Hat', price: 17.50, picture: ''},
+        {name: 'Outfit pretty', price: 23.50, picture: ''},
+        {name: 'Beggie Outfit', price: 22.50, picture: ''},
+        {name: 'Pants', price: 21.50, picture: ''},
+        {name: 'Scarf', price: 20.50, picture: ''},
+        {name: 'Sunglasses', price: 30.50, picture: ''},
+    ];
+
+    const shopPhotos = [
+        'grey_shoe.jpg', 
+        'blue_shoe_high_heels.jpg', 
+        'danim_jacket.jpg', 
+        'leather_green_bag.jpg', 
+        'smooth_clothes.jpg', 
+        'yellow_jacket.jpg',
+        'bag.jpg', 
+        'coat.jpg', 
+        'dress.jpg', 
+        'jeans.jpg', 
+        'jeans_2.jpg', 
+        'shoes.jpg',
+        'skirt.jpg', 
+        'down_jacket.jpg', 
+        'hat.jpg', 
+        'outfit_1.jpg', 
+        'outfit_2.jpg', 
+        'pants.jpg',
+        'scarf.jpg', 
+        'sunglasses.jpg', 
+    ];
+
+    app.post('/popularItemSearch', middleware.checkToken, (req, res) => {
+        console.log('req.body is =>', req.body);
+        let newshopArr = [];
+        shopItems.forEach((item) => {
+            if(item.name.includes(req.body)){
+                newshopArr.push(item);
+            }
+        });
+        res.json(newshopArr);
+        res.end();
+    });
+
     app.get('/popularItems', middleware.checkToken ,(req, res) => {
-        res.json([
-            {name: 'Gray Shoe', price: 20.00, picture: ''},
-            {name: 'Blue Shoe High Heels', price: 28.00, picture: ''},
-            {name: 'Danim Jacket', price: 28.00, picture: ''},
-            {name: 'Leather Green Bag', price: 25.00, picture: ''},
-            {name: 'Smooth Cloth', price: 15.00, picture: ''},
-            {name: 'Yellow Jacket', price: 58.00, picture: ''},
-            {name: 'Bag', price: 17.00, picture: ''},
-            {name: 'Coat', price: 16.00, picture: ''},
-            {name: 'Beautiful Dress', price: 23.00, picture: ''},
-            {name: 'Cool Jeans', price: 10.00, picture: ''},
-            {name: 'Styled Jeans', price: 12.00, picture: ''},
-            {name: 'Shoes', price: 20.00, picture: ''},
-            {name: 'Skirt', price: 18.00, picture: ''},
-            {name: 'Down Jacket', price: 16.50, picture: ''},
-            {name: 'Hat', price: 17.50, picture: ''},
-            {name: 'Outfit pretty', price: 23.50, picture: ''},
-            {name: 'Beggie Outfit', price: 22.50, picture: ''},
-            {name: 'Pants', price: 21.50, picture: ''},
-            {name: 'Scarf', price: 20.50, picture: ''},
-            {name: 'Sunglasses', price: 30.50, picture: ''},
-        ]);
+        res.json(shopItems);
     });
 
     app.get('/popularItemsPhoto', middleware.checkToken ,async(req, res) => {
-        const shopitems = [
-            'grey_shoe.jpg', 
-            'blue_shoe_high_heels.jpg', 
-            'danim_jacket.jpg', 
-            'leather_green_bag.jpg', 
-            'smooth_clothes.jpg', 
-            'yellow_jacket.jpg',
-            'bag.jpg', 
-            'coat.jpg', 
-            'dress.jpg', 
-            'jeans.jpg', 
-            'jeans_2.jpg', 
-            'shoes.jpg',
-            'skirt.jpg', 
-            'down_jacket.jpg', 
-            'hat.jpg', 
-            'outfit_1.jpg', 
-            'outfit_2.jpg', 
-            'pants.jpg',
-            'scarf.jpg', 
-            'sunglasses.jpg', 
-        ];
         const shoparr = [];
         let count = 0;
-        shopitems.forEach((item ,index) => {
+        shopPhotos.forEach((item ,index) => {
             fs.readFile(`./shop/${item}`,'base64',(err, image) => {
                 count++;
                 let imgUrl = `data:image/jpeg;base64, ${image}`;
                 shoparr.push(imgUrl);
-                if(count == shopitems.length){
+                if(count == shopPhotos.length){
                     res.json(shoparr);
                     res.end();
                 }

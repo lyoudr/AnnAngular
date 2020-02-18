@@ -67,3 +67,11 @@ tbody tr th{
     }
     
 }
+
+.modal{
+    &.active{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
