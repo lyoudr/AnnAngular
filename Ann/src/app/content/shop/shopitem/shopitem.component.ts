@@ -19,10 +19,10 @@ export class ShopitemComponent implements OnInit {
 
   ngOnInit() {
     this.$commodity = this.route.paramMap.pipe(
-      switchMap((params: ParamMap) =>
-        this.shopService.getcommdityDetail(params.get('id')))
+      switchMap((params: ParamMap) => {
+        return this.shopService.getcommdityDetail(params.get('id'))
+      })
     );
-    
     this.$commodity.subscribe(commoditydetail =>
       console.log('commoditydetail is =>', commoditydetail)
     );

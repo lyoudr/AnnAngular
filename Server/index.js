@@ -4,12 +4,12 @@ const app = express();
 const fs = require('fs');
 const multer = require('multer');
 const upload = multer();
-const util = require('util');
 const cors = require('cors');
-const readdir = util.promisify(fs.readdir);
 const jwt = require('jsonwebtoken');
 const config = require('./config');
 const middleware = require('./middleware');
+/* Algorithm */
+const HashTable = require('./algorithm/dictionary');
 
 /* Static Files */
 app.use(express.static('../Ann/dist/Ann'));
@@ -498,7 +498,6 @@ app.post('/login', tokenHandler.login);
     // Post personal memorandum to server
     app.post('/postcalendar', middleware.checkToken ,(req, res) => {
         let calendar = req.body;
-        console.log('calendar is =>', calendar);
         let user = calendar.user;
         Memorandum[user] = calendar.data;
         res.json({calendar: 'ok'});
@@ -528,6 +527,7 @@ app.post('/login', tokenHandler.login);
     });
 
 /* Commodities */
+    const hash = new HashTable();
     const shopItems = [
         {name: 'Gray Shoe', price: 20.00, picture: 'grey_shoe.jpg'},
         {name: 'Blue Shoe High Heels', price: 28.00, picture: 'blue_shoe_high_heels.jpg'},
@@ -550,23 +550,25 @@ app.post('/login', tokenHandler.login);
         {name: 'Scarf', price: 20.50, picture: 'scarf.jpg'},
         {name: 'Sunglasses', price: 30.50, picture: 'sunglasses.jpg'},
     ];
-
     // Turn picture url into base64 string
     shopItems.forEach((item ,index) => {
         fs.readFile(`./shop/${item.picture}`,'base64', (err, image) => {
             let imgUrl = `data:image/jpeg;base64, ${image}`;
             item.picture = imgUrl;
+            hash.put(item.name, {'name': item.name, 'price': item.price, 'picture': item.picture});
         });
     });
 
     app.post('/popularItemSearch', middleware.checkToken, (req, res) => {
-        let newshopArr = [];
+        /*let newshopArr = [];
         shopItems.forEach((item) => {
             if(item.name.includes(req.body)){
                 newshopArr.push(item);
             }
-        });
-        res.json(newshopArr);
+        });*/
+        console.log('req.body is =>', req.body);
+        let foundItem = hash.get(req.body);
+        res.json([foundItem]);
         res.end();
     });
 
@@ -574,8 +576,8 @@ app.post('/login', tokenHandler.login);
         res.json(shopItems);
     });
 
-    app.post('/getcommditydetail', middleware.checkToken ,(req, res) => {
-        console.log('getcommditydetail body is =>', req.body);
+    app.get('/getcommditydetail', middleware.checkToken ,(req, res) => {
+        console.log('getcommditydetail itemId is =>', req);
         res.json({"status": "ok", "code": "200"});
         res.end();
     });

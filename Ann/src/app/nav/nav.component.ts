@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth-service/auth.service';
 import { CookieService } from 'ngx-cookie-service';
-import { Router }      from '@angular/router';
+import { GlobaldataService } from '../services/global-service/globaldata.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-nav',
@@ -13,6 +15,7 @@ export class NavComponent implements OnInit {
   constructor(
     public authService: AuthService,
     private cookieService : CookieService,
+    public globalDataService : GlobaldataService,
     public router: Router
   ) { }
   navlists : any[] = [
@@ -22,10 +25,17 @@ export class NavComponent implements OnInit {
     {'url':'/calendar', 'title': 'Calendar', linkfocus : false},
     {'url':'/restaurant', 'title':'Restaurant', linkfocus : false},
     {'url': '/shop', 'title': 'Shop', linkfocus: false}
-  ]
+  ];
+  languages : Array<Object> = [
+    {name: '中', id: 'zh-tw'}, 
+    {name: 'En', id: 'en-us'}
+  ];
   isOpen : boolean = false;
+  isOpenLang : boolean = false;
+  
 
   ngOnInit() {
+    this.detectLangChange();
   }
 
 
@@ -48,5 +58,15 @@ export class NavComponent implements OnInit {
     } else if(event == 'mouseleave'){
       this.navlists[index]['linkfocus'] = false;
     }
+  }
+
+  selectLang(language){
+    this.globalDataService.language.next(language);
+  }
+
+  detectLangChange(){
+    this.globalDataService.language.subscribe(lang => 
+      console.log('lang is =>', lang)
+    );
   }
 }

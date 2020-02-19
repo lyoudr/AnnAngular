@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError, Subject } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,13 +13,14 @@ export class AuthService {
   counter : number = 900;
   countdown$ : any;
   countdownTimer$: any;
+  apiUrl: string = environment.apiUrl;
 
   constructor(
     private http: HttpClient
   ) { }
 
   Login(UserInfo): Observable<any>{
-    return this.http.post('http://127.0.0.1:4500/login', UserInfo)
+    return this.http.post(`${this.apiUrl}/login`, UserInfo)
       .pipe(
         catchError(this.handleError)
       )

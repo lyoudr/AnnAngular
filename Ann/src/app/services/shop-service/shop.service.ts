@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,8 @@ import { catchError } from 'rxjs/operators';
 export class ShopService {
   
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private cookieService : CookieService
   ) { }
   
   getSearchResult(searchVal : string) : Observable<any>{
@@ -39,8 +41,8 @@ export class ShopService {
       )
   }
 
-  async getcommdityDetail(itemId){
-    /*console.log('itemId is =>', itemId);
+  getcommdityDetail(itemId){
+    console.log('itemId is =>', itemId);
     const getcommdityOptions = {
       params : new HttpParams()
         .set('itemId', itemId)
@@ -48,15 +50,17 @@ export class ShopService {
     return this.http.get('http://127.0.0.1:4500/getcommditydetail', getcommdityOptions)
       .pipe(
         catchError(this.handleError)
-      )*/
-    const reqBody = {
-      method: 'POST',
-      headers: {
-        'Content-Type' : 'text/plain',
-      },
-      body: itemId
-    }
-    const commdity = await fetch('http://127.0.0.1:4500/getcommditydetail', reqBody)
+      )
+    /*const commdity = await fetch('http://127.0.0.1:4500/getcommditydetail', {
+        method: 'POST',
+        headers: {
+          'Content-Type' : 'text/plain',
+          'Authorization' : this.cookieService.get('AccessToken')
+        },
+        credentials: 'include',
+        mode: 'same-origin',
+        body: itemId
+      })
       .then((res) => {
         return res.json();
       })
@@ -67,8 +71,7 @@ export class ShopService {
       .catch(error => {
         console.error('error is =>', error);
       });
-    console.log('commdity is =>', commdity);
-    return commdity;
+    return commdity;*/
   }
   
   /* Error handling */

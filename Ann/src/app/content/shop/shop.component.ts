@@ -40,15 +40,17 @@ export class ShopComponent implements OnInit {
         this.shopService.getSearchResult(searchVal)
       )
     );
-    this.searchObserve$.subscribe(data => { 
-      data = data.map(item => {
-        item.picture = this.sanitizer.bypassSecurityTrustUrl(item.picture);
-        return item;
-      });
-      if(data.length != 0){
+    this.searchObserve$.subscribe(data => {
+      if(data.length != 0 && data[0] !== null){
+        console.log('1');
+        data = data.map(item => {
+          item.picture = this.sanitizer.bypassSecurityTrustUrl(item.picture);
+          return item;
+        });
         this.commdities = new MyDataSource(this.shopService, this.sanitizer, data);
         this.changeDetectorRefs.detectChanges();
-      } else {
+      } else if(data[0] === null || !data) {
+        console.log('2');
         this.commdities = new MyDataSource(this.shopService, this.sanitizer, null);
         this.changeDetectorRefs.detectChanges();
       }
@@ -78,6 +80,7 @@ export class MyDataSource extends DataSource<any | undefined>{
   // A Subject doesn't hold a value.
   // https://stackoverflow.com/questions/43348463/what-is-the-difference-between-subject-and-behaviorsubject
   private dataStream = new BehaviorSubject<(string | undefined)[]>(this.initialData)
+  private isCached : boolean = false; // record if API "popularItems" has been called
 
   constructor(
     private shopService: ShopService,
@@ -118,6 +121,9 @@ export class MyDataSource extends DataSource<any | undefined>{
     this.shopService.getpopularCommodities()
       .subscribe((data) => {
         data = data.map(item => {
+          if(item.isCached){
+            return item;
+          }
           item.picture = this.sanitizer.bypassSecurityTrustUrl(item.picture);
           return item;
         });

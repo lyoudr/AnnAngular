@@ -1,6 +1,14 @@
 <a class="menu" (click)="isOpen = true">
     <img src="assets/svg/menu.svg"/>
 </a>
+<a class="selectLang" (click)="isOpenLang = !isOpenLang">
+    <img src="assets/svg/language.svg"/>
+</a>
+<div class="langMenu" [ngClass]="{'active': isOpenLang , '': !isOpenLang}">
+    <a *ngFor="let language of languages" class="lang" (click)="selectLang(language.id)">
+        {{language.name}}
+    </a>
+</div>
 <nav [ngClass]="{'active': isOpen}">
     <div class="lang-wrap">
         <a routerLink="/login">
@@ -10,7 +18,9 @@
             <mat-icon>timer</mat-icon>
             <span>{{authService.counter}}</span>
         </div>-->
-        <span (click)="isOpen = false">X</span>
+        <a class="close" (click)="isOpen = false">
+            <img src="assets/svg/close.svg"/>
+        </a>
     </div>
     <div class="pages">
         <a *ngFor="let eachnav of navlists; let linkindex = index" 

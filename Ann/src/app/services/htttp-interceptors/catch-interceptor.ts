@@ -18,7 +18,12 @@ export class CachingInterceptor implements HttpInterceptor {
         const cachedResponse = this.cache.get(req);
         console.log('cahedResponse is =>', cachedResponse);
         if (cachedResponse !== null) {
-           return of(cachedResponse);
+            if(cachedResponse.url === "http://127.0.0.1:4500/popularItems"){
+               cachedResponse.body.map(item => 
+                  item.isCached = true
+               )
+            }
+            return of(cachedResponse);
         }
         // if request method is "GET", but is expired. Recache this request, and store its response and cache time in cacheMap. 
         return next.handle(req).pipe(
