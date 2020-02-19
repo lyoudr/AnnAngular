@@ -529,53 +529,37 @@ app.post('/login', tokenHandler.login);
 
 /* Commodities */
     const shopItems = [
-        {name: 'Gray Shoe', price: 20.00, picture: ''},
-        {name: 'Blue Shoe High Heels', price: 28.00, picture: ''},
-        {name: 'Danim Jacket', price: 28.00, picture: ''},
-        {name: 'Leather Green Bag', price: 25.00, picture: ''},
-        {name: 'Smooth Cloth', price: 15.00, picture: ''},
-        {name: 'Yellow Jacket', price: 58.00, picture: ''},
-        {name: 'Bag', price: 17.00, picture: ''},
-        {name: 'Coat', price: 16.00, picture: ''},
-        {name: 'Beautiful Dress', price: 23.00, picture: ''},
-        {name: 'Cool Jeans', price: 10.00, picture: ''},
-        {name: 'Styled Jeans', price: 12.00, picture: ''},
-        {name: 'Shoes', price: 20.00, picture: ''},
-        {name: 'Skirt', price: 18.00, picture: ''},
-        {name: 'Down Jacket', price: 16.50, picture: ''},
-        {name: 'Hat', price: 17.50, picture: ''},
-        {name: 'Outfit pretty', price: 23.50, picture: ''},
-        {name: 'Beggie Outfit', price: 22.50, picture: ''},
-        {name: 'Pants', price: 21.50, picture: ''},
-        {name: 'Scarf', price: 20.50, picture: ''},
-        {name: 'Sunglasses', price: 30.50, picture: ''},
+        {name: 'Gray Shoe', price: 20.00, picture: 'grey_shoe.jpg'},
+        {name: 'Blue Shoe High Heels', price: 28.00, picture: 'blue_shoe_high_heels.jpg'},
+        {name: 'Danim Jacket', price: 28.00, picture: 'danim_jacket.jpg'},
+        {name: 'Leather Green Bag', price: 25.00, picture: 'leather_green_bag.jpg'},
+        {name: 'Smooth Cloth', price: 15.00, picture: 'smooth_clothes.jpg'},
+        {name: 'Yellow Jacket', price: 58.00, picture: 'yellow_jacket.jpg'},
+        {name: 'Bag', price: 17.00, picture: 'bag.jpg'},
+        {name: 'Coat', price: 16.00, picture: 'coat.jpg'},
+        {name: 'Beautiful Dress', price: 23.00, picture: 'dress.jpg'},
+        {name: 'Cool Jeans', price: 10.00, picture: 'jeans.jpg'},
+        {name: 'Styled Jeans', price: 12.00, picture: 'jeans_2.jpg'},
+        {name: 'Shoes', price: 20.00, picture: 'shoes.jpg'},
+        {name: 'Skirt', price: 18.00, picture: 'skirt.jpg'},
+        {name: 'Down Jacket', price: 16.50, picture: 'down_jacket.jpg'},
+        {name: 'Hat', price: 17.50, picture: 'hat.jpg'},
+        {name: 'Outfit pretty', price: 23.50, picture: 'outfit_1.jpg'},
+        {name: 'Beggie Outfit', price: 22.50, picture: 'outfit_2.jpg'},
+        {name: 'Pants', price: 21.50, picture: 'pants.jpg'},
+        {name: 'Scarf', price: 20.50, picture: 'scarf.jpg'},
+        {name: 'Sunglasses', price: 30.50, picture: 'sunglasses.jpg'},
     ];
 
-    const shopPhotos = [
-        'grey_shoe.jpg', 
-        'blue_shoe_high_heels.jpg', 
-        'danim_jacket.jpg', 
-        'leather_green_bag.jpg', 
-        'smooth_clothes.jpg', 
-        'yellow_jacket.jpg',
-        'bag.jpg', 
-        'coat.jpg', 
-        'dress.jpg', 
-        'jeans.jpg', 
-        'jeans_2.jpg', 
-        'shoes.jpg',
-        'skirt.jpg', 
-        'down_jacket.jpg', 
-        'hat.jpg', 
-        'outfit_1.jpg', 
-        'outfit_2.jpg', 
-        'pants.jpg',
-        'scarf.jpg', 
-        'sunglasses.jpg', 
-    ];
+    // Turn picture url into base64 string
+    shopItems.forEach((item ,index) => {
+        fs.readFile(`./shop/${item.picture}`,'base64', (err, image) => {
+            let imgUrl = `data:image/jpeg;base64, ${image}`;
+            item.picture = imgUrl;
+        });
+    });
 
     app.post('/popularItemSearch', middleware.checkToken, (req, res) => {
-        console.log('req.body is =>', req.body);
         let newshopArr = [];
         shopItems.forEach((item) => {
             if(item.name.includes(req.body)){
@@ -588,22 +572,6 @@ app.post('/login', tokenHandler.login);
 
     app.get('/popularItems', middleware.checkToken ,(req, res) => {
         res.json(shopItems);
-    });
-
-    app.get('/popularItemsPhoto', middleware.checkToken ,async(req, res) => {
-        const shoparr = [];
-        let count = 0;
-        shopPhotos.forEach((item ,index) => {
-            fs.readFile(`./shop/${item}`,'base64',(err, image) => {
-                count++;
-                let imgUrl = `data:image/jpeg;base64, ${image}`;
-                shoparr.push(imgUrl);
-                if(count == shopPhotos.length){
-                    res.json(shoparr);
-                    res.end();
-                }
-            });
-        });
     });
 
     app.post('/getcommditydetail', middleware.checkToken ,(req, res) => {

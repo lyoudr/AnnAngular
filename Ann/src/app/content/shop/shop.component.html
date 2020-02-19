@@ -27,7 +27,7 @@
                 <cdk-virtual-scroll-viewport itemSize="50" class="virtual_scroll">
                     <div [routerLink]="['item', commodity.name]" class="col-4 scroll_item" 
                         *cdkVirtualFor="let commodity of commdities; templateCacheSize: 0; let itemindex = index">
-                        <img [src]="imgSources? imgSources[itemindex] : ''"/>
+                        <img [src]="commodity.picture"/>
                         <p>{{commodity.name}}</p>
                         <p>${{commodity.price}}</p>
                     </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { ShopService } from '../../services/shop-service/shop.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { BehaviorSubject, Observable, Subscription, Subject } from 'rxjs';
@@ -12,7 +12,7 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
   changeDetection : ChangeDetectionStrategy.OnPush
 })
 export class ShopComponent implements OnInit {
-  commdities = new MyDataSource(this.shopService, null);
+  commdities = new MyDataSource(this.shopService, this.sanitizer, null);
   imgSources : SafeResourceUrl; // photo image source
   prices : Array<any> = [10, 20, 30];
   sizes : Array<string> = ['small(S)', 'medium(M)', 'large(L)', 'extra-large(XL)']
@@ -28,10 +28,11 @@ export class ShopComponent implements OnInit {
   constructor(
     private shopService : ShopService,
     private sanitizer : DomSanitizer,
+    private changeDetectorRefs: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
-    this.getpopularCommodities();
+    //this.getpopularCommodities();
     this.searchObserve$ = this.searchText$.pipe(
       debounceTime(1000), // wait for user to stop typing (1 second in the case)
       distinctUntilChanged(), // wait until the search text changes.
@@ -40,32 +41,23 @@ export class ShopComponent implements OnInit {
       )
     );
     this.searchObserve$.subscribe(data => { 
-      console.log('data is =>', data);
+      data = data.map(item => {
+        item.picture = this.sanitizer.bypassSecurityTrustUrl(item.picture);
+        return item;
+      });
       if(data.length != 0){
-        this.commdities = new MyDataSource(this.shopService, data);
+        this.commdities = new MyDataSource(this.shopService, this.sanitizer, data);
+        this.changeDetectorRefs.detectChanges();
       } else {
-        this.commdities = new MyDataSource(this.shopService, null);
+        this.commdities = new MyDataSource(this.shopService, this.sanitizer, null);
+        this.changeDetectorRefs.detectChanges();
       }
     });
   }
 
   /* Search Shop items */
   onKey(searchVal : string){
-    console.log('searchVal is =>', searchVal);
     this.searchText$.next(searchVal);
-  }
-
-  /* Get popular commodities */
-  getpopularCommodities(){
-    // Get commodities pictures
-    this.shopService.getcommditiesPhoto()
-      .subscribe((photo: any) => {
-        console.log('photo is =>', photo);
-        photo = photo.map(src => { 
-          return this.sanitizer.bypassSecurityTrustUrl(src)
-        });
-        this.imgSources = photo;
-      });
   }
 }
 
@@ -89,7 +81,8 @@ export class MyDataSource extends DataSource<any | undefined>{
 
   constructor(
     private shopService: ShopService,
-    private searchVal : any
+    private sanitizer : DomSanitizer,
+    private searchVal : any,
   ){
     super();
   }
@@ -100,7 +93,6 @@ export class MyDataSource extends DataSource<any | undefined>{
     } 
     // fetch page from 1 to pageSize when scrolling
     this.subscription.add(collectionViewer.viewChange.subscribe((range) => {
-      console.log('range is =>', range);
       const startPage = this.getPageForIndex(range.start);
       const endPage = this.getPageForIndex(range.end - 1);
       for(let i = startPage; i <= endPage; i++){
@@ -123,10 +115,12 @@ export class MyDataSource extends DataSource<any | undefined>{
       return;
     }
     this.fetchPages.add(page);
-    console.log('this.fetchPages is =>', this.fetchPages);
     this.shopService.getpopularCommodities()
       .subscribe((data) => {
-        console.log('data is =>', data);
+        data = data.map(item => {
+          item.picture = this.sanitizer.bypassSecurityTrustUrl(item.picture);
+          return item;
+        });
         this.dataStream.next(data);
       });
   }
