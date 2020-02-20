@@ -1,0 +1,84 @@
+.shopcart{
+    font-family: "futura-pt-n4", "futura-pt", Tahoma, Geneva, Verdana, Arial, sans-serif;
+    .container{
+        .row{
+            .title{
+                display: flex;
+                margin: 2rem 0 1rem 0;
+                .eachtitle{
+                    &:nth-child(1){
+                        padding-left: 10px;
+                    }
+                    font-size: 13px;
+                    letter-spacing: 1.5px;
+                    line-height: 1.5;
+                    &:nth-child(1){
+                        width: 50%;
+                    }
+                    &:nth-child(2), &:nth-child(3){
+                        width: 25%;
+                        justify-content: center;
+                    }   
+                    display: flex;
+                    padding: 10px 0;
+                    background-color: #e0e0e0;
+                }
+            }
+            .shopitem{
+                .eachitem{
+                    display: flex;
+                    height: 14vh;
+                    padding: 15px 0;
+                    margin: 12px 0;
+                    border-bottom: 1px solid #e0e0e0;
+                    .item{
+                        width: 50%;
+                        >img{
+                            width: 40%;
+                            height: 100%;
+                            float: left;
+                            margin-right: 20px;
+                        }
+                        p{
+                            margin: 0;
+                            &:nth-child(2){
+                                font-size: 15px;
+                                font-weight: 700;
+                                line-height: 2;
+                                letter-spacing: 1.2px;
+                            }
+                            &:nth-child(3){
+                                font-size: 13px;
+                                letter-spacing: 1.2px;
+                            }
+                            &:nth-child(4), &:nth-child(5){
+                                color: #555;
+                                font-size: 13px;
+                                letter-spacing: 1.2px;
+                                line-height: 1.8;
+                            }
+                        }
+                    }
+                    .price, .total_price{
+                        width: 25%;
+                        font-size: 13px;
+                        letter-spacing: 1.2px;
+                        display: flex;
+                        align-items: center;;
+                        justify-content: center;
+                        >a{
+                            position: absolute;
+                            margin-top: 35px;
+                            margin-left: 50px;
+                            display: flex;
+                            >img{
+                                width: 15px;
+                                margin-right: 10px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

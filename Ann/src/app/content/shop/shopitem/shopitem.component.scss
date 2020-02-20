@@ -1,0 +1,106 @@
+.shopitem{
+    padding: 5rem 0;
+    >.container{
+        >.row{
+            .item_img{
+                .shopitemimg{
+                    width: 100%;
+                }
+            }
+            .item_detail{
+                font-family: "futura-pt-n4", "futura-pt", Tahoma, Geneva, Verdana, Arial, sans-serif;
+                >h5{
+                    font-size: 20px;
+                    font-weight: 400;
+                    line-height: 1.3;
+                    letter-spacing: 1.3px;
+                    padding-bottom: 12px;
+                    margin: 0;
+                }
+                >.brand{
+                    font-size: 15px;
+                    font-weight: 500;
+                    letter-spacing: 2.2px;
+                }
+                >.description{
+                    font-size: 14px;
+                    letter-spacing: 2.2px;
+                }
+                >.price{
+                    margin: 0;
+                    font-size: 20px;
+                    line-height: 1.1;
+                    letter-spacing: 2.8px;
+                    font-weight: 700;
+                    color: #555;
+                }
+                >.size, >.color{
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                    padding: 1rem 0;
+                    .eachsize{
+                        cursor: pointer;
+                        width: 11%;
+                        display: flex;
+                        justify-content: center;
+                        height: 30px;
+                        align-items: center;
+                        margin: 0 10px;
+                        box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, 0.2);
+                        &:hover, &.active{
+                            background-color: #555;
+                            color: #ffffff;
+                        }
+                    }
+                    .eachcolor{
+                        cursor: pointer;
+                        width: 11%;
+                        display: flex;
+                        justify-content: center;
+                        height: 30px;
+                        align-items: center;
+                        margin: 0 10px;
+                        box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, 0.2);
+                        >span{
+                            display: none;
+                        }
+                        &:hover, &.active{
+                            border: 1px solid rgb(124, 123, 123);
+                        }
+                        &.red{
+                            background-color: rgb(207, 118, 133);
+                        }
+                        &.blue{
+                            background-color: rgb(155, 190, 211);
+                        }
+                        &.pink{
+                            background-color: pink;
+                        }
+                        &.green{
+                            background-color: rgb(161, 175, 155);
+                        }
+                    }
+                }
+                >.addToCart{
+                    margin: 1rem 0;
+                    float: right;
+                    background-color: #ffffff;
+                    color: #555;
+                    height: 40px;
+                    letter-spacing: 2px;
+                    border: 1px solid #555;
+                    font-size: 14px;
+                    font-weight: 500;
+                    width: 50%;
+                    transition: all 300ms cubic-bezier(0.6, -0.28, 0.735, 0.045) .2s;
+                    &.active{
+                        background-color: #555;
+                        color: #ffffff;
+                        width: 70%;
+                    }
+                }
+            }
+        }
+    }
+}

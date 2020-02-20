@@ -1,1 +1,36 @@
-<p>shopitem works!</p>
+<article class="shopitem">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-7 col-8 item_img">
+                <img class="shopitemimg" [src]="itemdetail.picture">
+            </div>
+            <div class="col-md-5 col-8 item_detail">
+                <h5>{{itemdetail.name}}</h5>
+                <p class="brand">{{itemdetail.brand}}</p>
+                <p class="description">{{itemdetail.description}}</p>
+                <p class="price">${{itemdetail.price}}</p>
+                <div class="size">
+                    <a *ngFor="let size of sizes" 
+                        [ngClass]="{'eachsize': true, 'active': size.choose}"
+                        (click)="size.choose = !size.choose; chooseSize(size.name, size.choose)">
+                        {{size.name}}
+                    </a>
+                </div>
+                <div class="color">
+                    <a *ngFor="let color of colors" 
+                        [ngClass]="{'eachcolor': true, 'active': color.choose}" 
+                        [class]="color.name"
+                        (click)="color.choose = !color.choose; chooseColor(color.name, color.choose)">
+                        <span>{{color.name}}</span>
+                    </a>
+                </div>
+                <button 
+                    [ngClass]="{'addToCart': true, 'active': isAddToCart}" 
+                    (click)="addToCart()">
+                    <ng-container *ngIf="!isAddToCart">Add To Cart</ng-container>
+                    <ng-container *ngIf="isAddToCart">Successfully Added</ng-container>
+                </button>
+            </div>
+        </div>
+    </div>
+</article>

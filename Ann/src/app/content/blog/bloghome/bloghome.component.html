@@ -1,10 +1,10 @@
 <div class="main" id="bloglist">
     <div class="container">
         <div class="row">
-            <div class="col-6">
+            <div class="col-md-6 col-8">
                 <img class="img-fluid" src="../../../../assets/image/notebook.jpg" alt="img"/>
             </div>
-            <div class="col-6 text-left postlistarea"> 
+            <div class="col-md-6 col-4 text-left postlistarea"> 
                 <ng-container *ngFor="let dish of postlist">
                     <a [routerLink]="dish.url" (click)="hidePostlist()">
                         <span>{{dish.date | datetransform}}</span>

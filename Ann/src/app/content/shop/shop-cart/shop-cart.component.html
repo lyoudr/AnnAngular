@@ -1,1 +1,34 @@
-<p>shop-cart works!</p>
+<article class="shopcart">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12 col-12">
+                <section class="title">
+                    <span *ngFor="let title of shoptitles" class="eachtitle">
+                        {{title}}
+                    </span>
+                </section>
+                <section class="shopitem">
+                    <div *ngFor="let shopItem of shopService.shopCartLists" class="eachitem">
+                        <div class="item">
+                            <img src="shopItem.picture"/>
+                            <p>{{shopItem.name}}</p>
+                            <p>{{shopItem.brand}}</p>
+                            <p>Color: {{shopItem.color}}</p>
+                            <p>Size: {{shopItem.size}}</p>
+                        </div>
+                        <div class="price">
+                            {{shopItem.price}}
+                        </div>
+                        <div class="total_price">
+                            <span>{{shopItem.price}}</span>
+                            <a (click)="removeItem(shopItem.name)">
+                                <img src="assets/svg/trash.svg">
+                                Remove
+                            </a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</article>

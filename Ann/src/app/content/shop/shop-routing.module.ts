@@ -3,11 +3,27 @@ import { Routes, RouterModule } from '@angular/router';
 import { ShopComponent } from './shop.component';
 import { ShopitemComponent } from './shopitem/shopitem.component';
 import { ShopCartComponent } from './shop-cart/shop-cart.component'; 
+import { ShopAllitemComponent } from './shopall/shop-allitem.component';
 
 const shoproutes: Routes = [
-  { path: '', component : ShopComponent},
-  { path: 'item/:id', component: ShopitemComponent },
-  { path: 'shopcart', component: ShopCartComponent }
+  { 
+    path: '', 
+    component : ShopComponent,
+    children:[
+      {
+        path: '',
+        component : ShopAllitemComponent
+      },
+      {
+        path: 'item/:id',
+        component : ShopitemComponent
+      },
+      {
+        path: 'shopcart',
+        component : ShopCartComponent
+      }
+    ]
+  },
 ];
 
 @NgModule({

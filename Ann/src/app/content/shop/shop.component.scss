@@ -1,12 +1,12 @@
 .shop{
-    section{
+    header{
         &.title{
-            height: 110px;
-            display: block;
-            text-align: center;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             background-color: #f8f8f8;
             border-top: 1px solid #ddd;
-            border-bottom: 1px solid #ddd;
             >p{
                 font-family: monospace;
                 letter-spacing: 1px;
@@ -15,124 +15,63 @@
                 text-align: center;
                 padding: 15px 0 15px 0;
             }
-            .searchbox{
-                width: 40%;
-                border-radius: 19px/50%;
-                padding-left: 16px;
-                padding-right: 38px;
-                height: 38px;
-                border: 1px solid #e0e0e0;
-            }
-            >button{
-                background-color: transparent;
-                width: 38px;
-                height: 38px;
-                border-radius: 50%;
+            .cart{
                 position: absolute;
-                margin-left: -38px;
-                border: 1px solid transparent;
+                right: 70px;
                 >img{
-                    width: 20px;
+                    width: 22px;
+                }
+                >.number{
+                    &.active{
+                        display: flex;
+                    }
+                    width: 15px;
+                    height: 15px;
+                    position: absolute;
+                    top: -5px;
+                    left: 14px;
+                    display: none;
+                    border-radius: 50%;
+                    background-color: #ce2727;
+                    align-items: center;
+                    justify-content: center;
+                    color: #ffffff;
+                    font-size: 10px;
                 }
             }
-        }
-        &.search{
-            padding: 0.5rem 0;
-            background-color: #eee; 
-           >.container{
-               >.row{
-                   justify-content: space-between;
-                    >.select{
-                        width: 25%;
-                        padding: 8px 10px;
-                        border-top: 1px solid #ddd;
-                        border-bottom: 1px solid #ddd;
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                        cursor: pointer;
-                        &:hover{
-                            >p{
-                                color: rgb(70, 113, 194);
-                            }
-                        }
-                        >p{
-                            margin: 0;
-                            font-size: 14px;
-                            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                        }     
-                        .arrow{
-                            width: 10px;
-                            transition: all 200ms ease-in-out;
-                            &.down{
-                                transform: rotate(180deg);
-                            }
-                        }  
-                    }
-                    >.list{
-                        position: absolute;
-                        margin-top: 0%;
-                        opacity: 0;
-                        z-index: -1;
-                        width: 29%;
-                        transition: margin-top 200ms ease-out;
-                        &.show{
-                            margin-top: 44px;
-                            opacity: 1;
-                            z-index: 1;
-                        }
-                        &.size{
-                            left: 50%;
-                            margin-left: -10.5%;
-                        }
-                        &.brand{
-                            right: 2%;
-                        }
-                        .each{
-                            width: 100%;
-                            display: block;
-                            padding: 8px 10px;
-                            text-align: center;
-                            background: #fcfcfc;
-                            font-size: 13px;
-                            color:#555;
-                            border-bottom: 1px solid #fff;
-                        }
-                    }
-               }
-           } 
-        }
-        &.popular{
-            >.container{
-                >.row{
-                    .virtual_scroll{
-                        width: 100%;
-                        height: 100vh;
-                        &::-webkit-scrollbar{
-                            display: none;
-                        }
-                        .scroll_item{
-                            cursor: pointer;
-                            padding: 8px 4px;
-                            float: left;
-                            >img{
-                                width: 100%;
-                                height: 200px;
-                                box-shadow: 1px 5px 11px -6px;
-                            }
-                            >p{
-                                font-family: "Roboto",sans-serif;
-                                margin-top: 6px;
-                                &:nth-child(2){
-                                    font-size: 14px;
-                                }
-                                &:nth-child(3){
-                                    font-size: 12px;
-                                }
-                            }
-                        }
-                    }
+            .triangle{
+                display: none;
+                &.active{
+                    display: block;
                 }
+                width: 0;
+                height: 0;
+                top: 52px;
+                right: 94px;
+                position: absolute;
+                border-style: solid;
+                border-width: 5px 11px 11px 0;
+                border-color: transparent rgb(240, 205, 211) transparent transparent;
+            }
+            .goToCart{
+                display: none;
+                &.active{
+                    display: block;
+                }
+                p{
+                    margin: 0;
+                    font-size: 13px;
+                    letter-spacing: 1.3px;
+                }
+                text-decoration: none;
+                color: #000;
+                cursor: pointer;
+                position: absolute;
+                right: 94px;
+                top: 57px;
+                padding: 5px 10px;
+                background: rgb(240, 205, 211);
+                border-radius: 3px;
             }
         }
     }

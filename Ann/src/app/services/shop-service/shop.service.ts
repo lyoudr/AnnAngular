@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -8,7 +8,9 @@ import { CookieService } from 'ngx-cookie-service';
   providedIn: 'root'
 })
 export class ShopService {
-  
+  public shopCartNumber : BehaviorSubject<number> = new BehaviorSubject(0); // the number of items in shopping cart
+  public shopCartLists : Array<Object> = [];
+
   constructor(
     private http: HttpClient,
     private cookieService : CookieService
@@ -42,7 +44,6 @@ export class ShopService {
   }
 
   getcommdityDetail(itemId){
-    console.log('itemId is =>', itemId);
     const getcommdityOptions = {
       params : new HttpParams()
         .set('itemId', itemId)

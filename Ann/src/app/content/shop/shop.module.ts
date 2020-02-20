@@ -6,12 +6,14 @@ import { ShopCartComponent } from './shop-cart/shop-cart.component';
 import { ShopRoutingModule } from './shop-routing.module';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ScrollDispatchModule } from '@angular/cdk/scrolling';
+import { ShopAllitemComponent } from './shopall/shop-allitem.component';
 
 @NgModule({
   declarations: [
     ShopComponent,
     ShopitemComponent,
-    ShopCartComponent
+    ShopCartComponent,
+    ShopAllitemComponent
   ],
   imports: [
     CommonModule,

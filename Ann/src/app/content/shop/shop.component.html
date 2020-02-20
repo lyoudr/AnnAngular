@@ -1,38 +1,16 @@
-<div class="shop">
-    <section class="title">
+<main class="shop">
+    <header class="title">
         <p>NewShop</p>
-        <input #search (keyup)="onKey(search.value)" class="searchbox">
-        <button>
-            <img src="assets/svg/search.svg"/>
-        </button>
-    </section>
-    <section class="search">
-        <div class="container">
-            <div class="row">
-                <ng-container *ngFor="let selectItem of selectItems">
-                    <a class="select {{selectItem.name}}" (click)="selectItem.isOpen = !selectItem.isOpen">
-                        <p>{{selectItem.name}}</p>
-                        <img src="assets/svg/down.svg" [ngClass]="{'arrow': true, 'down': selectItem.isOpen}"/>
-                    </a>
-                    <div [ngClass]="{'list': true, 'show': selectItem.isOpen}" [class]="selectItem.name">
-                        <a class="each {{selectItem.name}}" *ngFor="let item of selectItem.arrays">{{item}}</a>
-                    </div>
-                </ng-container>
-            </div>
-        </div>
-    </section>
-    <section class="popular">
-        <div class="container">
-            <div class="row">
-                <cdk-virtual-scroll-viewport itemSize="50" class="virtual_scroll">
-                    <div [routerLink]="['item', commodity.name]" class="col-4 scroll_item" 
-                        *cdkVirtualFor="let commodity of commdities; templateCacheSize: 0; let itemindex = index">
-                        <img [src]="commodity.picture"/>
-                        <p>{{commodity.name}}</p>
-                        <p>${{commodity.price}}</p>
-                    </div>
-                </cdk-virtual-scroll-viewport>
-            </div>
-        </div>
-    </section>
-</div>
+        <a class="cart" routerLink="shopcart">
+            <img src="assets/svg/cart.svg"/>
+            <span [ngClass]="{'number': true, 'active': shopnumber > 0}">
+                {{shopnumber}}
+            </span>
+        </a>
+        <span [ngClass]="{'triangle': true, 'active': shopnumber > 0}"></span>
+        <a routerLink="shopcart" [ngClass]="{'goToCart': true, 'active': shopnumber > 0}">
+            <p>Go To Cart</p>
+        </a>
+    </header>
+    <router-outlet></router-outlet>
+</main>

@@ -208,7 +208,6 @@ app.post('/login', tokenHandler.login);
     // getmusicsheet 
     app.get('/getmusicsheet', middleware.checkToken ,(req, res) => {
         let musictype = req.query.musictype;
-        console.log('musictype is =>'< musictype);
         switch(musictype){
             case 'Classic':
                 res.json(['A', 'B', 'C']);
@@ -529,44 +528,58 @@ app.post('/login', tokenHandler.login);
 /* Commodities */
     const hash = new HashTable();
     const shopItems = [
-        {name: 'Gray Shoe', price: 20.00, picture: 'grey_shoe.jpg'},
-        {name: 'Blue Shoe High Heels', price: 28.00, picture: 'blue_shoe_high_heels.jpg'},
-        {name: 'Danim Jacket', price: 28.00, picture: 'danim_jacket.jpg'},
-        {name: 'Leather Green Bag', price: 25.00, picture: 'leather_green_bag.jpg'},
-        {name: 'Smooth Cloth', price: 15.00, picture: 'smooth_clothes.jpg'},
-        {name: 'Yellow Jacket', price: 58.00, picture: 'yellow_jacket.jpg'},
-        {name: 'Bag', price: 17.00, picture: 'bag.jpg'},
-        {name: 'Coat', price: 16.00, picture: 'coat.jpg'},
-        {name: 'Beautiful Dress', price: 23.00, picture: 'dress.jpg'},
-        {name: 'Cool Jeans', price: 10.00, picture: 'jeans.jpg'},
-        {name: 'Styled Jeans', price: 12.00, picture: 'jeans_2.jpg'},
-        {name: 'Shoes', price: 20.00, picture: 'shoes.jpg'},
-        {name: 'Skirt', price: 18.00, picture: 'skirt.jpg'},
-        {name: 'Down Jacket', price: 16.50, picture: 'down_jacket.jpg'},
-        {name: 'Hat', price: 17.50, picture: 'hat.jpg'},
-        {name: 'Outfit pretty', price: 23.50, picture: 'outfit_1.jpg'},
-        {name: 'Beggie Outfit', price: 22.50, picture: 'outfit_2.jpg'},
-        {name: 'Pants', price: 21.50, picture: 'pants.jpg'},
-        {name: 'Scarf', price: 20.50, picture: 'scarf.jpg'},
-        {name: 'Sunglasses', price: 30.50, picture: 'sunglasses.jpg'},
+        {name: 'Gray Shoe', price: 20.00, picture: 'grey_shoe.jpg', 
+                detail: {name: 'Gray Shoe', price: 20.00, description: "Skinny, straight, or slim, find your perfect jeans fit in the boohoo denim collection. Work the hot-right-now high waist in mom jeans and baggy boyfriend styles, and take your blues to the next level with punk badges and rock 'n' roll rips. Wear with a basic tee by day and add barely-there heeled sandals to take your denim from day to night.", brand: 'Net', picture: 'grey_shoe.jpg'}}, 
+        {name: 'Blue Shoe High Heels', price: 28.00, picture: 'blue_shoe_high_heels.jpg', 
+                detail: {name: 'Blue Shoe High Heels', price: 28.00, description: "Skinny, straight, or slim, find your perfect jeans fit in the boohoo denim collection. Work the hot-right-now high waist in mom jeans and baggy boyfriend styles, and take your blues to the next level with punk badges and rock 'n' roll rips. Wear with a basic tee by day and add barely-there heeled sandals to take your denim from day to night.", brand: 'Net', picture: 'blue_shoe_high_heels.jpg'}},
+        {name: 'Danim Jacket', price: 28.00, picture: 'danim_jacket.jpg', 
+                detail: {name: 'Danim Jacket', price: 28.00, description: "Skinny, straight, or slim, find your perfect jeans fit in the boohoo denim collection. Work the hot-right-now high waist in mom jeans and baggy boyfriend styles, and take your blues to the next level with punk badges and rock 'n' roll rips. Wear with a basic tee by day and add barely-there heeled sandals to take your denim from day to night.", brand: 'Net', picture: 'danim_jacket.jpg'}},
+        {name: 'Leather Green Bag', price: 25.00, picture: 'leather_green_bag.jpg', 
+                detail: {name: 'Leather Green Bag', price: 25.00, description: "Skinny, straight, or slim, find your perfect jeans fit in the boohoo denim collection. Work the hot-right-now high waist in mom jeans and baggy boyfriend styles, and take your blues to the next level with punk badges and rock 'n' roll rips. Wear with a basic tee by day and add barely-there heeled sandals to take your denim from day to night.", brand: 'Net', picture: 'leather_green_bag.jpg'}},
+        {name: 'Smooth Cloth', price: 15.00, picture: 'smooth_clothes.jpg', 
+                detail: {name: 'Smooth Cloth', price: 15.00, description: "Skinny, straight, or slim, find your perfect jeans fit in the boohoo denim collection. Work the hot-right-now high waist in mom jeans and baggy boyfriend styles, and take your blues to the next level with punk badges and rock 'n' roll rips. Wear with a basic tee by day and add barely-there heeled sandals to take your denim from day to night.", brand: 'Net', picture: 'smooth_clothes.jpg'}},
+        {name: 'Yellow Jacket', price: 58.00, picture: 'yellow_jacket.jpg', 
+                detail: {name: 'Yellow Jacket', price: 58.00, description: "Skinny, straight, or slim, find your perfect jeans fit in the boohoo denim collection. Work the hot-right-now high waist in mom jeans and baggy boyfriend styles, and take your blues to the next level with punk badges and rock 'n' roll rips. Wear with a basic tee by day and add barely-there heeled sandals to take your denim from day to night.", brand: 'Net', picture: 'yellow_jacket.jpg'}},
+        {name: 'Bag', price: 17.00, picture: 'bag.jpg', 
+                detail: {name: 'Bag', price: 17.00, description: "Skinny, straight, or slim, find your perfect jeans fit in the boohoo denim collection. Work the hot-right-now high waist in mom jeans and baggy boyfriend styles, and take your blues to the next level with punk badges and rock 'n' roll rips. Wear with a basic tee by day and add barely-there heeled sandals to take your denim from day to night.", brand: 'Net', picture: 'bag.jpg'}},
+        {name: 'Coat', price: 16.00, picture: 'coat.jpg', 
+                detail: {name: 'Coat', price: 16.00, description: "Skinny, straight, or slim, find your perfect jeans fit in the boohoo denim collection. Work the hot-right-now high waist in mom jeans and baggy boyfriend styles, and take your blues to the next level with punk badges and rock 'n' roll rips. Wear with a basic tee by day and add barely-there heeled sandals to take your denim from day to night.", brand: 'Net', picture: 'coat.jpg'}},
+        {name: 'Beautiful Dress', price: 23.00, picture: 'dress.jpg', 
+                detail: {name: 'Beautiful Dress', price: 23.00, description: "Skinny, straight, or slim, find your perfect jeans fit in the boohoo denim collection. Work the hot-right-now high waist in mom jeans and baggy boyfriend styles, and take your blues to the next level with punk badges and rock 'n' roll rips. Wear with a basic tee by day and add barely-there heeled sandals to take your denim from day to night.", brand: 'Net', picture: 'dress.jpg'}},
+        {name: 'Cool Jeans', price: 10.00, picture: 'jeans.jpg', 
+                detail: {name: 'Cool Jeans', price: 10.00, description: "Skinny, straight, or slim, find your perfect jeans fit in the boohoo denim collection. Work the hot-right-now high waist in mom jeans and baggy boyfriend styles, and take your blues to the next level with punk badges and rock 'n' roll rips. Wear with a basic tee by day and add barely-there heeled sandals to take your denim from day to night.", brand: 'Net', picture: 'jeans.jpg'}},
+        {name: 'Styled Jeans', price: 12.00, picture: 'jeans_2.jpg', 
+                detail: {name: 'Styled Jeans', price: 12.00, description: "Skinny, straight, or slim, find your perfect jeans fit in the boohoo denim collection. Work the hot-right-now high waist in mom jeans and baggy boyfriend styles, and take your blues to the next level with punk badges and rock 'n' roll rips. Wear with a basic tee by day and add barely-there heeled sandals to take your denim from day to night.", brand: 'Net', picture: 'jeans_2.jpg'}},
+        {name: 'Shoes', price: 20.00, picture: 'shoes.jpg', 
+                detail: {name: 'Shoes', price: 20.00, description: "Skinny, straight, or slim, find your perfect jeans fit in the boohoo denim collection. Work the hot-right-now high waist in mom jeans and baggy boyfriend styles, and take your blues to the next level with punk badges and rock 'n' roll rips. Wear with a basic tee by day and add barely-there heeled sandals to take your denim from day to night.", brand: 'Net', picture: 'shoes.jpg'}},
+        {name: 'Skirt', price: 18.00, picture: 'skirt.jpg', 
+                detail: {name: 'Skirt', price: 18.00, description: "Skinny, straight, or slim, find your perfect jeans fit in the boohoo denim collection. Work the hot-right-now high waist in mom jeans and baggy boyfriend styles, and take your blues to the next level with punk badges and rock 'n' roll rips. Wear with a basic tee by day and add barely-there heeled sandals to take your denim from day to night.", brand: 'Net', picture: 'skirt.jpg'}},
+        {name: 'Down Jacket', price: 16.50, picture: 'down_jacket.jpg', 
+                detail: {name: 'Down Jacket', price: 16.50, description: "Skinny, straight, or slim, find your perfect jeans fit in the boohoo denim collection. Work the hot-right-now high waist in mom jeans and baggy boyfriend styles, and take your blues to the next level with punk badges and rock 'n' roll rips. Wear with a basic tee by day and add barely-there heeled sandals to take your denim from day to night.", brand: 'Net', picture: 'down_jacket.jpg'}},
+        {name: 'Hat', price: 17.50, picture: 'hat.jpg', 
+                detail: {name: 'Hat', price: 17.50, description: "Skinny, straight, or slim, find your perfect jeans fit in the boohoo denim collection. Work the hot-right-now high waist in mom jeans and baggy boyfriend styles, and take your blues to the next level with punk badges and rock 'n' roll rips. Wear with a basic tee by day and add barely-there heeled sandals to take your denim from day to night.", brand: 'Net', picture: 'hat.jpg'}},
+        {name: 'Outfit pretty', price: 23.50, picture: 'outfit_1.jpg', 
+                detail: {name: 'Outfit pretty', price: 23.50, description: "Skinny, straight, or slim, find your perfect jeans fit in the boohoo denim collection. Work the hot-right-now high waist in mom jeans and baggy boyfriend styles, and take your blues to the next level with punk badges and rock 'n' roll rips. Wear with a basic tee by day and add barely-there heeled sandals to take your denim from day to night.", brand: 'Net', picture: 'outfit_1.jpg'}},
+        {name: 'Beggie Outfit', price: 22.50, picture: 'outfit_2.jpg', 
+                detail: {name: 'Beggie Outfit', price: 22.50, description: "Skinny, straight, or slim, find your perfect jeans fit in the boohoo denim collection. Work the hot-right-now high waist in mom jeans and baggy boyfriend styles, and take your blues to the next level with punk badges and rock 'n' roll rips. Wear with a basic tee by day and add barely-there heeled sandals to take your denim from day to night.", brand: 'Net', picture: 'outfit_2.jpg'}},
+        {name: 'Pants', price: 21.50, picture: 'pants.jpg', 
+                detail: {name: 'Pants', price: 21.50, description: "Skinny, straight, or slim, find your perfect jeans fit in the boohoo denim collection. Work the hot-right-now high waist in mom jeans and baggy boyfriend styles, and take your blues to the next level with punk badges and rock 'n' roll rips. Wear with a basic tee by day and add barely-there heeled sandals to take your denim from day to night.", brand: 'Net', picture: 'pants.jpg'}},
+        {name: 'Scarf', price: 20.50, picture: 'scarf.jpg', 
+                detail: {name: 'Scarf', price: 20.50, description: "Skinny, straight, or slim, find your perfect jeans fit in the boohoo denim collection. Work the hot-right-now high waist in mom jeans and baggy boyfriend styles, and take your blues to the next level with punk badges and rock 'n' roll rips. Wear with a basic tee by day and add barely-there heeled sandals to take your denim from day to night.", brand: 'Net', picture: 'scarf.jpg'}},
+        {name: 'Sunglasses', price: 30.50, picture: 'sunglasses.jpg', 
+                detail: {name: 'Sunglasses', price: 30.50, description: "Skinny, straight, or slim, find your perfect jeans fit in the boohoo denim collection. Work the hot-right-now high waist in mom jeans and baggy boyfriend styles, and take your blues to the next level with punk badges and rock 'n' roll rips. Wear with a basic tee by day and add barely-there heeled sandals to take your denim from day to night.", brand: 'Net', picture: 'sunglasses.jpg'}},
     ];
     // Turn picture url into base64 string
     shopItems.forEach((item ,index) => {
         fs.readFile(`./shop/${item.picture}`,'base64', (err, image) => {
             let imgUrl = `data:image/jpeg;base64, ${image}`;
             item.picture = imgUrl;
-            hash.put(item.name, {'name': item.name, 'price': item.price, 'picture': item.picture});
+            item.detail.picture = imgUrl;
+            hash.put(item.name, {'name': item.name, 'price': item.price, 'picture': item.picture, 'detail': item.detail});
         });
     });
 
     app.post('/popularItemSearch', middleware.checkToken, (req, res) => {
-        /*let newshopArr = [];
-        shopItems.forEach((item) => {
-            if(item.name.includes(req.body)){
-                newshopArr.push(item);
-            }
-        });*/
-        console.log('req.body is =>', req.body);
         let foundItem = hash.get(req.body);
         res.json([foundItem]);
         res.end();
@@ -577,8 +590,8 @@ app.post('/login', tokenHandler.login);
     });
 
     app.get('/getcommditydetail', middleware.checkToken ,(req, res) => {
-        console.log('getcommditydetail itemId is =>', req);
-        res.json({"status": "ok", "code": "200"});
+        let foundItem = hash.get(req.query.itemId);
+        res.json(foundItem.detail);
         res.end();
     });
 
