@@ -14,10 +14,17 @@
                     line-height: 1.5;
                     &:nth-child(1){
                         width: 50%;
+                        @media screen and (max-width: 600px) {
+                            width: 60%;
+                        }
                     }
                     &:nth-child(2), &:nth-child(3){
                         width: 25%;
                         justify-content: center;
+                        @media screen and (max-width: 600px) {
+                            width: 20%;
+                        }
+
                     }   
                     display: flex;
                     padding: 10px 0;
@@ -27,12 +34,15 @@
             .shopitem{
                 .eachitem{
                     display: flex;
-                    height: 14vh;
+                    height: 20vh;
                     padding: 15px 0;
                     margin: 12px 0;
                     border-bottom: 1px solid #e0e0e0;
                     .item{
                         width: 50%;
+                        @media screen and (max-width: 600px) {
+                            width: 60%;
+                        }
                         >img{
                             width: 40%;
                             height: 100%;
@@ -61,20 +71,53 @@
                     }
                     .price, .total_price{
                         width: 25%;
+                        @media screen and (max-width: 600px) {
+                            width: 20%;
+                        }
                         font-size: 13px;
                         letter-spacing: 1.2px;
-                        display: flex;
-                        align-items: center;;
-                        justify-content: center;
+                        display: block;
+                        >span{
+                            width: 100%;
+                            text-align: center;
+                            top: 50%;
+                            position: relative;
+                            display: block;
+                            margin-top: -17px;
+                        }
                         >a{
-                            position: absolute;
-                            margin-top: 35px;
-                            margin-left: 50px;
-                            display: flex;
+                            cursor: pointer;
+                            display: block;
+                            width: 100%;
+                            text-align: right;
+                            position: relative;
+                            top: 100%;
+                            margin-top: -22px;
                             >img{
                                 width: 15px;
                                 margin-right: 10px;
                             }
+                        }
+                    }
+                }
+                .checkout{
+                    >a{
+                        float: right;
+                        border: none;
+                        background-color: rgb(51, 50, 50);
+                        color: #fff;
+                        width: 200px;
+                        height: 40px;
+                        padding: 5px 0;
+                        font-size: 15px;
+                        letter-spacing: 2.0px;
+                        font-weight: 500;
+                        margin: 2rem 0;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        &:hover{
+                            background-color: #555;
                         }
                     }
                 }

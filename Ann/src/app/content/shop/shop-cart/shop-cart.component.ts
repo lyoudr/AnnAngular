@@ -15,7 +15,9 @@ export class ShopCartComponent implements OnInit {
     public shopService : ShopService
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log('this.shopService.shopCartLists is =>', this.shopService.shopCartLists);
+  }
 
   removeItem(name){
     const arryRemove = (arr, value) => {

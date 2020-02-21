@@ -10,14 +10,14 @@
                 <section class="shopitem">
                     <div *ngFor="let shopItem of shopService.shopCartLists" class="eachitem">
                         <div class="item">
-                            <img src="shopItem.picture"/>
+                            <img [src]="shopItem.picture"/>
                             <p>{{shopItem.name}}</p>
                             <p>{{shopItem.brand}}</p>
                             <p>Color: {{shopItem.color}}</p>
                             <p>Size: {{shopItem.size}}</p>
                         </div>
                         <div class="price">
-                            {{shopItem.price}}
+                            <span>{{shopItem.price}}</span>
                         </div>
                         <div class="total_price">
                             <span>{{shopItem.price}}</span>
@@ -26,6 +26,9 @@
                                 Remove
                             </a>
                         </div>
+                    </div>
+                    <div class="checkout">
+                        <a routerLink="/shop/checkout">Check Out</a>
                     </div>
                 </section>
             </div>

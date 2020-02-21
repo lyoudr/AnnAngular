@@ -24,7 +24,7 @@
     </div>
     <div class="pages">
         <a *ngFor="let eachnav of navlists; let linkindex = index" 
-            (click)="ActiveLink('click', linkindex)"
+            (click)="ActiveLink('click', linkindex); isOpen = false"
             [routerLink]="eachnav.url"
             (mouseover)="ActiveLink('mouseover', linkindex)"
             (mouseleave)="ActiveLink('mouseleave', linkindex)"

@@ -4,6 +4,7 @@ import { ShopComponent } from './shop.component';
 import { ShopitemComponent } from './shopitem/shopitem.component';
 import { ShopCartComponent } from './shop-cart/shop-cart.component'; 
 import { ShopAllitemComponent } from './shopall/shop-allitem.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 const shoproutes: Routes = [
   { 
@@ -21,6 +22,10 @@ const shoproutes: Routes = [
       {
         path: 'shopcart',
         component : ShopCartComponent
+      },
+      {
+        path: 'checkout',
+        component: CheckoutComponent
       }
     ]
   },
