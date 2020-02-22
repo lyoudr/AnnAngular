@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
     private cookieService : CookieService,
     public router: Router
   ) { }
-
+  
   ngOnInit() {
   }
 
@@ -42,6 +42,9 @@ export class LoginComponent implements OnInit {
           this.authService.isLoggedIn = false;
         }
         this.ReNavigate();
+        return new Promise(resolve => {
+          resolve(true);
+        });
       });
   }
 

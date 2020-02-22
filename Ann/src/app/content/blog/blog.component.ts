@@ -13,6 +13,8 @@ export class BlogComponent implements OnInit {
   constructor(
     private router: Router
   ) { }
+  
+  title : string = 'Edit your blog';
 
   ngOnInit() {
     $('#blogImg').fadeIn(1000);
