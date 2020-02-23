@@ -21,7 +21,7 @@
                         </div>
                         <div class="total_price">
                             <span>{{shopItem.price}}</span>
-                            <a (click)="removeItem(shopItem.name)">
+                            <a [id]="shopItem.name" (click)="removeItem(shopItem.name)">
                                 <img src="assets/svg/trash.svg">
                                 Remove
                             </a>

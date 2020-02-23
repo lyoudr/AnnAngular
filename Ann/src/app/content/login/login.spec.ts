@@ -16,7 +16,6 @@ describe('*Component* => LoginComponent', () => {
     let authService : AuthService;
     let cookieService : CookieService;
 
-
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [LoginComponent],

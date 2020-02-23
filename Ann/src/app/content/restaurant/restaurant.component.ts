@@ -81,6 +81,7 @@ export class RestaurantComponent implements OnInit {
   searchFood(food : string){
     this.restaurantService.searchFood(food)
       .subscribe(data => {
+        console.log('data is =>', data);
         this.tabIndex = 3;
         this.restaurantlists = data;
         this.type = 'search';
