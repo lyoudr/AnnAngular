@@ -8,6 +8,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ScrollDispatchModule } from '@angular/cdk/scrolling';
 import { ShopAllitemComponent } from './shopall/shop-allitem.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { CheckoutComponent } from './checkout/checkout.component';
     CommonModule,
     ShopRoutingModule,
     ScrollingModule,
-    ScrollDispatchModule
+    ScrollDispatchModule,
+    ReactiveFormsModule
   ]
 })
 export class ShopModule { }

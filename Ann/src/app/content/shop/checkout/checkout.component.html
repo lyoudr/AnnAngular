@@ -1,1 +1,50 @@
-<p>checkout works!</p>
+
+
+<article class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-12">
+            <form [formGroup]="sheetForm" (ngSubmit)="onSubmit()">
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Card number</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" formControlName="cardnumber">
+                        <div *ngIf="cardnumber.invalid && (cardnumber.dirty || cardnumber.touched)"
+                            class="alert alert-danger">
+                            <div *ngIf="cardnumber.errors.required">
+                                Card number is required.
+                            </div>
+                            <div *ngIf="cardnumber.errors.forbiddenCardNo">
+                                Wrong card number.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">CW</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" formControlName="cw">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Card holder</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" formControlName="cardholder">
+                    </div>
+                </div>
+                <div class="form-group row" formGroupName="validdate">
+                    <label class="col-sm-2 col-form-label">Valild Until</label>
+                    <div class="col-sm-4">
+                        <input class="form-control" formControlName="month" placeholder="MM">
+                    </div>
+                    <div class="col-sm-4">
+                        <input class="form-control" formControlName="year" placeholder="YYYY">
+                    </div>
+                    <div *ngIf="validdate.errors?.forbiddenexpDate && (validdate.touched || validdate.dirty)" class="cross-validation-error-message alert alert-danger">
+                        Invalid month or year.
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary credit-card-btn" [disabled]="!sheetForm.valid">Submit</button>
+            </form>
+        </div>
+    </div>
+</article>
